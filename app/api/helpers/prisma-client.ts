@@ -1,5 +1,5 @@
 
-import { PrismaClient } from "../../generated/prisma/client";
+import { PrismaClient } from "../../../generated/prisma/client";
 
 class DBClient{ // singleton class to ensure only 1 instance of prisma client exists everytime
     private static instance: PrismaClient | undefined; // the instance is static because it belongs to the class itself, not the instance

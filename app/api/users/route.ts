@@ -1,9 +1,10 @@
 
 import { NextResponse } from "next/server";
-import { DBClient } from "../helpers/prisma-client"
-import { user_delegate, pokemon_delegate } from "../helpers/models-delegate";
-import { createModel, fetchOne, fetchMany, deleteOne, deleteMany } from "../helpers/crud-functions";
+import { UserDelegate } from "../helpers/user-delegate";
+
+const delegate=new UserDelegate();
 
 export async function GET(){
-    
+    const users=await delegate.fetchMany();
+    return NextResponse.json(users);
 }
