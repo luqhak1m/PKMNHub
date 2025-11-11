@@ -1,6 +1,7 @@
 
 import { NextResponse } from "next/server";
 import { UserDelegate } from "../helpers/user-delegate";
+import { create_user_schema } from "../schemas/user-schema";
 
 const delegate=new UserDelegate();
 
@@ -18,11 +19,12 @@ export async function GET(){
 export async function POST(request: Request){
     const data=await request.json();
     try{
+        const { name, email }=create_user_schema.parse(data);
         const new_user=await delegate.createModel({
-            name: data.name,
-            email: data.email
+            name,
+            email
         });
-        console.log("[POST][/users] user created: ", data.name, " ", data.email)
+        console.log("[POST][/users] user created: ", name, " ", email)
         return NextResponse.json({new_user});
     }catch(err){
         console.error("[POST][/users] error: ", err)

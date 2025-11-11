@@ -20,8 +20,8 @@ async function main() {
   // 2️⃣ Create a new user
   console.log("\nCreating a test user...");
   const newUser = await userDelegate.createModel({
-    name: "Ash Ketchum",
-    email: "ash@pkmn.com",
+    name: "Lusamine",
+    email: "lusamine@pkmn.com",
   });
   console.log("New User:", newUser);
 
