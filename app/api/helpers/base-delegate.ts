@@ -1,21 +1,19 @@
 import "dotenv/config";
 
-abstract class BaseDelegate<T extends {id: string}>{
-    private model: { // the model must possesses these functions
-        findMany:()=>Promise<T[]>,
-        deleteMany: ()=>Promise<{count: number}>,
-        create: (args: { data: Omit<T, "id" | "createdAt"> })=>Promise<T>, // omit the id from T type because ID is auto generated. can only pass the data without id like data={ name="name", email="email" } instead of data={ id="id", name="name", email="email" }
-        findUnique: (args: {where: {id: string}})=>Promise<T|null>,
-        delete: (args: {where: {id: string}})=>Promise<T>
-    };
+// only useful for tables that need to use ID. more than id need to redefine the delegate in the subclass
 
-    public constructor(model:  { // the model must possesses these functions
-        findMany:()=>Promise<T[]>,
-        deleteMany: ()=>Promise<{count: number}>,
-        create: (args: { data: Omit<T, "id" | "createdAt"> })=>Promise<T>, // omit the id from T type because ID is auto generated. can only pass the data without id like data={ name="name", email="email" } instead of data={ id="id", name="name", email="email" }
-        findUnique: (args: {where: {id: string}})=>Promise<T|null>,
-        delete: (args: {where: {id: string}})=>Promise<T>
-    }){
+type ModelDelegate<T>={
+    findMany:()=>Promise<T[]>,
+    deleteMany: ()=>Promise<{count: number}>,
+    create: (args: { data: Omit<T, "id" | "createdAt" | "updatedAt" | "role"> })=>Promise<T>, // omit the id from T type because ID is auto generated. can only pass the data without id like data={ name="name", email="email" } instead of data={ id="id", name="name", email="email" }
+    findUnique: (args: {where: {id: string}})=>Promise<T|null>,
+    delete: (args: {where: {id: string}})=>Promise<T>
+}
+
+abstract class BaseDelegate<T extends {id: string}>{
+    readonly model: ModelDelegate<T>
+
+    public constructor(model: ModelDelegate<T>){
         this.model=model;
     }
 
@@ -31,7 +29,7 @@ abstract class BaseDelegate<T extends {id: string}>{
         return deleted_models_count;
     }
 
-    async createModel(data: Omit<T, "id"| "createdAt">){ // again, expects data without id
+    async createModel(data: Omit<T, "id"| "createdAt" | "updatedAt" | "role">){ // again, expects data without id
         const created_model=await this.model.create({data});
         console.log('Created Model:\n', created_model);
         return created_model;

@@ -19,10 +19,11 @@ export async function GET(){
 export async function POST(request: Request){
     const data=await request.json();
     try{
-        const { name, email }=create_user_schema.parse(data);
+        const { name, email, password }=create_user_schema.parse(data);
         const new_user=await delegate.createModel({
             name,
-            email
+            email,
+            password,
         });
         console.log("[POST][/users] user created: ", name, " ", email)
         return NextResponse.json({new_user});
