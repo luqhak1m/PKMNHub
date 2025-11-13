@@ -1,14 +1,15 @@
 
 import { Annotation, StateDefinition } from "@langchain/langgraph";
 import { ChatGroq } from "@langchain/groq"
+import "dotenv/config";
 
-export abstract class BaseAIAgents<S extends StateDefinition>{
+export abstract class BaseAIAgents <T extends {State: any}>{
     private api_key: string;
-    private llm: any;
-    private state: ReturnType<typeof Annotation.Root<S>>;
+    readonly llm: any;
+    private state: T["State"];
 
-    constructor(state: ReturnType<typeof Annotation.Root<S>>){
-        const api_key=process.env.API_KEY;
+    constructor(state: T["State"]){
+        const api_key=process.env.GROQ_API_KEY;
         if(!api_key){throw new Error("No Groq API Key in .env")}
         this.api_key=api_key;
         this.state=state;
@@ -16,14 +17,15 @@ export abstract class BaseAIAgents<S extends StateDefinition>{
             model: "llama-3.3-70b-versatile",
             temperature: 0,
             maxTokens: undefined,
-        }) as any; // notttt recommended but  this wont work unless it's in js so is it what is it
+            apiKey: this.api_key
+        }) as any;
     }
 
     getLLM(){
         return this.llm;
     }
 
-    getState(): ReturnType<typeof Annotation.Root<S>>{
+    getState(): T["State"]{
         return this.state;
     }
 }
