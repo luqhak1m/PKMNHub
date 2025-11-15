@@ -1,7 +1,13 @@
+
+import React from "react";
+import RegisterForm from "./components/Register";
+import LoginForm from "./components/Login";
+
 export default function HomePage() {
   return (
     <>
-      <h1>Hello from Next.js App Router 👋</h1>
+      <RegisterForm />
+      <LoginForm />
     </>
   );
 }

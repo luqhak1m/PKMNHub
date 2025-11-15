@@ -1,5 +1,6 @@
 import React from "react";
-
+import "./styles/global.css";
+import Providers from "./providers/Providers";
 
 export const metadata = {
   title: "PKMNHub",
@@ -14,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        {children}
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
