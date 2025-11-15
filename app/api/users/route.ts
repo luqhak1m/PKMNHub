@@ -2,6 +2,7 @@
 import { NextResponse } from "next/server";
 import { UserDelegate } from "../helpers/user-delegate";
 import { create_user_schema } from "../schemas/user-schema";
+import { withAuth } from "../middleware/auth";
 
 const delegate=new UserDelegate();
 
@@ -16,22 +17,29 @@ export async function GET(){
     }
 }
 
-export async function POST(request: Request){
-    const data=await request.json();
-    try{
-        const { name, email, password }=create_user_schema.parse(data);
-        const new_user=await delegate.createModel({
-            name,
-            email,
-            password,
-        });
-        console.log("[POST][/users] user created: ", name, " ", email)
-        return NextResponse.json({new_user});
-    }catch(err){
-        console.error("[POST][/users] error: ", err)
-        return NextResponse.json({ error: "Failed to create user" }, { status: 500 });
-    }
-}
+// export const GET=withAuth(async(request)=>{
+//     const users=await delegate.fetchMany();
+//     console.log("[GET][/users] users fetched: ")
+//     return NextResponse.json({users});
+
+// })
+
+// export async function POST(request: Request){
+//     const data=await request.json();
+//     try{
+//         const { name, email, password }=create_user_schema.parse(data);
+//         const new_user=await delegate.createModel({
+//             name,
+//             email,
+//             password,
+//         });
+//         console.log("[POST][/users] user created: ", name, " ", email)
+//         return NextResponse.json({new_user});
+//     }catch(err){
+//         console.error("[POST][/users] error: ", err)
+//         return NextResponse.json({ error: "Failed to create user" }, { status: 500 });
+//     }
+// }
 
 export async function DELETE(){
     try{

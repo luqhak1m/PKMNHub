@@ -5,7 +5,6 @@ import { login_user_schema } from "../../schemas/user-schema";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
 
-
 const delegate=new UserDelegate();
 
 export async function POST(request: Request){
@@ -23,6 +22,8 @@ export async function POST(request: Request){
 
         // crosscheck password
         const valid_password=await bcrypt.compare(password, user.password);
+        console.log(password, " - password");
+        console.log(user.password, " - user.password");
         if(!valid_password){return NextResponse.json({ error: "wrong password"})};
 
         const token=jwt.sign(

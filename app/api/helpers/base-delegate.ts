@@ -36,6 +36,7 @@ abstract class BaseDelegate<T extends {id: string}>{
     }
 
     async fetchOne(id: string){
+        console.log('Fetching model with ID:', id);
         const fetched_model=await this.model.findUnique({where: {id}});
         console.log('Fetched Model:\n', fetched_model);
         return fetched_model;
