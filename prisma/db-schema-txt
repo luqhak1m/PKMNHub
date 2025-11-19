@@ -1,41 +1,14 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
-generator client {
-  provider        = "prisma-client-js"
-  output          = "../generated/prisma"
-  previewFeatures = ["clientExtensions"]
-}
-
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
-
-model User {
-  id        Int    @id
-  email     String    @unique
-  name      String
-  password  String
-  role      String    @default("user")
-  created_at DateTime  @default(now())
-  updated_at DateTime @default(now())
-}
-
 model Pokemon {
-  id      Int @id
-  name    String @unique
+  id             Int              @id
+  name           String
 
   abilities      PokemonAbility[]
   natures        PokemonNature[]
   stats          PokemonStat[]
   types          PokemonType[]
-  egg_groups      PokemonEggGroup[]
+  eggGroups      PokemonEggGroup[]
   encounters     Encounter[]
-  dex_numbers     PokemonDexNumber[]
+  dexNumbers     PokemonDexNumber[]
   moves          PokemonMove[]
 }
 
@@ -47,67 +20,35 @@ model Ability {
   pokemon     PokemonAbility[]
 }
 
-model PokemonAbility {
-  id         Int     @id
-  pokemon_id Int
-  ability_id Int
-  is_hidden  Boolean
-
-  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])
-  ability Ability @relation(fields: [ability_id], references: [id])
-}
-
 model Nature {
   id                Int       @id
   name              String
   increased_stat_id Int
   decreased_stat_id Int
 
-  stat_increased     Stat      @relation("Nature-Increase", fields: [increased_stat_id], references: [id])
-  stat_decreased     Stat      @relation("Nature-Decrease", fields: [decreased_stat_id], references: [id])
+  increasedStat     Stat      @relation("NatureIncreased", fields: [increased_stat_id], references: [id])
+  decreasedStat     Stat      @relation("NatureDecreased", fields: [decreased_stat_id], references: [id])
 
   pokemon           PokemonNature[]
-}
-
-model PokemonNature {
-  id         Int   @id
-  pokemon_id Int
-  nature_id  Int
-
-  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])
-  nature  Nature  @relation(fields: [nature_id], references: [id])
 }
 
 model Stat {
   id    Int    @id
   name  String
 
-  natures_increase Nature[] @relation("Nature-Increase")
-  natures_decrease Nature[] @relation("Nature-Decrease")
-
-  pokemon_stats     PokemonStat[]
-}
-
-model PokemonStat {
-  id         Int  @id
-  pokemon_id Int
-  stat_id    Int
-  base_stat  Int
-
-  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])
-  stat    Stat    @relation(fields: [stat_id], references: [id])
+  naturesIncreased Nature[] @relation("NatureIncreased")
+  naturesDecreased Nature[] @relation("NatureDecreased")
+  pokemonStats     PokemonStat[]
 }
 
 model Type {
   id            Int                @id
   name          String
   generation_id Int
-
   generation    Generation         @relation(fields: [generation_id], references: [id])
-
   pokemon       PokemonType[]
-  attacking     TypeEffectiveness[] @relation("Type-Attack")
-  defending     TypeEffectiveness[] @relation("Type-Defend")
+  attacking     TypeEffectiveness[] @relation("AttackType")
+  defending     TypeEffectiveness[] @relation("DefendType")
 }
 
 model TypeEffectiveness {
@@ -116,49 +57,23 @@ model TypeEffectiveness {
   target_type_id Int
   damage_factor  Int
 
-  attacker Type @relation("Type-Attack", fields: [type_id], references: [id])
-  defender Type @relation("Type-Defend", fields: [target_type_id], references: [id])
-}
-
-model PokemonType {
-  id         Int   @id
-  pokemon_id Int
-  type_id    Int
-
-  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])
-  type    Type    @relation(fields: [type_id], references: [id])
-}
-
-model EggGroup{
-  id Int @id
-  name String
-}
-
-model PokemonEggGroup {
-  id         Int   @id
-  pokemon_id Int
-  egg_group_id Int
-
-  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])
-  egg_group EggGroup @relation(fields: [egg_group_id], references: [id])
+  attacker Type @relation("AttackType", fields: [type_id], references: [id])
+  defender Type @relation("DefendType", fields: [target_type_id], references: [id])
 }
 
 model Region {
   id        Int                 @id
   name      String
-
-  locations Locat ion[]
-  version_groups VersionGroupRegion[]
-  generations Generation
+  locations Location[]
+  versionGroups VersionGroupRegion[]
+  generations Generation[]
 }
 
 model Generation {
   id        Int        @id
   name      String
   region_id Int
-
   region    Region     @relation(fields: [region_id], references: [id])
-
   types     Type[]
   versionGroups VersionGroup[]
 }
@@ -167,7 +82,6 @@ model VersionGroup {
   id            Int       @id
   name          String
   generation_id Int
-
   generation    Generation @relation(fields: [generation_id], references: [id])
 
   versions  Version[]
@@ -176,17 +90,10 @@ model VersionGroup {
   moves     PokemonMove[]
 }
 
-model VersionGroupRegion{
-  id Int
-  version_group_id Int
-  region_id Int
-}
-
 model Version {
   id               Int    @id
   name             String
   version_group_id Int
-
   versionGroup     VersionGroup @relation(fields: [version_group_id], references: [id])
 
   encounters  Encounter[]
@@ -197,7 +104,6 @@ model Location {
   id        Int       @id
   name      String
   region_id Int
-
   region    Region    @relation(fields: [region_id], references: [id])
   areas     LocationArea[]
 }
@@ -206,18 +112,10 @@ model LocationArea {
   id        Int    @id
   name      String
   location_id Int
-
   location  Location @relation(fields: [location_id], references: [id])
 
   encounters   Encounter[]
   encounterRates LocationAreaEncounterRate[]
-}
-
-model EncounterMethod {
-  id     Int   @id
-  name   String
-
-  slots  EncounterSlot[]
 }
 
 model EncounterSlot {
@@ -227,9 +125,15 @@ model EncounterSlot {
   slot              Int
   rarity            Int
 
-  version_group VersionGroup @relation(fields: [version_group_id], references: [id])
+  versionGroup VersionGroup @relation(fields: [version_group_id], references: [id])
   method       EncounterMethod @relation(fields: [encounter_method_id], references: [id])
   encounters   Encounter[]
+}
+
+model EncounterMethod {
+  id     Int   @id
+  name   String
+  slots  EncounterSlot[]
 }
 
 model Encounter {
@@ -243,16 +147,14 @@ model Encounter {
 
   version       Version       @relation(fields: [version_id], references: [id])
   pokemon       Pokemon       @relation(fields: [pokemon_id], references: [id])
-  location_area  LocationArea  @relation(fields: [location_area_id], references: [id])
+  locationArea  LocationArea  @relation(fields: [location_area_id], references: [id])
   slot          EncounterSlot @relation(fields: [encounter_slot_id], references: [id])
-
   conditions    EncounterConditionValueMap[]
 }
 
 model EncounterCondition {
   id     Int   @id
   name   String
-
   values EncounterConditionValue[]
 }
 
@@ -275,23 +177,51 @@ model EncounterConditionValueMap {
   value     EncounterConditionValue @relation(fields: [encounter_condition_value_id], references: [id])
 }
 
-model MoveDamageClass {
-  id    Int    @id
-  name  String
+model PokemonAbility {
+  id         Int     @id
+  pokemon_id Int
+  ability_id Int
+  is_hidden  Boolean
 
-  moves Move[]
+  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])
+  ability Ability @relation(fields: [ability_id], references: [id])
 }
 
-model MoveEffect {
-  id          Int    @id
-  description String
-  moves       Move[]
+model PokemonNature {
+  id         Int   @id
+  pokemon_id Int
+  nature_id  Int
+
+  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])
+  nature  Nature  @relation(fields: [nature_id], references: [id])
 }
 
-model MoveMethod {
-  id    Int   @id
-  name  String
-  moves PokemonMove[]
+model PokemonStat {
+  id         Int  @id
+  pokemon_id Int
+  stat_id    Int
+  base_stat  Int
+
+  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])
+  stat    Stat    @relation(fields: [stat_id], references: [id])
+}
+
+model PokemonType {
+  id         Int   @id
+  pokemon_id Int
+  type_id    Int
+
+  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])
+  type    Type    @relation(fields: [type_id], references: [id])
+}
+
+model PokemonEggGroup {
+  id         Int   @id
+  pokemon_id Int
+  egg_group_id Int
+
+  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])
+  eggGroup EggGroup @relation(fields: [egg_group_id], references: [id])
 }
 
 model Move {
@@ -302,24 +232,41 @@ model Move {
   pp              Int
   accuracy        Int?
   priority        Int
-  move_damage_class_id Int
-  move_effect_id       Int
+  damage_class_id Int
+  effect_id       Int
 
   type          Type           @relation(fields: [type_id], references: [id])
-  damage_class   MoveDamageClass @relation(fields: [damage_class_id], references: [id])
+  damageClass   MoveDamageClass @relation(fields: [damage_class_id], references: [id])
   effect        MoveEffect     @relation(fields: [effect_id], references: [id])
-
   pokemonMoves  PokemonMove[]
+}
+
+model MoveEffect {
+  id          Int    @id
+  description String
+  moves       Move[]
+}
+
+model MoveDamageClass {
+  id    Int    @id
+  name  String
+  moves Move[]
 }
 
 model PokemonMove {
   id                    Int @id
   version_group_id      Int
-  move_method_id        Int
+  pokemon_move_method_id Int
   move_id               Int
   level                 Int
 
-  version_roup VersionGroup @relation(fields: [version_group_id], references: [id])
+  versionGroup VersionGroup @relation(fields: [version_group_id], references: [id])
   method       MoveMethod @relation(fields: [pokemon_move_method_id], references: [id])
   move         Move        @relation(fields: [move_id], references: [id])
+}
+
+model MoveMethod {
+  id    Int   @id
+  name  String
+  moves PokemonMove[]
 }

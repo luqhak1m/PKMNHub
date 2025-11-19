@@ -719,12 +719,12 @@ type Move={
      * Move Damage Class (special, physical, status)
      * - row.damage_class_id
      */
-    damage_class_id: number;
+    move_damage_class_id: number;
     /**
      * Move Effect ID
      * - row.effect_id
      */
-    effect_id: number;
+    move_effect_id: number;
 }
 
 /**
@@ -1052,8 +1052,8 @@ function parseMoveCSV(row: any): Move{
         pp: Number(row.pp),
         accuracy: Number(row.accuracy),
         priority: Number(row.priority),
-        damage_class_id: Number(row.damage_class_id),
-        effect_id: Number(row.effect_id),
+        move_damage_class_id: Number(row.damage_class_id),
+        move_effect_id: Number(row.effect_id),
     }
 }
 function parseMoveEffectCSV(row: any): MoveEffect{
