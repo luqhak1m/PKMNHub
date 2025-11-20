@@ -51,7 +51,7 @@ This project is currently **under active development**. Core backend API, authen
 
 ### **Database**
 - PostgreSQL with normalized schema for many-to-many relationships
-- Dataset imported from CSV and transformed for complete local control: https://github.com/PokeAPI/pokeapi/tree/master
+- Dataset imported from CSV and transformed for complete local control from: https://github.com/PokeAPI/pokeapi/tree/master
 - Entity Relationship Model (version 19-11-25):
 ![ERD_191125](images/ERD_191125.png)
 

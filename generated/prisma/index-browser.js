@@ -126,15 +126,226 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   password: 'password',
   role: 'role',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.PokemonScalarFieldEnum = {
   id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.AbilityScalarFieldEnum = {
+  id: 'id',
   name: 'name',
-  nat_dex: 'nat_dex',
-  loc_dex: 'loc_dex'
+  description: 'description'
+};
+
+exports.Prisma.PokemonAbilityScalarFieldEnum = {
+  id: 'id',
+  pokemon_id: 'pokemon_id',
+  ability_id: 'ability_id',
+  is_hidden: 'is_hidden'
+};
+
+exports.Prisma.NatureScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  increased_stat_id: 'increased_stat_id',
+  decreased_stat_id: 'decreased_stat_id'
+};
+
+exports.Prisma.PokemonNatureScalarFieldEnum = {
+  id: 'id',
+  pokemon_id: 'pokemon_id',
+  nature_id: 'nature_id'
+};
+
+exports.Prisma.StatScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.PokemonStatScalarFieldEnum = {
+  id: 'id',
+  pokemon_id: 'pokemon_id',
+  stat_id: 'stat_id',
+  base_stat: 'base_stat'
+};
+
+exports.Prisma.TypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  generation_id: 'generation_id'
+};
+
+exports.Prisma.TypeEffectivenessScalarFieldEnum = {
+  id: 'id',
+  type_id: 'type_id',
+  target_type_id: 'target_type_id',
+  damage_factor: 'damage_factor'
+};
+
+exports.Prisma.PokemonTypeScalarFieldEnum = {
+  id: 'id',
+  pokemon_id: 'pokemon_id',
+  type_id: 'type_id'
+};
+
+exports.Prisma.EggGroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.PokemonEggGroupScalarFieldEnum = {
+  id: 'id',
+  pokemon_id: 'pokemon_id',
+  egg_group_id: 'egg_group_id'
+};
+
+exports.Prisma.RegionScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.GenerationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  region_id: 'region_id'
+};
+
+exports.Prisma.VersionGroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  generation_id: 'generation_id'
+};
+
+exports.Prisma.VersionGroupRegionScalarFieldEnum = {
+  id: 'id',
+  version_group_id: 'version_group_id',
+  region_id: 'region_id'
+};
+
+exports.Prisma.VersionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  version_group_id: 'version_group_id'
+};
+
+exports.Prisma.LocationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  region_id: 'region_id'
+};
+
+exports.Prisma.LocationAreaScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  location_id: 'location_id'
+};
+
+exports.Prisma.EncounterMethodScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.EncounterSlotScalarFieldEnum = {
+  id: 'id',
+  version_group_id: 'version_group_id',
+  encounter_method_id: 'encounter_method_id',
+  slot: 'slot',
+  rarity: 'rarity'
+};
+
+exports.Prisma.EncounterScalarFieldEnum = {
+  id: 'id',
+  version_id: 'version_id',
+  pokemon_id: 'pokemon_id',
+  location_area_id: 'location_area_id',
+  encounter_slot_id: 'encounter_slot_id',
+  min_level: 'min_level',
+  max_level: 'max_level'
+};
+
+exports.Prisma.EncounterConditionScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.EncounterConditionValueScalarFieldEnum = {
+  id: 'id',
+  encounter_condition_id: 'encounter_condition_id',
+  name: 'name',
+  is_default: 'is_default'
+};
+
+exports.Prisma.EncounterConditionValueMapScalarFieldEnum = {
+  id: 'id',
+  encounter_id: 'encounter_id',
+  encounter_condition_value_id: 'encounter_condition_value_id'
+};
+
+exports.Prisma.LocationAreaEncounterRateScalarFieldEnum = {
+  id: 'id',
+  location_area_id: 'location_area_id',
+  encounter_method_id: 'encounter_method_id',
+  version_id: 'version_id',
+  rate: 'rate'
+};
+
+exports.Prisma.MoveDamageClassScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.MoveEffectScalarFieldEnum = {
+  id: 'id',
+  description: 'description'
+};
+
+exports.Prisma.MoveMethodScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.MoveScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  generation_id: 'generation_id',
+  type_id: 'type_id',
+  pp: 'pp',
+  accuracy: 'accuracy',
+  priority: 'priority',
+  move_damage_class_id: 'move_damage_class_id',
+  move_effect_id: 'move_effect_id'
+};
+
+exports.Prisma.PokemonMoveScalarFieldEnum = {
+  id: 'id',
+  version_group_id: 'version_group_id',
+  move_method_id: 'move_method_id',
+  move_id: 'move_id',
+  pokemon_id: 'pokemon_id',
+  level: 'level'
+};
+
+exports.Prisma.PokedexScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  region_id: 'region_id'
+};
+
+exports.Prisma.PokedexVersionGroupScalarFieldEnum = {
+  id: 'id',
+  version_group_id: 'version_group_id',
+  pokedex_id: 'pokedex_id'
+};
+
+exports.Prisma.PokemonDexNumberScalarFieldEnum = {
+  id: 'id',
+  pokemon_id: 'pokemon_id',
+  pokedex_id: 'pokedex_id',
+  pokedex_number: 'pokedex_number'
 };
 
 exports.Prisma.SortOrder = {
@@ -147,10 +358,48 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Pokemon: 'Pokemon'
+  Pokemon: 'Pokemon',
+  Ability: 'Ability',
+  PokemonAbility: 'PokemonAbility',
+  Nature: 'Nature',
+  PokemonNature: 'PokemonNature',
+  Stat: 'Stat',
+  PokemonStat: 'PokemonStat',
+  Type: 'Type',
+  TypeEffectiveness: 'TypeEffectiveness',
+  PokemonType: 'PokemonType',
+  EggGroup: 'EggGroup',
+  PokemonEggGroup: 'PokemonEggGroup',
+  Region: 'Region',
+  Generation: 'Generation',
+  VersionGroup: 'VersionGroup',
+  VersionGroupRegion: 'VersionGroupRegion',
+  Version: 'Version',
+  Location: 'Location',
+  LocationArea: 'LocationArea',
+  EncounterMethod: 'EncounterMethod',
+  EncounterSlot: 'EncounterSlot',
+  Encounter: 'Encounter',
+  EncounterCondition: 'EncounterCondition',
+  EncounterConditionValue: 'EncounterConditionValue',
+  EncounterConditionValueMap: 'EncounterConditionValueMap',
+  LocationAreaEncounterRate: 'LocationAreaEncounterRate',
+  MoveDamageClass: 'MoveDamageClass',
+  MoveEffect: 'MoveEffect',
+  MoveMethod: 'MoveMethod',
+  Move: 'Move',
+  PokemonMove: 'PokemonMove',
+  Pokedex: 'Pokedex',
+  PokedexVersionGroup: 'PokedexVersionGroup',
+  PokemonDexNumber: 'PokemonDexNumber'
 };
 
 /**

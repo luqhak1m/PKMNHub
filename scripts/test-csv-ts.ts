@@ -791,6 +791,11 @@ type PokemonMove={
      * - row.level
      */
     level: number;
+    /**
+     * Pokemon ID
+     * - row.pokemon_id
+     */
+    pokemon_id: number
 }
 
 /**
@@ -1069,6 +1074,8 @@ function parsePokemonMoveCSV(row: any, id: any): PokemonMove{
         pokemon_move_method_id: Number(row.pokemon_move_method_id),
         move_id: Number(row.move_id),
         level: Number(row.level),
+        pokemon_id: Number(row.pokemon_id)
+
     }
 }
 function parseMoveDamageClassCSV(row: any, id: number): MoveDamageClass{
@@ -1193,12 +1200,10 @@ async function main(){
     const encounter_slots: EncounterSlot[]=encounter_slots_CSV.map(parseEncounterSlotCSV);
     const encounters: Encounter[]=encounters_CSV.map(parseEncounterCSV);
     const location_area_encounter_rates: LocationAreaEncounterRate[]=location_area_encounter_rates_CSV.map(parseLocationAreaEncounterRateCSV);
-    
     const pokemon_abilities: PokemonAbility[]=pokemon_abilities_CSV.map(parsePokemonAbilityCSV);
     const pokemon_stats: PokemonStat[]=pokemon_stats_CSV.map(parsePokemonStatCSV);
     const pokemon_types: PokemonType[]=pokemon_types_CSV.map(parsePokemonTypeCSV);
     const pokemon_egg_groups: PokemonEggGroup[]=pokemon_egg_groups_CSV.map(parsePokemonEggGroupCSV);
-
     const move_methods: MoveMethod[]=move_methods_CSV.map(parseMoveMethodCSV);
     const move_effects: MoveEffect[]=move_effects_CSV.map(parseMoveEffectCSV);
     const moves: Move[]=moves_CSV.map(parseMoveCSV);

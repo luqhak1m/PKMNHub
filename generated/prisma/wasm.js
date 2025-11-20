@@ -98,15 +98,226 @@ exports.Prisma.UserScalarFieldEnum = {
   name: 'name',
   password: 'password',
   role: 'role',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
+  created_at: 'created_at',
+  updated_at: 'updated_at'
 };
 
 exports.Prisma.PokemonScalarFieldEnum = {
   id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.AbilityScalarFieldEnum = {
+  id: 'id',
   name: 'name',
-  nat_dex: 'nat_dex',
-  loc_dex: 'loc_dex'
+  description: 'description'
+};
+
+exports.Prisma.PokemonAbilityScalarFieldEnum = {
+  id: 'id',
+  pokemon_id: 'pokemon_id',
+  ability_id: 'ability_id',
+  is_hidden: 'is_hidden'
+};
+
+exports.Prisma.NatureScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  increased_stat_id: 'increased_stat_id',
+  decreased_stat_id: 'decreased_stat_id'
+};
+
+exports.Prisma.PokemonNatureScalarFieldEnum = {
+  id: 'id',
+  pokemon_id: 'pokemon_id',
+  nature_id: 'nature_id'
+};
+
+exports.Prisma.StatScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.PokemonStatScalarFieldEnum = {
+  id: 'id',
+  pokemon_id: 'pokemon_id',
+  stat_id: 'stat_id',
+  base_stat: 'base_stat'
+};
+
+exports.Prisma.TypeScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  generation_id: 'generation_id'
+};
+
+exports.Prisma.TypeEffectivenessScalarFieldEnum = {
+  id: 'id',
+  type_id: 'type_id',
+  target_type_id: 'target_type_id',
+  damage_factor: 'damage_factor'
+};
+
+exports.Prisma.PokemonTypeScalarFieldEnum = {
+  id: 'id',
+  pokemon_id: 'pokemon_id',
+  type_id: 'type_id'
+};
+
+exports.Prisma.EggGroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.PokemonEggGroupScalarFieldEnum = {
+  id: 'id',
+  pokemon_id: 'pokemon_id',
+  egg_group_id: 'egg_group_id'
+};
+
+exports.Prisma.RegionScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.GenerationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  region_id: 'region_id'
+};
+
+exports.Prisma.VersionGroupScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  generation_id: 'generation_id'
+};
+
+exports.Prisma.VersionGroupRegionScalarFieldEnum = {
+  id: 'id',
+  version_group_id: 'version_group_id',
+  region_id: 'region_id'
+};
+
+exports.Prisma.VersionScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  version_group_id: 'version_group_id'
+};
+
+exports.Prisma.LocationScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  region_id: 'region_id'
+};
+
+exports.Prisma.LocationAreaScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  location_id: 'location_id'
+};
+
+exports.Prisma.EncounterMethodScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.EncounterSlotScalarFieldEnum = {
+  id: 'id',
+  version_group_id: 'version_group_id',
+  encounter_method_id: 'encounter_method_id',
+  slot: 'slot',
+  rarity: 'rarity'
+};
+
+exports.Prisma.EncounterScalarFieldEnum = {
+  id: 'id',
+  version_id: 'version_id',
+  pokemon_id: 'pokemon_id',
+  location_area_id: 'location_area_id',
+  encounter_slot_id: 'encounter_slot_id',
+  min_level: 'min_level',
+  max_level: 'max_level'
+};
+
+exports.Prisma.EncounterConditionScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.EncounterConditionValueScalarFieldEnum = {
+  id: 'id',
+  encounter_condition_id: 'encounter_condition_id',
+  name: 'name',
+  is_default: 'is_default'
+};
+
+exports.Prisma.EncounterConditionValueMapScalarFieldEnum = {
+  id: 'id',
+  encounter_id: 'encounter_id',
+  encounter_condition_value_id: 'encounter_condition_value_id'
+};
+
+exports.Prisma.LocationAreaEncounterRateScalarFieldEnum = {
+  id: 'id',
+  location_area_id: 'location_area_id',
+  encounter_method_id: 'encounter_method_id',
+  version_id: 'version_id',
+  rate: 'rate'
+};
+
+exports.Prisma.MoveDamageClassScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.MoveEffectScalarFieldEnum = {
+  id: 'id',
+  description: 'description'
+};
+
+exports.Prisma.MoveMethodScalarFieldEnum = {
+  id: 'id',
+  name: 'name'
+};
+
+exports.Prisma.MoveScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  generation_id: 'generation_id',
+  type_id: 'type_id',
+  pp: 'pp',
+  accuracy: 'accuracy',
+  priority: 'priority',
+  move_damage_class_id: 'move_damage_class_id',
+  move_effect_id: 'move_effect_id'
+};
+
+exports.Prisma.PokemonMoveScalarFieldEnum = {
+  id: 'id',
+  version_group_id: 'version_group_id',
+  move_method_id: 'move_method_id',
+  move_id: 'move_id',
+  pokemon_id: 'pokemon_id',
+  level: 'level'
+};
+
+exports.Prisma.PokedexScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  region_id: 'region_id'
+};
+
+exports.Prisma.PokedexVersionGroupScalarFieldEnum = {
+  id: 'id',
+  version_group_id: 'version_group_id',
+  pokedex_id: 'pokedex_id'
+};
+
+exports.Prisma.PokemonDexNumberScalarFieldEnum = {
+  id: 'id',
+  pokemon_id: 'pokemon_id',
+  pokedex_id: 'pokedex_id',
+  pokedex_number: 'pokedex_number'
 };
 
 exports.Prisma.SortOrder = {
@@ -119,10 +330,48 @@ exports.Prisma.QueryMode = {
   insensitive: 'insensitive'
 };
 
+exports.Prisma.NullsOrder = {
+  first: 'first',
+  last: 'last'
+};
+
 
 exports.Prisma.ModelName = {
   User: 'User',
-  Pokemon: 'Pokemon'
+  Pokemon: 'Pokemon',
+  Ability: 'Ability',
+  PokemonAbility: 'PokemonAbility',
+  Nature: 'Nature',
+  PokemonNature: 'PokemonNature',
+  Stat: 'Stat',
+  PokemonStat: 'PokemonStat',
+  Type: 'Type',
+  TypeEffectiveness: 'TypeEffectiveness',
+  PokemonType: 'PokemonType',
+  EggGroup: 'EggGroup',
+  PokemonEggGroup: 'PokemonEggGroup',
+  Region: 'Region',
+  Generation: 'Generation',
+  VersionGroup: 'VersionGroup',
+  VersionGroupRegion: 'VersionGroupRegion',
+  Version: 'Version',
+  Location: 'Location',
+  LocationArea: 'LocationArea',
+  EncounterMethod: 'EncounterMethod',
+  EncounterSlot: 'EncounterSlot',
+  Encounter: 'Encounter',
+  EncounterCondition: 'EncounterCondition',
+  EncounterConditionValue: 'EncounterConditionValue',
+  EncounterConditionValueMap: 'EncounterConditionValueMap',
+  LocationAreaEncounterRate: 'LocationAreaEncounterRate',
+  MoveDamageClass: 'MoveDamageClass',
+  MoveEffect: 'MoveEffect',
+  MoveMethod: 'MoveMethod',
+  Move: 'Move',
+  PokemonMove: 'PokemonMove',
+  Pokedex: 'Pokedex',
+  PokedexVersionGroup: 'PokedexVersionGroup',
+  PokemonDexNumber: 'PokemonDexNumber'
 };
 /**
  * Create the Client
@@ -173,13 +422,13 @@ const config = {
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider        = \"prisma-client-js\"\n  output          = \"../generated/prisma\"\n  previewFeatures = [\"clientExtensions\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id        String   @id @default(uuid())\n  email     String   @unique\n  name      String\n  password  String\n  role      String   @default(\"user\")\n  createdAt DateTime @default(now())\n  updatedAt DateTime @default(now())\n}\n\nmodel Pokemon {\n  id      String @id @default(uuid())\n  name    String @unique\n  nat_dex Int\n  loc_dex Int\n}\n",
-  "inlineSchemaHash": "20089c9d100ea4582c00482e15b55e6284c3abcdf6feec467064a502fae563c5",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider        = \"prisma-client-js\"\n  output          = \"../generated/prisma\"\n  previewFeatures = [\"clientExtensions\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel User {\n  id         Int      @id\n  email      String   @unique\n  name       String\n  password   String\n  role       String   @default(\"user\")\n  created_at DateTime @default(now())\n  updated_at DateTime @default(now())\n}\n\nmodel Pokemon {\n  id   Int    @id\n  name String @unique\n\n  abilities   PokemonAbility[]\n  natures     PokemonNature[]\n  stats       PokemonStat[]\n  types       PokemonType[]\n  egg_groups  PokemonEggGroup[]\n  encounters  Encounter[]\n  dex_numbers PokemonDexNumber[]\n  move        PokemonMove[]\n}\n\nmodel Ability {\n  id          Int    @id\n  name        String\n  description String\n\n  pokemon PokemonAbility[]\n}\n\nmodel PokemonAbility {\n  id         Int     @id\n  pokemon_id Int\n  ability_id Int\n  is_hidden  Boolean\n\n  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])\n  ability Ability @relation(fields: [ability_id], references: [id])\n}\n\nmodel Nature {\n  id                Int    @id\n  name              String\n  increased_stat_id Int\n  decreased_stat_id Int\n\n  stat_increased Stat @relation(\"Nature-Increase\", fields: [increased_stat_id], references: [id])\n  stat_decreased Stat @relation(\"Nature-Decrease\", fields: [decreased_stat_id], references: [id])\n\n  pokemon PokemonNature[]\n}\n\nmodel PokemonNature {\n  id         Int @id\n  pokemon_id Int\n  nature_id  Int\n\n  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])\n  nature  Nature  @relation(fields: [nature_id], references: [id])\n}\n\nmodel Stat {\n  id   Int    @id\n  name String\n\n  natures_increase Nature[] @relation(\"Nature-Increase\")\n  natures_decrease Nature[] @relation(\"Nature-Decrease\")\n\n  pokemon_stats PokemonStat[]\n}\n\nmodel PokemonStat {\n  id         Int @id\n  pokemon_id Int\n  stat_id    Int\n  base_stat  Int\n\n  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])\n  stat    Stat    @relation(fields: [stat_id], references: [id])\n}\n\nmodel Type {\n  id            Int    @id\n  name          String\n  generation_id Int\n\n  generation Generation @relation(fields: [generation_id], references: [id])\n\n  pokemon   PokemonType[]\n  attacking TypeEffectiveness[] @relation(\"Type-Attack\")\n  defending TypeEffectiveness[] @relation(\"Type-Defend\")\n  move      Move[]\n}\n\nmodel TypeEffectiveness {\n  id             Int @id\n  type_id        Int\n  target_type_id Int\n  damage_factor  Int\n\n  attacker Type @relation(\"Type-Attack\", fields: [type_id], references: [id])\n  defender Type @relation(\"Type-Defend\", fields: [target_type_id], references: [id])\n}\n\nmodel PokemonType {\n  id         Int @id\n  pokemon_id Int\n  type_id    Int\n\n  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])\n  type    Type    @relation(fields: [type_id], references: [id])\n}\n\nmodel EggGroup {\n  id   Int    @id\n  name String\n\n  pokemon_egg_group PokemonEggGroup[]\n}\n\nmodel PokemonEggGroup {\n  id           Int @id\n  pokemon_id   Int\n  egg_group_id Int\n\n  pokemon   Pokemon  @relation(fields: [pokemon_id], references: [id])\n  egg_group EggGroup @relation(fields: [egg_group_id], references: [id])\n}\n\nmodel Region {\n  id   Int    @id\n  name String\n\n  locations      Location[]\n  version_groups VersionGroupRegion[]\n  generations    Generation?\n  pokedex        Pokedex[]\n}\n\nmodel Generation {\n  id        Int    @id\n  name      String\n  region_id Int    @unique\n\n  region Region @relation(fields: [region_id], references: [id])\n\n  types         Type[]\n  versionGroups VersionGroup[]\n}\n\nmodel VersionGroup {\n  id            Int    @id\n  name          String\n  generation_id Int\n\n  generation Generation @relation(fields: [generation_id], references: [id])\n\n  versions               Version[]\n  regions                VersionGroupRegion[]\n  slots                  EncounterSlot[]\n  moves                  PokemonMove[]\n  pokedex_version_groups PokedexVersionGroup[]\n}\n\nmodel VersionGroupRegion {\n  id               Int @id\n  version_group_id Int\n  region_id        Int\n\n  region        Region       @relation(fields: [region_id], references: [id])\n  version_group VersionGroup @relation(fields: [version_group_id], references: [id])\n}\n\nmodel Version {\n  id               Int    @id\n  name             String\n  version_group_id Int\n\n  versionGroup VersionGroup @relation(fields: [version_group_id], references: [id])\n\n  encounters     Encounter[]\n  encounterRates LocationAreaEncounterRate[]\n}\n\nmodel Location {\n  id        Int    @id\n  name      String\n  region_id Int\n\n  region Region         @relation(fields: [region_id], references: [id])\n  areas  LocationArea[]\n}\n\nmodel LocationArea {\n  id          Int    @id\n  name        String\n  location_id Int\n\n  location Location @relation(fields: [location_id], references: [id])\n\n  encounters     Encounter[]\n  encounterRates LocationAreaEncounterRate[]\n}\n\nmodel EncounterMethod {\n  id   Int    @id\n  name String\n\n  slots                         EncounterSlot[]\n  location_area_encounter_rates LocationAreaEncounterRate[]\n}\n\nmodel EncounterSlot {\n  id                  Int @id\n  version_group_id    Int\n  encounter_method_id Int\n  slot                Int\n  rarity              Int\n\n  version_group VersionGroup    @relation(fields: [version_group_id], references: [id])\n  method        EncounterMethod @relation(fields: [encounter_method_id], references: [id])\n  encounters    Encounter[]\n}\n\nmodel Encounter {\n  id                Int @id\n  version_id        Int\n  pokemon_id        Int\n  location_area_id  Int\n  encounter_slot_id Int\n  min_level         Int\n  max_level         Int\n\n  version       Version       @relation(fields: [version_id], references: [id])\n  pokemon       Pokemon       @relation(fields: [pokemon_id], references: [id])\n  location_area LocationArea  @relation(fields: [location_area_id], references: [id])\n  slot          EncounterSlot @relation(fields: [encounter_slot_id], references: [id])\n\n  conditions EncounterConditionValueMap[]\n}\n\nmodel EncounterCondition {\n  id   Int    @id\n  name String\n\n  values EncounterConditionValue[]\n}\n\nmodel EncounterConditionValue {\n  id                     Int     @id\n  encounter_condition_id Int\n  name                   String\n  is_default             Boolean\n\n  condition EncounterCondition           @relation(fields: [encounter_condition_id], references: [id])\n  maps      EncounterConditionValueMap[]\n}\n\nmodel EncounterConditionValueMap {\n  id                           Int @id\n  encounter_id                 Int\n  encounter_condition_value_id Int\n\n  encounter Encounter               @relation(fields: [encounter_id], references: [id])\n  value     EncounterConditionValue @relation(fields: [encounter_condition_value_id], references: [id])\n}\n\nmodel LocationAreaEncounterRate {\n  id                  Int @id\n  location_area_id    Int\n  encounter_method_id Int\n  version_id          Int\n  rate                Int\n\n  location_area    LocationArea    @relation(fields: [location_area_id], references: [id])\n  encounter_method EncounterMethod @relation(fields: [encounter_method_id], references: [id])\n  version          Version         @relation(fields: [version_id], references: [id])\n}\n\nmodel MoveDamageClass {\n  id   Int    @id\n  name String\n\n  moves Move[]\n}\n\nmodel MoveEffect {\n  id          Int    @id\n  description String\n  moves       Move[]\n}\n\nmodel MoveMethod {\n  id   Int    @id\n  name String\n\n  moves PokemonMove[]\n}\n\nmodel Move {\n  id                   Int    @id\n  name                 String\n  generation_id        Int\n  type_id              Int\n  pp                   Int\n  accuracy             Int?\n  priority             Int\n  move_damage_class_id Int\n  move_effect_id       Int\n\n  type         Type            @relation(fields: [type_id], references: [id])\n  damage_class MoveDamageClass @relation(fields: [move_damage_class_id], references: [id])\n  effect       MoveEffect      @relation(fields: [move_effect_id], references: [id])\n\n  pokemon_moves PokemonMove[]\n}\n\nmodel PokemonMove {\n  id               Int @id\n  version_group_id Int\n  move_method_id   Int\n  move_id          Int\n  pokemon_id       Int\n  level            Int\n\n  version_group VersionGroup @relation(fields: [version_group_id], references: [id])\n  method        MoveMethod   @relation(fields: [move_method_id], references: [id])\n  move          Move         @relation(fields: [move_id], references: [id])\n  pokemon       Pokemon      @relation(fields: [pokemon_id], references: [id])\n}\n\nmodel Pokedex {\n  id        Int    @id\n  name      String\n  region_id Int\n\n  region Region @relation(fields: [region_id], references: [id])\n\n  pokedex_version_groups PokedexVersionGroup[]\n  pokemon_dex_numbers    PokemonDexNumber[]\n}\n\nmodel PokedexVersionGroup {\n  id               Int @id\n  version_group_id Int\n  pokedex_id       Int\n\n  version_group VersionGroup @relation(fields: [version_group_id], references: [id])\n  pokedex       Pokedex      @relation(fields: [pokedex_id], references: [id])\n}\n\nmodel PokemonDexNumber {\n  id             Int @id\n  pokemon_id     Int\n  pokedex_id     Int\n  pokedex_number Int\n\n  pokemon Pokemon @relation(fields: [pokemon_id], references: [id])\n  pokedex Pokedex @relation(fields: [pokedex_id], references: [id])\n}\n",
+  "inlineSchemaHash": "200816dc5be9c7a5deaef2df0a5ab80aa4e47263c1b1b8c10c1b7d1e69f9d9e9",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Pokemon\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"nat_dex\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"loc_dex\",\"kind\":\"scalar\",\"type\":\"Int\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"password\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"role\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"created_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updated_at\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"Pokemon\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"abilities\",\"kind\":\"object\",\"type\":\"PokemonAbility\",\"relationName\":\"PokemonToPokemonAbility\"},{\"name\":\"natures\",\"kind\":\"object\",\"type\":\"PokemonNature\",\"relationName\":\"PokemonToPokemonNature\"},{\"name\":\"stats\",\"kind\":\"object\",\"type\":\"PokemonStat\",\"relationName\":\"PokemonToPokemonStat\"},{\"name\":\"types\",\"kind\":\"object\",\"type\":\"PokemonType\",\"relationName\":\"PokemonToPokemonType\"},{\"name\":\"egg_groups\",\"kind\":\"object\",\"type\":\"PokemonEggGroup\",\"relationName\":\"PokemonToPokemonEggGroup\"},{\"name\":\"encounters\",\"kind\":\"object\",\"type\":\"Encounter\",\"relationName\":\"EncounterToPokemon\"},{\"name\":\"dex_numbers\",\"kind\":\"object\",\"type\":\"PokemonDexNumber\",\"relationName\":\"PokemonToPokemonDexNumber\"},{\"name\":\"move\",\"kind\":\"object\",\"type\":\"PokemonMove\",\"relationName\":\"PokemonToPokemonMove\"}],\"dbName\":null},\"Ability\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pokemon\",\"kind\":\"object\",\"type\":\"PokemonAbility\",\"relationName\":\"AbilityToPokemonAbility\"}],\"dbName\":null},\"PokemonAbility\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokemon_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"ability_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"is_hidden\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"pokemon\",\"kind\":\"object\",\"type\":\"Pokemon\",\"relationName\":\"PokemonToPokemonAbility\"},{\"name\":\"ability\",\"kind\":\"object\",\"type\":\"Ability\",\"relationName\":\"AbilityToPokemonAbility\"}],\"dbName\":null},\"Nature\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"increased_stat_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"decreased_stat_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"stat_increased\",\"kind\":\"object\",\"type\":\"Stat\",\"relationName\":\"Nature-Increase\"},{\"name\":\"stat_decreased\",\"kind\":\"object\",\"type\":\"Stat\",\"relationName\":\"Nature-Decrease\"},{\"name\":\"pokemon\",\"kind\":\"object\",\"type\":\"PokemonNature\",\"relationName\":\"NatureToPokemonNature\"}],\"dbName\":null},\"PokemonNature\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokemon_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"nature_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokemon\",\"kind\":\"object\",\"type\":\"Pokemon\",\"relationName\":\"PokemonToPokemonNature\"},{\"name\":\"nature\",\"kind\":\"object\",\"type\":\"Nature\",\"relationName\":\"NatureToPokemonNature\"}],\"dbName\":null},\"Stat\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"natures_increase\",\"kind\":\"object\",\"type\":\"Nature\",\"relationName\":\"Nature-Increase\"},{\"name\":\"natures_decrease\",\"kind\":\"object\",\"type\":\"Nature\",\"relationName\":\"Nature-Decrease\"},{\"name\":\"pokemon_stats\",\"kind\":\"object\",\"type\":\"PokemonStat\",\"relationName\":\"PokemonStatToStat\"}],\"dbName\":null},\"PokemonStat\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokemon_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"stat_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"base_stat\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokemon\",\"kind\":\"object\",\"type\":\"Pokemon\",\"relationName\":\"PokemonToPokemonStat\"},{\"name\":\"stat\",\"kind\":\"object\",\"type\":\"Stat\",\"relationName\":\"PokemonStatToStat\"}],\"dbName\":null},\"Type\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"generation_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"generation\",\"kind\":\"object\",\"type\":\"Generation\",\"relationName\":\"GenerationToType\"},{\"name\":\"pokemon\",\"kind\":\"object\",\"type\":\"PokemonType\",\"relationName\":\"PokemonTypeToType\"},{\"name\":\"attacking\",\"kind\":\"object\",\"type\":\"TypeEffectiveness\",\"relationName\":\"Type-Attack\"},{\"name\":\"defending\",\"kind\":\"object\",\"type\":\"TypeEffectiveness\",\"relationName\":\"Type-Defend\"},{\"name\":\"move\",\"kind\":\"object\",\"type\":\"Move\",\"relationName\":\"MoveToType\"}],\"dbName\":null},\"TypeEffectiveness\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"type_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"target_type_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"damage_factor\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"attacker\",\"kind\":\"object\",\"type\":\"Type\",\"relationName\":\"Type-Attack\"},{\"name\":\"defender\",\"kind\":\"object\",\"type\":\"Type\",\"relationName\":\"Type-Defend\"}],\"dbName\":null},\"PokemonType\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokemon_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"type_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokemon\",\"kind\":\"object\",\"type\":\"Pokemon\",\"relationName\":\"PokemonToPokemonType\"},{\"name\":\"type\",\"kind\":\"object\",\"type\":\"Type\",\"relationName\":\"PokemonTypeToType\"}],\"dbName\":null},\"EggGroup\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pokemon_egg_group\",\"kind\":\"object\",\"type\":\"PokemonEggGroup\",\"relationName\":\"EggGroupToPokemonEggGroup\"}],\"dbName\":null},\"PokemonEggGroup\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokemon_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"egg_group_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokemon\",\"kind\":\"object\",\"type\":\"Pokemon\",\"relationName\":\"PokemonToPokemonEggGroup\"},{\"name\":\"egg_group\",\"kind\":\"object\",\"type\":\"EggGroup\",\"relationName\":\"EggGroupToPokemonEggGroup\"}],\"dbName\":null},\"Region\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"locations\",\"kind\":\"object\",\"type\":\"Location\",\"relationName\":\"LocationToRegion\"},{\"name\":\"version_groups\",\"kind\":\"object\",\"type\":\"VersionGroupRegion\",\"relationName\":\"RegionToVersionGroupRegion\"},{\"name\":\"generations\",\"kind\":\"object\",\"type\":\"Generation\",\"relationName\":\"GenerationToRegion\"},{\"name\":\"pokedex\",\"kind\":\"object\",\"type\":\"Pokedex\",\"relationName\":\"PokedexToRegion\"}],\"dbName\":null},\"Generation\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"region_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"region\",\"kind\":\"object\",\"type\":\"Region\",\"relationName\":\"GenerationToRegion\"},{\"name\":\"types\",\"kind\":\"object\",\"type\":\"Type\",\"relationName\":\"GenerationToType\"},{\"name\":\"versionGroups\",\"kind\":\"object\",\"type\":\"VersionGroup\",\"relationName\":\"GenerationToVersionGroup\"}],\"dbName\":null},\"VersionGroup\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"generation_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"generation\",\"kind\":\"object\",\"type\":\"Generation\",\"relationName\":\"GenerationToVersionGroup\"},{\"name\":\"versions\",\"kind\":\"object\",\"type\":\"Version\",\"relationName\":\"VersionToVersionGroup\"},{\"name\":\"regions\",\"kind\":\"object\",\"type\":\"VersionGroupRegion\",\"relationName\":\"VersionGroupToVersionGroupRegion\"},{\"name\":\"slots\",\"kind\":\"object\",\"type\":\"EncounterSlot\",\"relationName\":\"EncounterSlotToVersionGroup\"},{\"name\":\"moves\",\"kind\":\"object\",\"type\":\"PokemonMove\",\"relationName\":\"PokemonMoveToVersionGroup\"},{\"name\":\"pokedex_version_groups\",\"kind\":\"object\",\"type\":\"PokedexVersionGroup\",\"relationName\":\"PokedexVersionGroupToVersionGroup\"}],\"dbName\":null},\"VersionGroupRegion\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"version_group_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"region_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"region\",\"kind\":\"object\",\"type\":\"Region\",\"relationName\":\"RegionToVersionGroupRegion\"},{\"name\":\"version_group\",\"kind\":\"object\",\"type\":\"VersionGroup\",\"relationName\":\"VersionGroupToVersionGroupRegion\"}],\"dbName\":null},\"Version\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"version_group_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"versionGroup\",\"kind\":\"object\",\"type\":\"VersionGroup\",\"relationName\":\"VersionToVersionGroup\"},{\"name\":\"encounters\",\"kind\":\"object\",\"type\":\"Encounter\",\"relationName\":\"EncounterToVersion\"},{\"name\":\"encounterRates\",\"kind\":\"object\",\"type\":\"LocationAreaEncounterRate\",\"relationName\":\"LocationAreaEncounterRateToVersion\"}],\"dbName\":null},\"Location\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"region_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"region\",\"kind\":\"object\",\"type\":\"Region\",\"relationName\":\"LocationToRegion\"},{\"name\":\"areas\",\"kind\":\"object\",\"type\":\"LocationArea\",\"relationName\":\"LocationToLocationArea\"}],\"dbName\":null},\"LocationArea\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"location_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"location\",\"kind\":\"object\",\"type\":\"Location\",\"relationName\":\"LocationToLocationArea\"},{\"name\":\"encounters\",\"kind\":\"object\",\"type\":\"Encounter\",\"relationName\":\"EncounterToLocationArea\"},{\"name\":\"encounterRates\",\"kind\":\"object\",\"type\":\"LocationAreaEncounterRate\",\"relationName\":\"LocationAreaToLocationAreaEncounterRate\"}],\"dbName\":null},\"EncounterMethod\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"slots\",\"kind\":\"object\",\"type\":\"EncounterSlot\",\"relationName\":\"EncounterMethodToEncounterSlot\"},{\"name\":\"location_area_encounter_rates\",\"kind\":\"object\",\"type\":\"LocationAreaEncounterRate\",\"relationName\":\"EncounterMethodToLocationAreaEncounterRate\"}],\"dbName\":null},\"EncounterSlot\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"version_group_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"encounter_method_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"slot\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"rarity\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"version_group\",\"kind\":\"object\",\"type\":\"VersionGroup\",\"relationName\":\"EncounterSlotToVersionGroup\"},{\"name\":\"method\",\"kind\":\"object\",\"type\":\"EncounterMethod\",\"relationName\":\"EncounterMethodToEncounterSlot\"},{\"name\":\"encounters\",\"kind\":\"object\",\"type\":\"Encounter\",\"relationName\":\"EncounterToEncounterSlot\"}],\"dbName\":null},\"Encounter\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"version_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokemon_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"location_area_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"encounter_slot_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"min_level\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"max_level\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"version\",\"kind\":\"object\",\"type\":\"Version\",\"relationName\":\"EncounterToVersion\"},{\"name\":\"pokemon\",\"kind\":\"object\",\"type\":\"Pokemon\",\"relationName\":\"EncounterToPokemon\"},{\"name\":\"location_area\",\"kind\":\"object\",\"type\":\"LocationArea\",\"relationName\":\"EncounterToLocationArea\"},{\"name\":\"slot\",\"kind\":\"object\",\"type\":\"EncounterSlot\",\"relationName\":\"EncounterToEncounterSlot\"},{\"name\":\"conditions\",\"kind\":\"object\",\"type\":\"EncounterConditionValueMap\",\"relationName\":\"EncounterToEncounterConditionValueMap\"}],\"dbName\":null},\"EncounterCondition\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"values\",\"kind\":\"object\",\"type\":\"EncounterConditionValue\",\"relationName\":\"EncounterConditionToEncounterConditionValue\"}],\"dbName\":null},\"EncounterConditionValue\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"encounter_condition_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"is_default\",\"kind\":\"scalar\",\"type\":\"Boolean\"},{\"name\":\"condition\",\"kind\":\"object\",\"type\":\"EncounterCondition\",\"relationName\":\"EncounterConditionToEncounterConditionValue\"},{\"name\":\"maps\",\"kind\":\"object\",\"type\":\"EncounterConditionValueMap\",\"relationName\":\"EncounterConditionValueToEncounterConditionValueMap\"}],\"dbName\":null},\"EncounterConditionValueMap\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"encounter_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"encounter_condition_value_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"encounter\",\"kind\":\"object\",\"type\":\"Encounter\",\"relationName\":\"EncounterToEncounterConditionValueMap\"},{\"name\":\"value\",\"kind\":\"object\",\"type\":\"EncounterConditionValue\",\"relationName\":\"EncounterConditionValueToEncounterConditionValueMap\"}],\"dbName\":null},\"LocationAreaEncounterRate\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"location_area_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"encounter_method_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"version_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"rate\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"location_area\",\"kind\":\"object\",\"type\":\"LocationArea\",\"relationName\":\"LocationAreaToLocationAreaEncounterRate\"},{\"name\":\"encounter_method\",\"kind\":\"object\",\"type\":\"EncounterMethod\",\"relationName\":\"EncounterMethodToLocationAreaEncounterRate\"},{\"name\":\"version\",\"kind\":\"object\",\"type\":\"Version\",\"relationName\":\"LocationAreaEncounterRateToVersion\"}],\"dbName\":null},\"MoveDamageClass\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"moves\",\"kind\":\"object\",\"type\":\"Move\",\"relationName\":\"MoveToMoveDamageClass\"}],\"dbName\":null},\"MoveEffect\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"moves\",\"kind\":\"object\",\"type\":\"Move\",\"relationName\":\"MoveToMoveEffect\"}],\"dbName\":null},\"MoveMethod\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"moves\",\"kind\":\"object\",\"type\":\"PokemonMove\",\"relationName\":\"MoveMethodToPokemonMove\"}],\"dbName\":null},\"Move\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"generation_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"type_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pp\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"accuracy\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"priority\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"move_damage_class_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"move_effect_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"type\",\"kind\":\"object\",\"type\":\"Type\",\"relationName\":\"MoveToType\"},{\"name\":\"damage_class\",\"kind\":\"object\",\"type\":\"MoveDamageClass\",\"relationName\":\"MoveToMoveDamageClass\"},{\"name\":\"effect\",\"kind\":\"object\",\"type\":\"MoveEffect\",\"relationName\":\"MoveToMoveEffect\"},{\"name\":\"pokemon_moves\",\"kind\":\"object\",\"type\":\"PokemonMove\",\"relationName\":\"MoveToPokemonMove\"}],\"dbName\":null},\"PokemonMove\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"version_group_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"move_method_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"move_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokemon_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"level\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"version_group\",\"kind\":\"object\",\"type\":\"VersionGroup\",\"relationName\":\"PokemonMoveToVersionGroup\"},{\"name\":\"method\",\"kind\":\"object\",\"type\":\"MoveMethod\",\"relationName\":\"MoveMethodToPokemonMove\"},{\"name\":\"move\",\"kind\":\"object\",\"type\":\"Move\",\"relationName\":\"MoveToPokemonMove\"},{\"name\":\"pokemon\",\"kind\":\"object\",\"type\":\"Pokemon\",\"relationName\":\"PokemonToPokemonMove\"}],\"dbName\":null},\"Pokedex\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"region_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"region\",\"kind\":\"object\",\"type\":\"Region\",\"relationName\":\"PokedexToRegion\"},{\"name\":\"pokedex_version_groups\",\"kind\":\"object\",\"type\":\"PokedexVersionGroup\",\"relationName\":\"PokedexToPokedexVersionGroup\"},{\"name\":\"pokemon_dex_numbers\",\"kind\":\"object\",\"type\":\"PokemonDexNumber\",\"relationName\":\"PokedexToPokemonDexNumber\"}],\"dbName\":null},\"PokedexVersionGroup\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"version_group_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokedex_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"version_group\",\"kind\":\"object\",\"type\":\"VersionGroup\",\"relationName\":\"PokedexVersionGroupToVersionGroup\"},{\"name\":\"pokedex\",\"kind\":\"object\",\"type\":\"Pokedex\",\"relationName\":\"PokedexToPokedexVersionGroup\"}],\"dbName\":null},\"PokemonDexNumber\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokemon_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokedex_id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokedex_number\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"pokemon\",\"kind\":\"object\",\"type\":\"Pokemon\",\"relationName\":\"PokemonToPokemonDexNumber\"},{\"name\":\"pokedex\",\"kind\":\"object\",\"type\":\"Pokedex\",\"relationName\":\"PokedexToPokemonDexNumber\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),
