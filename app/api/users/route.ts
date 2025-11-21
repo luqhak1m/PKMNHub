@@ -1,14 +1,15 @@
 
 import { NextResponse } from "next/server";
-import { UserDelegate } from "../helpers/user-delegate";
+import { DBClient } from "../helpers/prisma-client";
 import { create_user_schema } from "../schemas/user-schema";
 import { withAuth } from "../middleware/auth";
 
-const delegate=new UserDelegate();
+const prisma=DBClient.getInstance();
+const delegate=prisma.user;
 
 export async function GET(){
     try{
-        const users=await delegate.fetchMany();
+        const users=await delegate.findMany();
         console.log("[GET][/users] users fetched: ")
         return NextResponse.json({users});
     }catch(err){

@@ -2,6 +2,7 @@
 import fs, { read } from "fs";
 import { parse } from "csv-parse"
 import { error } from "console";
+import { DBClient } from "../app/api/helpers/prisma-client";
 
 /**
  * Pokemon
@@ -1210,39 +1211,49 @@ async function main(){
     const move_damage_classes: MoveDamageClass[]=move_damage_classes_CSV.map(parseMoveDamageClassCSV);
     const pokemon_moves: PokemonMove[]=pokemon_moves_CSV.map(parsePokemonMoveCSV);
 
-    console.log("pokemon.csv", pokemon.slice(0,3));
-    console.log("generations.csv", generations.slice(0,9));
-    console.log("regions.csv", regions.slice(0,10));
-    console.log("versions.csv", versions.slice(0,10));
-    console.log("version_groups.csv", version_groups.slice(0,10));
-    console.log("version_group_regions.csv", version_group_regions.slice(0,10));
-    console.log("pokedexes.csv", pokedexes.slice(0,10));
-    console.log("pokedex_version_groups.csv", pokedex_version_groups.slice(0,10));
-    console.log("pokemon_dex_numbers.csv", pokemon_dex_numbers.slice(0,10));
-    console.log("natures.csv", natures.slice(0,3));
-    console.log("abilities.csv", abilities.slice(0,3));
-    console.log("pokemon_abilities.csv", pokemon_abilities.slice(0,3));
-    console.log("stats.csv", stats.slice(0,6));
-    console.log("egg_groups.csv", egg_groups.slice(0,6));
-    console.log("pokemon_egg_groups.csv", pokemon_egg_groups.slice(0,3));
-    console.log("pokemon_stats.csv", pokemon_stats.slice(0,3));
-    console.log("types.csv", types.slice(0,18));
-    console.log("type_efficacy.csv", type_effectiveness.slice(0,18));
-    console.log("pokemon_types.csv", pokemon_types.slice(0,18));
-    console.log("locations.csv", locations.slice(0,3));
-    console.log("location_areas.csv", location_areas.slice(0,10));
-    console.log("encounter_methods.csv", encounter_methods.slice(0,3));
-    console.log("encounter_conditions.csv", encounter_conditions.slice(0,3));
-    console.log("encounter_condition_values.csv", encounter_condition_values.slice(0,3));
-    console.log("encounter_condition_value_maps.csv", encounter_condition_value_maps.slice(0,3));
-    console.log("encounter_slots.csv", encounter_slots.slice(0,3));
-    console.log("encounters.csv", encounters.slice(0,3));
-    console.log("location_area_encounter_rates.csv", location_area_encounter_rates.slice(0,3));
-    console.log("pokemon_move_methods.csv", move_methods.slice(0,3));
-    console.log("move_effects.csv", move_effects.slice(0,3));
-    console.log("moves.csv", moves.slice(0,3));
-    console.log("move_damage_classes.csv", move_damage_classes.slice(0,3));
-    console.log("pokemon_moves.csv", pokemon_moves.slice(0,3));
+    // console.log("pokemon.csv", pokemon.slice(0,3));
+    // console.log("generations.csv", generations.slice(0,9));
+    // console.log("regions.csv", regions.slice(0,10));
+    // console.log("versions.csv", versions.slice(0,10));
+    // console.log("version_groups.csv", version_groups.slice(0,10));
+    // console.log("version_group_regions.csv", version_group_regions.slice(0,10));
+    // console.log("pokedexes.csv", pokedexes.slice(0,10));
+    // console.log("pokedex_version_groups.csv", pokedex_version_groups.slice(0,10));
+    // console.log("pokemon_dex_numbers.csv", pokemon_dex_numbers.slice(0,10));
+    // console.log("natures.csv", natures.slice(0,3));
+    // console.log("abilities.csv", abilities.slice(0,3));
+    // console.log("pokemon_abilities.csv", pokemon_abilities.slice(0,3));
+    // console.log("stats.csv", stats.slice(0,6));
+    // console.log("egg_groups.csv", egg_groups.slice(0,6));
+    // console.log("pokemon_egg_groups.csv", pokemon_egg_groups.slice(0,3));
+    // console.log("pokemon_stats.csv", pokemon_stats.slice(0,3));
+    // console.log("types.csv", types.slice(0,18));
+    // console.log("type_efficacy.csv", type_effectiveness.slice(0,18));
+    // console.log("pokemon_types.csv", pokemon_types.slice(0,18));
+    // console.log("locations.csv", locations.slice(0,3));
+    // console.log("location_areas.csv", location_areas.slice(0,10));
+    // console.log("encounter_methods.csv", encounter_methods.slice(0,3));
+    // console.log("encounter_conditions.csv", encounter_conditions.slice(0,3));
+    // console.log("encounter_condition_values.csv", encounter_condition_values.slice(0,3));
+    // console.log("encounter_condition_value_maps.csv", encounter_condition_value_maps.slice(0,3));
+    // console.log("encounter_slots.csv", encounter_slots.slice(0,3));
+    // console.log("encounters.csv", encounters.slice(0,3));
+    // console.log("location_area_encounter_rates.csv", location_area_encounter_rates.slice(0,3));
+    // console.log("pokemon_move_methods.csv", move_methods.slice(0,3));
+    // console.log("move_effects.csv", move_effects.slice(0,3));
+    // console.log("moves.csv", moves.slice(0,3));
+    // console.log("move_damage_classes.csv", move_damage_classes.slice(0,3));
+    // console.log("pokemon_moves.csv", pokemon_moves.slice(0,3));
+    
+    const prisma=DBClient.getInstance();
+    
+    const pokemon_result=await prisma.pokemon.createMany({
+        data: pokemon,
+        skipDuplicates: true,
+    })
+
+    console.log("Inserted Pokémon:", pokemon_result);
 }
+
 
 main();

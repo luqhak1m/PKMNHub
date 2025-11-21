@@ -1,9 +1,11 @@
 
 import { NextResponse } from "next/server";
-import { UserDelegate } from "../../helpers/user-delegate";
 import { withAuth } from "../../middleware/auth";
+import { DBClient } from "../../helpers/prisma-client";
 
-const delegate=new UserDelegate();
+
+const prisma=DBClient.getInstance();
+const delegate=prisma.user;
 
 // export async function GET(
 //     request: Request,
@@ -20,7 +22,7 @@ const delegate=new UserDelegate();
 //     }
 // }
 
-export const GET=withAuth<{params: Promise<{id: string}>}>(
+export const GET=withAuth<{params: Promise<{id: number}>}>(
     async(request, context)=>{
     if(!context?.params){
         return NextResponse.json({error: "missing ID in params"}, {status: 400})
@@ -28,20 +30,19 @@ export const GET=withAuth<{params: Promise<{id: string}>}>(
     
     const resolved_params = await context.params;
     const user_id=resolved_params.id;
-    console.log("ID:", `"${user_id}"`, "length:", user_id.length);
     console.log("user_id", user_id);
-    const user=await delegate.fetchOne(user_id);
+    const user=await delegate.findUnique({where: {id: user_id}});
     console.log("[GET][/:id/users] user fetched: ", user?.name)
     return NextResponse.json({user});
 })
 
 export async function DELETE(
     request: Request,
-    { params }: { params: Promise<{id: string}> }
+    { params }: { params: Promise<{id: number}> }
 ){
     try{
         const resolved_params = await params;
-        const deleted_user=await delegate.deleteOne(resolved_params.id);
+        const deleted_user=await delegate.delete({where: {id: resolved_params.id}});
         console.log("[DELETE][/:id/users] user deleted: ")
         return NextResponse.json({deleted_user});
     }catch(err){

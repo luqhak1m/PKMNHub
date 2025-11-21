@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
-import { UserDelegate } from "../../helpers/user-delegate";
 import { login_user_schema } from "../../schemas/user-schema";
 import jwt from "jsonwebtoken";
 import "dotenv/config";
+import { DBClient } from "../../helpers/prisma-client";
 
-const delegate=new UserDelegate();
+const prisma=DBClient.getInstance();
+const delegate=prisma.user;
 
 export async function POST(request: Request){
     const data=await request.json();
@@ -17,7 +18,7 @@ export async function POST(request: Request){
         const { email, password }=login_user_schema.parse(data);
 
         // check email existence
-        const user=await delegate.fetchByEmail(email);
+        const user=await delegate.findUnique({where: {email: email}});
         if(!user){return NextResponse.json({ error: "user not found"})};
 
         // crosscheck password

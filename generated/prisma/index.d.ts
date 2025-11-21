@@ -46232,7 +46232,6 @@ export namespace Prisma {
   }
 
   export type UserCreateInput = {
-    id: number
     email: string
     name: string
     password: string
@@ -46242,7 +46241,7 @@ export namespace Prisma {
   }
 
   export type UserUncheckedCreateInput = {
-    id: number
+    id?: number
     email: string
     name: string
     password: string
@@ -46252,7 +46251,6 @@ export namespace Prisma {
   }
 
   export type UserUpdateInput = {
-    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
@@ -46272,7 +46270,7 @@ export namespace Prisma {
   }
 
   export type UserCreateManyInput = {
-    id: number
+    id?: number
     email: string
     name: string
     password: string
@@ -46282,7 +46280,6 @@ export namespace Prisma {
   }
 
   export type UserUpdateManyMutationInput = {
-    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     password?: StringFieldUpdateOperationsInput | string
@@ -49522,20 +49519,20 @@ export namespace Prisma {
     pokedex_number?: SortOrder
   }
 
-  export type IntFieldUpdateOperationsInput = {
-    set?: number
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type StringFieldUpdateOperationsInput = {
     set?: string
   }
 
   export type DateTimeFieldUpdateOperationsInput = {
     set?: Date | string
+  }
+
+  export type IntFieldUpdateOperationsInput = {
+    set?: number
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type PokemonAbilityCreateNestedManyWithoutPokemonInput = {
