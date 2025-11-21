@@ -17,10 +17,11 @@ type Pokemon={
 export default function PokemonList(){
     const [pokemon, setPokemon]=useState<Pokemon[]>([]);
     const [page, setPage]=useState<number>(1);
+    const [search, setSearch]=useState<string>("");
     const limit=25;
 
     useEffect(()=>{
-        fetch(`/api/pokemon?page=${page}&limit=${limit}`)
+        fetch(`/api/pokemon?page=${page}&limit=${limit}&q=${encodeURIComponent(search)}`)
             .then(response=>response.json())
             .then(data=>{
                 setPokemon(data.pokemon.sort(
@@ -28,7 +29,7 @@ export default function PokemonList(){
                 )
             })
             .catch(error=>console.error(error));
-    }, [page]); // runs this every time the page is set
+    }, [page, search]); // runs this every time the page is set or the search bar is being typed on
 
     const play_cry=(p: Pokemon)=>{
         const audio=getCachedAudio(p.id, p.cry_url);
@@ -36,6 +37,16 @@ export default function PokemonList(){
     }
 
     return <div>
+        <input
+            type="text"
+            placeholder="search pokemon name"
+            value={search}
+            onChange={e=>{
+                setSearch(e.target.value);
+                setPage(1);
+            }}
+        >
+        </input>
         <h2>Pokemon List:</h2>
         <ul>
             {pokemon.map(
