@@ -26,8 +26,10 @@ model User {
 }
 
 model Pokemon {
-  id   Int    @id
-  name String @unique
+  id         Int     @id
+  name       String  @unique
+  sprite_url String?
+  cry_url    String?
 
   abilities   PokemonAbility[]
   natures     PokemonNature[]

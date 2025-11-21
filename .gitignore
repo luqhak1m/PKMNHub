@@ -6,3 +6,5 @@
 .DS_Store
 *.tsbuildinfo
 /csv
+/app/public/sprites
+/app/public/cries

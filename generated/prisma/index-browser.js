@@ -132,7 +132,9 @@ exports.Prisma.UserScalarFieldEnum = {
 
 exports.Prisma.PokemonScalarFieldEnum = {
   id: 'id',
-  name: 'name'
+  name: 'name',
+  sprite_url: 'sprite_url',
+  cry_url: 'cry_url'
 };
 
 exports.Prisma.AbilityScalarFieldEnum = {

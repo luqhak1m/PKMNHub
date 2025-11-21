@@ -5921,16 +5921,22 @@ export namespace Prisma {
   export type PokemonMinAggregateOutputType = {
     id: number | null
     name: string | null
+    sprite_url: string | null
+    cry_url: string | null
   }
 
   export type PokemonMaxAggregateOutputType = {
     id: number | null
     name: string | null
+    sprite_url: string | null
+    cry_url: string | null
   }
 
   export type PokemonCountAggregateOutputType = {
     id: number
     name: number
+    sprite_url: number
+    cry_url: number
     _all: number
   }
 
@@ -5946,16 +5952,22 @@ export namespace Prisma {
   export type PokemonMinAggregateInputType = {
     id?: true
     name?: true
+    sprite_url?: true
+    cry_url?: true
   }
 
   export type PokemonMaxAggregateInputType = {
     id?: true
     name?: true
+    sprite_url?: true
+    cry_url?: true
   }
 
   export type PokemonCountAggregateInputType = {
     id?: true
     name?: true
+    sprite_url?: true
+    cry_url?: true
     _all?: true
   }
 
@@ -6048,6 +6060,8 @@ export namespace Prisma {
   export type PokemonGroupByOutputType = {
     id: number
     name: string
+    sprite_url: string | null
+    cry_url: string | null
     _count: PokemonCountAggregateOutputType | null
     _avg: PokemonAvgAggregateOutputType | null
     _sum: PokemonSumAggregateOutputType | null
@@ -6072,6 +6086,8 @@ export namespace Prisma {
   export type PokemonSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    sprite_url?: boolean
+    cry_url?: boolean
     abilities?: boolean | Pokemon$abilitiesArgs<ExtArgs>
     natures?: boolean | Pokemon$naturesArgs<ExtArgs>
     stats?: boolean | Pokemon$statsArgs<ExtArgs>
@@ -6086,19 +6102,25 @@ export namespace Prisma {
   export type PokemonSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    sprite_url?: boolean
+    cry_url?: boolean
   }, ExtArgs["result"]["pokemon"]>
 
   export type PokemonSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    sprite_url?: boolean
+    cry_url?: boolean
   }, ExtArgs["result"]["pokemon"]>
 
   export type PokemonSelectScalar = {
     id?: boolean
     name?: boolean
+    sprite_url?: boolean
+    cry_url?: boolean
   }
 
-  export type PokemonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name", ExtArgs["result"]["pokemon"]>
+  export type PokemonOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "sprite_url" | "cry_url", ExtArgs["result"]["pokemon"]>
   export type PokemonInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     abilities?: boolean | Pokemon$abilitiesArgs<ExtArgs>
     natures?: boolean | Pokemon$naturesArgs<ExtArgs>
@@ -6128,6 +6150,8 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
+      sprite_url: string | null
+      cry_url: string | null
     }, ExtArgs["result"]["pokemon"]>
     composites: {}
   }
@@ -6561,6 +6585,8 @@ export namespace Prisma {
   interface PokemonFieldRefs {
     readonly id: FieldRef<"Pokemon", 'Int'>
     readonly name: FieldRef<"Pokemon", 'String'>
+    readonly sprite_url: FieldRef<"Pokemon", 'String'>
+    readonly cry_url: FieldRef<"Pokemon", 'String'>
   }
     
 
@@ -43912,7 +43938,9 @@ export namespace Prisma {
 
   export const PokemonScalarFieldEnum: {
     id: 'id',
-    name: 'name'
+    name: 'name',
+    sprite_url: 'sprite_url',
+    cry_url: 'cry_url'
   };
 
   export type PokemonScalarFieldEnum = (typeof PokemonScalarFieldEnum)[keyof typeof PokemonScalarFieldEnum]
@@ -44395,6 +44423,8 @@ export namespace Prisma {
     NOT?: PokemonWhereInput | PokemonWhereInput[]
     id?: IntFilter<"Pokemon"> | number
     name?: StringFilter<"Pokemon"> | string
+    sprite_url?: StringNullableFilter<"Pokemon"> | string | null
+    cry_url?: StringNullableFilter<"Pokemon"> | string | null
     abilities?: PokemonAbilityListRelationFilter
     natures?: PokemonNatureListRelationFilter
     stats?: PokemonStatListRelationFilter
@@ -44408,6 +44438,8 @@ export namespace Prisma {
   export type PokemonOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    sprite_url?: SortOrderInput | SortOrder
+    cry_url?: SortOrderInput | SortOrder
     abilities?: PokemonAbilityOrderByRelationAggregateInput
     natures?: PokemonNatureOrderByRelationAggregateInput
     stats?: PokemonStatOrderByRelationAggregateInput
@@ -44424,6 +44456,8 @@ export namespace Prisma {
     AND?: PokemonWhereInput | PokemonWhereInput[]
     OR?: PokemonWhereInput[]
     NOT?: PokemonWhereInput | PokemonWhereInput[]
+    sprite_url?: StringNullableFilter<"Pokemon"> | string | null
+    cry_url?: StringNullableFilter<"Pokemon"> | string | null
     abilities?: PokemonAbilityListRelationFilter
     natures?: PokemonNatureListRelationFilter
     stats?: PokemonStatListRelationFilter
@@ -44437,6 +44471,8 @@ export namespace Prisma {
   export type PokemonOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    sprite_url?: SortOrderInput | SortOrder
+    cry_url?: SortOrderInput | SortOrder
     _count?: PokemonCountOrderByAggregateInput
     _avg?: PokemonAvgOrderByAggregateInput
     _max?: PokemonMaxOrderByAggregateInput
@@ -44450,6 +44486,8 @@ export namespace Prisma {
     NOT?: PokemonScalarWhereWithAggregatesInput | PokemonScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Pokemon"> | number
     name?: StringWithAggregatesFilter<"Pokemon"> | string
+    sprite_url?: StringNullableWithAggregatesFilter<"Pokemon"> | string | null
+    cry_url?: StringNullableWithAggregatesFilter<"Pokemon"> | string | null
   }
 
   export type AbilityWhereInput = {
@@ -46301,6 +46339,8 @@ export namespace Prisma {
   export type PokemonCreateInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityCreateNestedManyWithoutPokemonInput
     natures?: PokemonNatureCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatCreateNestedManyWithoutPokemonInput
@@ -46314,6 +46354,8 @@ export namespace Prisma {
   export type PokemonUncheckedCreateInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityUncheckedCreateNestedManyWithoutPokemonInput
     natures?: PokemonNatureUncheckedCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatUncheckedCreateNestedManyWithoutPokemonInput
@@ -46327,6 +46369,8 @@ export namespace Prisma {
   export type PokemonUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUpdateManyWithoutPokemonNestedInput
     natures?: PokemonNatureUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUpdateManyWithoutPokemonNestedInput
@@ -46340,6 +46384,8 @@ export namespace Prisma {
   export type PokemonUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUncheckedUpdateManyWithoutPokemonNestedInput
     natures?: PokemonNatureUncheckedUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUncheckedUpdateManyWithoutPokemonNestedInput
@@ -46353,16 +46399,22 @@ export namespace Prisma {
   export type PokemonCreateManyInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
   }
 
   export type PokemonUpdateManyMutationInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PokemonUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type AbilityCreateInput = {
@@ -48085,6 +48137,21 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
+  export type StringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
+  }
+
   export type PokemonAbilityListRelationFilter = {
     every?: PokemonAbilityWhereInput
     some?: PokemonAbilityWhereInput
@@ -48133,6 +48200,11 @@ export namespace Prisma {
     none?: PokemonMoveWhereInput
   }
 
+  export type SortOrderInput = {
+    sort: SortOrder
+    nulls?: NullsOrder
+  }
+
   export type PokemonAbilityOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
@@ -48168,6 +48240,8 @@ export namespace Prisma {
   export type PokemonCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    sprite_url?: SortOrder
+    cry_url?: SortOrder
   }
 
   export type PokemonAvgOrderByAggregateInput = {
@@ -48177,15 +48251,37 @@ export namespace Prisma {
   export type PokemonMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    sprite_url?: SortOrder
+    cry_url?: SortOrder
   }
 
   export type PokemonMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    sprite_url?: SortOrder
+    cry_url?: SortOrder
   }
 
   export type PokemonSumOrderByAggregateInput = {
     id?: SortOrder
+  }
+
+  export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    mode?: QueryMode
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type AbilityCountOrderByAggregateInput = {
@@ -49287,11 +49383,6 @@ export namespace Prisma {
     isNot?: MoveEffectWhereInput
   }
 
-  export type SortOrderInput = {
-    sort: SortOrder
-    nulls?: NullsOrder
-  }
-
   export type MoveCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
@@ -49645,6 +49736,10 @@ export namespace Prisma {
     connectOrCreate?: PokemonMoveCreateOrConnectWithoutPokemonInput | PokemonMoveCreateOrConnectWithoutPokemonInput[]
     createMany?: PokemonMoveCreateManyPokemonInputEnvelope
     connect?: PokemonMoveWhereUniqueInput | PokemonMoveWhereUniqueInput[]
+  }
+
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
   export type PokemonAbilityUpdateManyWithoutPokemonNestedInput = {
@@ -52207,17 +52302,35 @@ export namespace Prisma {
     _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
+  export type NestedStringNullableFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
+  export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: string | StringFieldRefInput<$PrismaModel> | null
+    in?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    notIn?: string[] | ListStringFieldRefInput<$PrismaModel> | null
+    lt?: string | StringFieldRefInput<$PrismaModel>
+    lte?: string | StringFieldRefInput<$PrismaModel>
+    gt?: string | StringFieldRefInput<$PrismaModel>
+    gte?: string | StringFieldRefInput<$PrismaModel>
+    contains?: string | StringFieldRefInput<$PrismaModel>
+    startsWith?: string | StringFieldRefInput<$PrismaModel>
+    endsWith?: string | StringFieldRefInput<$PrismaModel>
+    not?: NestedStringNullableWithAggregatesFilter<$PrismaModel> | string | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedStringNullableFilter<$PrismaModel>
+    _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
   export type NestedIntNullableFilter<$PrismaModel = never> = {
@@ -52229,6 +52342,19 @@ export namespace Prisma {
     gt?: number | IntFieldRefInput<$PrismaModel>
     gte?: number | IntFieldRefInput<$PrismaModel>
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -52691,6 +52817,8 @@ export namespace Prisma {
   export type PokemonCreateWithoutAbilitiesInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     natures?: PokemonNatureCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatCreateNestedManyWithoutPokemonInput
     types?: PokemonTypeCreateNestedManyWithoutPokemonInput
@@ -52703,6 +52831,8 @@ export namespace Prisma {
   export type PokemonUncheckedCreateWithoutAbilitiesInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     natures?: PokemonNatureUncheckedCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatUncheckedCreateNestedManyWithoutPokemonInput
     types?: PokemonTypeUncheckedCreateNestedManyWithoutPokemonInput
@@ -52748,6 +52878,8 @@ export namespace Prisma {
   export type PokemonUpdateWithoutAbilitiesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     natures?: PokemonNatureUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUpdateManyWithoutPokemonNestedInput
     types?: PokemonTypeUpdateManyWithoutPokemonNestedInput
@@ -52760,6 +52892,8 @@ export namespace Prisma {
   export type PokemonUncheckedUpdateWithoutAbilitiesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     natures?: PokemonNatureUncheckedUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUncheckedUpdateManyWithoutPokemonNestedInput
     types?: PokemonTypeUncheckedUpdateManyWithoutPokemonNestedInput
@@ -52919,6 +53053,8 @@ export namespace Prisma {
   export type PokemonCreateWithoutNaturesInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatCreateNestedManyWithoutPokemonInput
     types?: PokemonTypeCreateNestedManyWithoutPokemonInput
@@ -52931,6 +53067,8 @@ export namespace Prisma {
   export type PokemonUncheckedCreateWithoutNaturesInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityUncheckedCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatUncheckedCreateNestedManyWithoutPokemonInput
     types?: PokemonTypeUncheckedCreateNestedManyWithoutPokemonInput
@@ -52978,6 +53116,8 @@ export namespace Prisma {
   export type PokemonUpdateWithoutNaturesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUpdateManyWithoutPokemonNestedInput
     types?: PokemonTypeUpdateManyWithoutPokemonNestedInput
@@ -52990,6 +53130,8 @@ export namespace Prisma {
   export type PokemonUncheckedUpdateWithoutNaturesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUncheckedUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUncheckedUpdateManyWithoutPokemonNestedInput
     types?: PokemonTypeUncheckedUpdateManyWithoutPokemonNestedInput
@@ -53155,6 +53297,8 @@ export namespace Prisma {
   export type PokemonCreateWithoutStatsInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityCreateNestedManyWithoutPokemonInput
     natures?: PokemonNatureCreateNestedManyWithoutPokemonInput
     types?: PokemonTypeCreateNestedManyWithoutPokemonInput
@@ -53167,6 +53311,8 @@ export namespace Prisma {
   export type PokemonUncheckedCreateWithoutStatsInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityUncheckedCreateNestedManyWithoutPokemonInput
     natures?: PokemonNatureUncheckedCreateNestedManyWithoutPokemonInput
     types?: PokemonTypeUncheckedCreateNestedManyWithoutPokemonInput
@@ -53214,6 +53360,8 @@ export namespace Prisma {
   export type PokemonUpdateWithoutStatsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUpdateManyWithoutPokemonNestedInput
     natures?: PokemonNatureUpdateManyWithoutPokemonNestedInput
     types?: PokemonTypeUpdateManyWithoutPokemonNestedInput
@@ -53226,6 +53374,8 @@ export namespace Prisma {
   export type PokemonUncheckedUpdateWithoutStatsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUncheckedUpdateManyWithoutPokemonNestedInput
     natures?: PokemonNatureUncheckedUpdateManyWithoutPokemonNestedInput
     types?: PokemonTypeUncheckedUpdateManyWithoutPokemonNestedInput
@@ -53598,6 +53748,8 @@ export namespace Prisma {
   export type PokemonCreateWithoutTypesInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityCreateNestedManyWithoutPokemonInput
     natures?: PokemonNatureCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatCreateNestedManyWithoutPokemonInput
@@ -53610,6 +53762,8 @@ export namespace Prisma {
   export type PokemonUncheckedCreateWithoutTypesInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityUncheckedCreateNestedManyWithoutPokemonInput
     natures?: PokemonNatureUncheckedCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatUncheckedCreateNestedManyWithoutPokemonInput
@@ -53661,6 +53815,8 @@ export namespace Prisma {
   export type PokemonUpdateWithoutTypesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUpdateManyWithoutPokemonNestedInput
     natures?: PokemonNatureUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUpdateManyWithoutPokemonNestedInput
@@ -53673,6 +53829,8 @@ export namespace Prisma {
   export type PokemonUncheckedUpdateWithoutTypesInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUncheckedUpdateManyWithoutPokemonNestedInput
     natures?: PokemonNatureUncheckedUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUncheckedUpdateManyWithoutPokemonNestedInput
@@ -53750,6 +53908,8 @@ export namespace Prisma {
   export type PokemonCreateWithoutEgg_groupsInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityCreateNestedManyWithoutPokemonInput
     natures?: PokemonNatureCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatCreateNestedManyWithoutPokemonInput
@@ -53762,6 +53922,8 @@ export namespace Prisma {
   export type PokemonUncheckedCreateWithoutEgg_groupsInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityUncheckedCreateNestedManyWithoutPokemonInput
     natures?: PokemonNatureUncheckedCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatUncheckedCreateNestedManyWithoutPokemonInput
@@ -53805,6 +53967,8 @@ export namespace Prisma {
   export type PokemonUpdateWithoutEgg_groupsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUpdateManyWithoutPokemonNestedInput
     natures?: PokemonNatureUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUpdateManyWithoutPokemonNestedInput
@@ -53817,6 +53981,8 @@ export namespace Prisma {
   export type PokemonUncheckedUpdateWithoutEgg_groupsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUncheckedUpdateManyWithoutPokemonNestedInput
     natures?: PokemonNatureUncheckedUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUncheckedUpdateManyWithoutPokemonNestedInput
@@ -55183,6 +55349,8 @@ export namespace Prisma {
   export type PokemonCreateWithoutEncountersInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityCreateNestedManyWithoutPokemonInput
     natures?: PokemonNatureCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatCreateNestedManyWithoutPokemonInput
@@ -55195,6 +55363,8 @@ export namespace Prisma {
   export type PokemonUncheckedCreateWithoutEncountersInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityUncheckedCreateNestedManyWithoutPokemonInput
     natures?: PokemonNatureUncheckedCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatUncheckedCreateNestedManyWithoutPokemonInput
@@ -55308,6 +55478,8 @@ export namespace Prisma {
   export type PokemonUpdateWithoutEncountersInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUpdateManyWithoutPokemonNestedInput
     natures?: PokemonNatureUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUpdateManyWithoutPokemonNestedInput
@@ -55320,6 +55492,8 @@ export namespace Prisma {
   export type PokemonUncheckedUpdateWithoutEncountersInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUncheckedUpdateManyWithoutPokemonNestedInput
     natures?: PokemonNatureUncheckedUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUncheckedUpdateManyWithoutPokemonNestedInput
@@ -56136,6 +56310,8 @@ export namespace Prisma {
   export type PokemonCreateWithoutMoveInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityCreateNestedManyWithoutPokemonInput
     natures?: PokemonNatureCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatCreateNestedManyWithoutPokemonInput
@@ -56148,6 +56324,8 @@ export namespace Prisma {
   export type PokemonUncheckedCreateWithoutMoveInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityUncheckedCreateNestedManyWithoutPokemonInput
     natures?: PokemonNatureUncheckedCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatUncheckedCreateNestedManyWithoutPokemonInput
@@ -56263,6 +56441,8 @@ export namespace Prisma {
   export type PokemonUpdateWithoutMoveInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUpdateManyWithoutPokemonNestedInput
     natures?: PokemonNatureUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUpdateManyWithoutPokemonNestedInput
@@ -56275,6 +56455,8 @@ export namespace Prisma {
   export type PokemonUncheckedUpdateWithoutMoveInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUncheckedUpdateManyWithoutPokemonNestedInput
     natures?: PokemonNatureUncheckedUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUncheckedUpdateManyWithoutPokemonNestedInput
@@ -56509,6 +56691,8 @@ export namespace Prisma {
   export type PokemonCreateWithoutDex_numbersInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityCreateNestedManyWithoutPokemonInput
     natures?: PokemonNatureCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatCreateNestedManyWithoutPokemonInput
@@ -56521,6 +56705,8 @@ export namespace Prisma {
   export type PokemonUncheckedCreateWithoutDex_numbersInput = {
     id: number
     name: string
+    sprite_url?: string | null
+    cry_url?: string | null
     abilities?: PokemonAbilityUncheckedCreateNestedManyWithoutPokemonInput
     natures?: PokemonNatureUncheckedCreateNestedManyWithoutPokemonInput
     stats?: PokemonStatUncheckedCreateNestedManyWithoutPokemonInput
@@ -56568,6 +56754,8 @@ export namespace Prisma {
   export type PokemonUpdateWithoutDex_numbersInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUpdateManyWithoutPokemonNestedInput
     natures?: PokemonNatureUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUpdateManyWithoutPokemonNestedInput
@@ -56580,6 +56768,8 @@ export namespace Prisma {
   export type PokemonUncheckedUpdateWithoutDex_numbersInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+    sprite_url?: NullableStringFieldUpdateOperationsInput | string | null
+    cry_url?: NullableStringFieldUpdateOperationsInput | string | null
     abilities?: PokemonAbilityUncheckedUpdateManyWithoutPokemonNestedInput
     natures?: PokemonNatureUncheckedUpdateManyWithoutPokemonNestedInput
     stats?: PokemonStatUncheckedUpdateManyWithoutPokemonNestedInput
