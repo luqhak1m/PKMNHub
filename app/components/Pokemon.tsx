@@ -16,16 +16,19 @@ type Pokemon={
 
 export default function PokemonList(){
     const [pokemon, setPokemon]=useState<Pokemon[]>([]);
-
+    const [page, setPage]=useState<number>(1);
+    const limit=25;
 
     useEffect(()=>{
-        fetch("/api/pokemon")
+        fetch(`/api/pokemon?page=${page}&limit=${limit}`)
             .then(response=>response.json())
             .then(data=>{
-                setPokemon(data.pokemon)
+                setPokemon(data.pokemon.sort(
+                    (a: Pokemon, b: Pokemon)=>a.id-b.id)
+                )
             })
             .catch(error=>console.error(error));
-    }, []);
+    }, [page]); // runs this every time the page is set
 
     const play_cry=(p: Pokemon)=>{
         const audio=getCachedAudio(p.id, p.cry_url);
@@ -40,7 +43,7 @@ export default function PokemonList(){
                     <li
                         key={p.id}
                     >
-                        {p.name && <h3>{p.name}</h3>}
+                        <h3>{p.id}. {p.name}</h3>
                         {p.sprite_url && <img src={p.sprite_url} alt={p.name}/>}
                         {/* {p.cry_url && <audio controls src={p.cry_url}/>} */}
                         <button
@@ -52,6 +55,8 @@ export default function PokemonList(){
                 )
             )}
         </ul>
+        <button disabled={page===1} onClick={()=>setPage(page-1)}>Previous</button>
+        <button onClick={()=>setPage(page+1)}>Next</button>
 
     </div>
 
