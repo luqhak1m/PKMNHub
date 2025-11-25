@@ -13,16 +13,29 @@ export async function GET(request: NextRequest){
         const skip=(page-1)*limit; // at page 1 skip 0, page 2 skip (2-1)*25=25, basically skips previous entries
 
         const query=url.searchParams.get("q") || "";
+        const ability=url.searchParams.get("ability") || "";
 
         const pokemon=await delegate.findMany({
             where: {
-                name: { contains: query, mode: "insensitive"}
+                name: { contains: query, mode: "insensitive"},
+                ...(ability && {
+                    abilities: {
+                        some: {
+                            ability: {
+                                name: {
+                                    equals: ability,
+                                    mode: "insensitive",
+                                },
+                            },
+                        },
+                    },
+                }),    
             },
             skip,
             take: limit,
             orderBy: {id:"asc"}, // sort by id here
         });
-        console.log("[GET][/pokemon] pokemon fetched: \n", pokemon);
+        console.log("[GET][/pokemon] pokemon fetched: \n", pokemon.length);
         return NextResponse.json({pokemon, page, limit, query})
     }catch(err){
         console.error("[GET][/pokemon] error: ", err);

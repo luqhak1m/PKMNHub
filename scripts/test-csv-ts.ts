@@ -1296,14 +1296,17 @@ async function main(){
     //     })
     // }
 
-    await prisma.ability.updateMany({
-        where: {
-            description: "[object Object]",
-        },
-        data: { description: "no description"},
-    })
+    // await prisma.ability.updateMany({
+    //     where: {
+    //         description: "[object Object]",
+    //     },
+    //     data: { description: "no description"},
+    // })
 
-
+    // await prisma.pokemonAbility.createMany({
+    //     data: pokemon_abilities,
+    //     skipDuplicates: true,
+    // })
 }
 
 

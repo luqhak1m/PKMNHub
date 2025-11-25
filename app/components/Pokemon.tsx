@@ -5,17 +5,13 @@ import React from "react";
 import { useEffect, useState } from "react";
 import { useRef } from "react";
 import getCachedAudio from "../utils/Audio-Cache";
+import { Pokemon, Ability } from "../../generated/prisma";
 
-
-type Pokemon={
-    id: number;
-    name: string;
-    sprite_url: string;
-    cry_url: string;
-}
 
 export default function PokemonList(){
     const [pokemon, setPokemon]=useState<Pokemon[]>([]);
+    const [abilities, setAbilities]=useState<Ability[]>([]);
+    const [ability, setAbility]=useState<string>("");
     const [page, setPage]=useState<number>(1);
     const [search, setSearch]=useState<string>("");
     const [query, setQuery]=useState<string>("");
@@ -23,7 +19,7 @@ export default function PokemonList(){
     const limit=25;
 
     useEffect(()=>{
-        fetch(`/api/pokemon?page=${page}&limit=${limit}&q=${encodeURIComponent(query)}`)
+        fetch(`/api/pokemon?page=${page}&limit=${limit}&q=${encodeURIComponent(query)}&ability=${ability}`)
             .then(response=>response.json())
             .then(data=>{
                 setPokemon(data.pokemon.sort(
@@ -32,10 +28,23 @@ export default function PokemonList(){
             })
             .catch(error=>console.error(error))
             .finally(()=>setLoadingStatus(false))
-    }, [page, query]); // runs this every time the page is set or the search bar is being typed on
+        console.log("ability selected: ", ability);
+    }, [query, search, ability, page]); // runs this every time the page is set or the search bar is being typed on
+
+    useEffect(()=>{
+        fetch(`/api/ability`)
+            .then(response=>response.json())
+            .then(data=>{
+                setAbilities(data.abilities.sort(
+                    (a: Ability, b: Ability)=>a.name.localeCompare(b.name))
+                )
+            })
+            .catch(error=>console.error(error))
+            .finally(()=>setLoadingStatus(false))
+    }, [])
 
     const play_cry=(p: Pokemon)=>{
-        const audio=getCachedAudio(p.id, p.cry_url);
+        const audio=getCachedAudio(p.id, p.cry_url || "");
         audio.play();
     }
 
@@ -46,6 +55,7 @@ export default function PokemonList(){
 
     return <div>
 
+        <h2>Pokemon List:</h2>
         <form onSubmit={search_pokemon}>
             <input
                 type="text"
@@ -60,7 +70,19 @@ export default function PokemonList(){
         </form>
         
 
-        <h2>Pokemon List:</h2>
+
+        <label htmlFor="abilities">Filter Pokemon by abilities: </label>
+            {isLoading?(
+                <h3>Loading Abilities...</h3>
+            ):(
+                <select name="abilities" id="abilities" defaultValue="" onChange={e=>setAbility(e.target.value)}>
+                    <option value="">--select an ability--</option>
+                    {abilities.map(ability=>(
+                        <option value={ability.name} key={ability.id}>{ability.name}</option>
+                    ))}
+                 </select>
+            )}
+
         {isLoading?(
             <h3>Loading Pokemon...</h3>
         ):(
