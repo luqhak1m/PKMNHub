@@ -4300,11 +4300,13 @@ export namespace Prisma {
   export type GenerationCountOutputType = {
     types: number
     versionGroups: number
+    ability: number
   }
 
   export type GenerationCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     types?: boolean | GenerationCountOutputTypeCountTypesArgs
     versionGroups?: boolean | GenerationCountOutputTypeCountVersionGroupsArgs
+    ability?: boolean | GenerationCountOutputTypeCountAbilityArgs
   }
 
   // Custom InputTypes
@@ -4330,6 +4332,13 @@ export namespace Prisma {
    */
   export type GenerationCountOutputTypeCountVersionGroupsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: VersionGroupWhereInput
+  }
+
+  /**
+   * GenerationCountOutputType without action
+   */
+  export type GenerationCountOutputTypeCountAbilityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AbilityWhereInput
   }
 
 
@@ -7199,56 +7208,66 @@ export namespace Prisma {
 
   export type AbilityAvgAggregateOutputType = {
     id: number | null
+    generation_id: number | null
   }
 
   export type AbilitySumAggregateOutputType = {
     id: number | null
+    generation_id: number | null
   }
 
   export type AbilityMinAggregateOutputType = {
     id: number | null
     name: string | null
     description: string | null
+    generation_id: number | null
   }
 
   export type AbilityMaxAggregateOutputType = {
     id: number | null
     name: string | null
     description: string | null
+    generation_id: number | null
   }
 
   export type AbilityCountAggregateOutputType = {
     id: number
     name: number
     description: number
+    generation_id: number
     _all: number
   }
 
 
   export type AbilityAvgAggregateInputType = {
     id?: true
+    generation_id?: true
   }
 
   export type AbilitySumAggregateInputType = {
     id?: true
+    generation_id?: true
   }
 
   export type AbilityMinAggregateInputType = {
     id?: true
     name?: true
     description?: true
+    generation_id?: true
   }
 
   export type AbilityMaxAggregateInputType = {
     id?: true
     name?: true
     description?: true
+    generation_id?: true
   }
 
   export type AbilityCountAggregateInputType = {
     id?: true
     name?: true
     description?: true
+    generation_id?: true
     _all?: true
   }
 
@@ -7342,6 +7361,7 @@ export namespace Prisma {
     id: number
     name: string
     description: string
+    generation_id: number | null
     _count: AbilityCountAggregateOutputType | null
     _avg: AbilityAvgAggregateOutputType | null
     _sum: AbilitySumAggregateOutputType | null
@@ -7367,6 +7387,8 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
+    generation_id?: boolean
+    generations?: boolean | Ability$generationsArgs<ExtArgs>
     pokemon?: boolean | Ability$pokemonArgs<ExtArgs>
     _count?: boolean | AbilityCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ability"]>
@@ -7375,37 +7397,49 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     description?: boolean
+    generation_id?: boolean
+    generations?: boolean | Ability$generationsArgs<ExtArgs>
   }, ExtArgs["result"]["ability"]>
 
   export type AbilitySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     description?: boolean
+    generation_id?: boolean
+    generations?: boolean | Ability$generationsArgs<ExtArgs>
   }, ExtArgs["result"]["ability"]>
 
   export type AbilitySelectScalar = {
     id?: boolean
     name?: boolean
     description?: boolean
+    generation_id?: boolean
   }
 
-  export type AbilityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description", ExtArgs["result"]["ability"]>
+  export type AbilityOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "description" | "generation_id", ExtArgs["result"]["ability"]>
   export type AbilityInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    generations?: boolean | Ability$generationsArgs<ExtArgs>
     pokemon?: boolean | Ability$pokemonArgs<ExtArgs>
     _count?: boolean | AbilityCountOutputTypeDefaultArgs<ExtArgs>
   }
-  export type AbilityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type AbilityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AbilityIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    generations?: boolean | Ability$generationsArgs<ExtArgs>
+  }
+  export type AbilityIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    generations?: boolean | Ability$generationsArgs<ExtArgs>
+  }
 
   export type $AbilityPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Ability"
     objects: {
+      generations: Prisma.$GenerationPayload<ExtArgs> | null
       pokemon: Prisma.$PokemonAbilityPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
       description: string
+      generation_id: number | null
     }, ExtArgs["result"]["ability"]>
     composites: {}
   }
@@ -7800,6 +7834,7 @@ export namespace Prisma {
    */
   export interface Prisma__AbilityClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    generations<T extends Ability$generationsArgs<ExtArgs> = {}>(args?: Subset<T, Ability$generationsArgs<ExtArgs>>): Prisma__GenerationClient<$Result.GetResult<Prisma.$GenerationPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     pokemon<T extends Ability$pokemonArgs<ExtArgs> = {}>(args?: Subset<T, Ability$pokemonArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PokemonAbilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -7833,6 +7868,7 @@ export namespace Prisma {
     readonly id: FieldRef<"Ability", 'Int'>
     readonly name: FieldRef<"Ability", 'String'>
     readonly description: FieldRef<"Ability", 'String'>
+    readonly generation_id: FieldRef<"Ability", 'Int'>
   }
     
 
@@ -8082,6 +8118,10 @@ export namespace Prisma {
      */
     data: AbilityCreateManyInput | AbilityCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AbilityIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -8152,6 +8192,10 @@ export namespace Prisma {
      * Limit how many Abilities to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AbilityIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -8218,6 +8262,25 @@ export namespace Prisma {
      * Limit how many Abilities to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Ability.generations
+   */
+  export type Ability$generationsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Generation
+     */
+    select?: GenerationSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Generation
+     */
+    omit?: GenerationOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: GenerationInclude<ExtArgs> | null
+    where?: GenerationWhereInput
   }
 
   /**
@@ -20630,6 +20693,7 @@ export namespace Prisma {
     region?: boolean | RegionDefaultArgs<ExtArgs>
     types?: boolean | Generation$typesArgs<ExtArgs>
     versionGroups?: boolean | Generation$versionGroupsArgs<ExtArgs>
+    ability?: boolean | Generation$abilityArgs<ExtArgs>
     _count?: boolean | GenerationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["generation"]>
 
@@ -20658,6 +20722,7 @@ export namespace Prisma {
     region?: boolean | RegionDefaultArgs<ExtArgs>
     types?: boolean | Generation$typesArgs<ExtArgs>
     versionGroups?: boolean | Generation$versionGroupsArgs<ExtArgs>
+    ability?: boolean | Generation$abilityArgs<ExtArgs>
     _count?: boolean | GenerationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type GenerationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -20673,6 +20738,7 @@ export namespace Prisma {
       region: Prisma.$RegionPayload<ExtArgs>
       types: Prisma.$TypePayload<ExtArgs>[]
       versionGroups: Prisma.$VersionGroupPayload<ExtArgs>[]
+      ability: Prisma.$AbilityPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
@@ -21075,6 +21141,7 @@ export namespace Prisma {
     region<T extends RegionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RegionDefaultArgs<ExtArgs>>): Prisma__RegionClient<$Result.GetResult<Prisma.$RegionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     types<T extends Generation$typesArgs<ExtArgs> = {}>(args?: Subset<T, Generation$typesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     versionGroups<T extends Generation$versionGroupsArgs<ExtArgs> = {}>(args?: Subset<T, Generation$versionGroupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$VersionGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    ability<T extends Generation$abilityArgs<ExtArgs> = {}>(args?: Subset<T, Generation$abilityArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AbilityPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -21548,6 +21615,30 @@ export namespace Prisma {
     take?: number
     skip?: number
     distinct?: VersionGroupScalarFieldEnum | VersionGroupScalarFieldEnum[]
+  }
+
+  /**
+   * Generation.ability
+   */
+  export type Generation$abilityArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ability
+     */
+    select?: AbilitySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ability
+     */
+    omit?: AbilityOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AbilityInclude<ExtArgs> | null
+    where?: AbilityWhereInput
+    orderBy?: AbilityOrderByWithRelationInput | AbilityOrderByWithRelationInput[]
+    cursor?: AbilityWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AbilityScalarFieldEnum | AbilityScalarFieldEnum[]
   }
 
   /**
@@ -43949,7 +44040,8 @@ export namespace Prisma {
   export const AbilityScalarFieldEnum: {
     id: 'id',
     name: 'name',
-    description: 'description'
+    description: 'description',
+    generation_id: 'generation_id'
   };
 
   export type AbilityScalarFieldEnum = (typeof AbilityScalarFieldEnum)[keyof typeof AbilityScalarFieldEnum]
@@ -44497,6 +44589,8 @@ export namespace Prisma {
     id?: IntFilter<"Ability"> | number
     name?: StringFilter<"Ability"> | string
     description?: StringFilter<"Ability"> | string
+    generation_id?: IntNullableFilter<"Ability"> | number | null
+    generations?: XOR<GenerationNullableScalarRelationFilter, GenerationWhereInput> | null
     pokemon?: PokemonAbilityListRelationFilter
   }
 
@@ -44504,6 +44598,8 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    generation_id?: SortOrderInput | SortOrder
+    generations?: GenerationOrderByWithRelationInput
     pokemon?: PokemonAbilityOrderByRelationAggregateInput
   }
 
@@ -44514,6 +44610,8 @@ export namespace Prisma {
     NOT?: AbilityWhereInput | AbilityWhereInput[]
     name?: StringFilter<"Ability"> | string
     description?: StringFilter<"Ability"> | string
+    generation_id?: IntNullableFilter<"Ability"> | number | null
+    generations?: XOR<GenerationNullableScalarRelationFilter, GenerationWhereInput> | null
     pokemon?: PokemonAbilityListRelationFilter
   }, "id">
 
@@ -44521,6 +44619,7 @@ export namespace Prisma {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    generation_id?: SortOrderInput | SortOrder
     _count?: AbilityCountOrderByAggregateInput
     _avg?: AbilityAvgOrderByAggregateInput
     _max?: AbilityMaxOrderByAggregateInput
@@ -44535,6 +44634,7 @@ export namespace Prisma {
     id?: IntWithAggregatesFilter<"Ability"> | number
     name?: StringWithAggregatesFilter<"Ability"> | string
     description?: StringWithAggregatesFilter<"Ability"> | string
+    generation_id?: IntNullableWithAggregatesFilter<"Ability"> | number | null
   }
 
   export type PokemonAbilityWhereInput = {
@@ -45120,6 +45220,7 @@ export namespace Prisma {
     region?: XOR<RegionScalarRelationFilter, RegionWhereInput>
     types?: TypeListRelationFilter
     versionGroups?: VersionGroupListRelationFilter
+    ability?: AbilityListRelationFilter
   }
 
   export type GenerationOrderByWithRelationInput = {
@@ -45129,6 +45230,7 @@ export namespace Prisma {
     region?: RegionOrderByWithRelationInput
     types?: TypeOrderByRelationAggregateInput
     versionGroups?: VersionGroupOrderByRelationAggregateInput
+    ability?: AbilityOrderByRelationAggregateInput
   }
 
   export type GenerationWhereUniqueInput = Prisma.AtLeast<{
@@ -45141,6 +45243,7 @@ export namespace Prisma {
     region?: XOR<RegionScalarRelationFilter, RegionWhereInput>
     types?: TypeListRelationFilter
     versionGroups?: VersionGroupListRelationFilter
+    ability?: AbilityListRelationFilter
   }, "id" | "region_id">
 
   export type GenerationOrderByWithAggregationInput = {
@@ -46421,6 +46524,7 @@ export namespace Prisma {
     id: number
     name: string
     description: string
+    generations?: GenerationCreateNestedOneWithoutAbilityInput
     pokemon?: PokemonAbilityCreateNestedManyWithoutAbilityInput
   }
 
@@ -46428,6 +46532,7 @@ export namespace Prisma {
     id: number
     name: string
     description: string
+    generation_id?: number | null
     pokemon?: PokemonAbilityUncheckedCreateNestedManyWithoutAbilityInput
   }
 
@@ -46435,6 +46540,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    generations?: GenerationUpdateOneWithoutAbilityNestedInput
     pokemon?: PokemonAbilityUpdateManyWithoutAbilityNestedInput
   }
 
@@ -46442,6 +46548,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    generation_id?: NullableIntFieldUpdateOperationsInput | number | null
     pokemon?: PokemonAbilityUncheckedUpdateManyWithoutAbilityNestedInput
   }
 
@@ -46449,6 +46556,7 @@ export namespace Prisma {
     id: number
     name: string
     description: string
+    generation_id?: number | null
   }
 
   export type AbilityUpdateManyMutationInput = {
@@ -46461,6 +46569,7 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    generation_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PokemonAbilityCreateInput = {
@@ -46975,6 +47084,7 @@ export namespace Prisma {
     region: RegionCreateNestedOneWithoutGenerationsInput
     types?: TypeCreateNestedManyWithoutGenerationInput
     versionGroups?: VersionGroupCreateNestedManyWithoutGenerationInput
+    ability?: AbilityCreateNestedManyWithoutGenerationsInput
   }
 
   export type GenerationUncheckedCreateInput = {
@@ -46983,6 +47093,7 @@ export namespace Prisma {
     region_id: number
     types?: TypeUncheckedCreateNestedManyWithoutGenerationInput
     versionGroups?: VersionGroupUncheckedCreateNestedManyWithoutGenerationInput
+    ability?: AbilityUncheckedCreateNestedManyWithoutGenerationsInput
   }
 
   export type GenerationUpdateInput = {
@@ -46991,6 +47102,7 @@ export namespace Prisma {
     region?: RegionUpdateOneRequiredWithoutGenerationsNestedInput
     types?: TypeUpdateManyWithoutGenerationNestedInput
     versionGroups?: VersionGroupUpdateManyWithoutGenerationNestedInput
+    ability?: AbilityUpdateManyWithoutGenerationsNestedInput
   }
 
   export type GenerationUncheckedUpdateInput = {
@@ -46999,6 +47111,7 @@ export namespace Prisma {
     region_id?: IntFieldUpdateOperationsInput | number
     types?: TypeUncheckedUpdateManyWithoutGenerationNestedInput
     versionGroups?: VersionGroupUncheckedUpdateManyWithoutGenerationNestedInput
+    ability?: AbilityUncheckedUpdateManyWithoutGenerationsNestedInput
   }
 
   export type GenerationCreateManyInput = {
@@ -48284,30 +48397,67 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
+  export type IntNullableFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type GenerationNullableScalarRelationFilter = {
+    is?: GenerationWhereInput | null
+    isNot?: GenerationWhereInput | null
+  }
+
   export type AbilityCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    generation_id?: SortOrder
   }
 
   export type AbilityAvgOrderByAggregateInput = {
     id?: SortOrder
+    generation_id?: SortOrder
   }
 
   export type AbilityMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    generation_id?: SortOrder
   }
 
   export type AbilityMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
     description?: SortOrder
+    generation_id?: SortOrder
   }
 
   export type AbilitySumOrderByAggregateInput = {
     id?: SortOrder
+    generation_id?: SortOrder
+  }
+
+  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel> | null
+    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
+    _count?: NestedIntNullableFilter<$PrismaModel>
+    _avg?: NestedFloatNullableFilter<$PrismaModel>
+    _sum?: NestedIntNullableFilter<$PrismaModel>
+    _min?: NestedIntNullableFilter<$PrismaModel>
+    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type BoolFilter<$PrismaModel = never> = {
@@ -48700,11 +48850,6 @@ export namespace Prisma {
     none?: VersionGroupRegionWhereInput
   }
 
-  export type GenerationNullableScalarRelationFilter = {
-    is?: GenerationWhereInput | null
-    isNot?: GenerationWhereInput | null
-  }
-
   export type PokedexListRelationFilter = {
     every?: PokedexWhereInput
     some?: PokedexWhereInput
@@ -48763,11 +48908,21 @@ export namespace Prisma {
     none?: VersionGroupWhereInput
   }
 
+  export type AbilityListRelationFilter = {
+    every?: AbilityWhereInput
+    some?: AbilityWhereInput
+    none?: AbilityWhereInput
+  }
+
   export type TypeOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
   export type VersionGroupOrderByRelationAggregateInput = {
+    _count?: SortOrder
+  }
+
+  export type AbilityOrderByRelationAggregateInput = {
     _count?: SortOrder
   }
 
@@ -49362,17 +49517,6 @@ export namespace Prisma {
     id?: SortOrder
   }
 
-  export type IntNullableFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableFilter<$PrismaModel> | number | null
-  }
-
   export type MoveDamageClassScalarRelationFilter = {
     is?: MoveDamageClassWhereInput
     isNot?: MoveDamageClassWhereInput
@@ -49439,22 +49583,6 @@ export namespace Prisma {
     priority?: SortOrder
     move_damage_class_id?: SortOrder
     move_effect_id?: SortOrder
-  }
-
-  export type IntNullableWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel> | null
-    in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel> | null
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntNullableWithAggregatesFilter<$PrismaModel> | number | null
-    _count?: NestedIntNullableFilter<$PrismaModel>
-    _avg?: NestedFloatNullableFilter<$PrismaModel>
-    _sum?: NestedIntNullableFilter<$PrismaModel>
-    _min?: NestedIntNullableFilter<$PrismaModel>
-    _max?: NestedIntNullableFilter<$PrismaModel>
   }
 
   export type MoveMethodScalarRelationFilter = {
@@ -49966,6 +50094,12 @@ export namespace Prisma {
     deleteMany?: PokemonMoveScalarWhereInput | PokemonMoveScalarWhereInput[]
   }
 
+  export type GenerationCreateNestedOneWithoutAbilityInput = {
+    create?: XOR<GenerationCreateWithoutAbilityInput, GenerationUncheckedCreateWithoutAbilityInput>
+    connectOrCreate?: GenerationCreateOrConnectWithoutAbilityInput
+    connect?: GenerationWhereUniqueInput
+  }
+
   export type PokemonAbilityCreateNestedManyWithoutAbilityInput = {
     create?: XOR<PokemonAbilityCreateWithoutAbilityInput, PokemonAbilityUncheckedCreateWithoutAbilityInput> | PokemonAbilityCreateWithoutAbilityInput[] | PokemonAbilityUncheckedCreateWithoutAbilityInput[]
     connectOrCreate?: PokemonAbilityCreateOrConnectWithoutAbilityInput | PokemonAbilityCreateOrConnectWithoutAbilityInput[]
@@ -49980,6 +50114,16 @@ export namespace Prisma {
     connect?: PokemonAbilityWhereUniqueInput | PokemonAbilityWhereUniqueInput[]
   }
 
+  export type GenerationUpdateOneWithoutAbilityNestedInput = {
+    create?: XOR<GenerationCreateWithoutAbilityInput, GenerationUncheckedCreateWithoutAbilityInput>
+    connectOrCreate?: GenerationCreateOrConnectWithoutAbilityInput
+    upsert?: GenerationUpsertWithoutAbilityInput
+    disconnect?: GenerationWhereInput | boolean
+    delete?: GenerationWhereInput | boolean
+    connect?: GenerationWhereUniqueInput
+    update?: XOR<XOR<GenerationUpdateToOneWithWhereWithoutAbilityInput, GenerationUpdateWithoutAbilityInput>, GenerationUncheckedUpdateWithoutAbilityInput>
+  }
+
   export type PokemonAbilityUpdateManyWithoutAbilityNestedInput = {
     create?: XOR<PokemonAbilityCreateWithoutAbilityInput, PokemonAbilityUncheckedCreateWithoutAbilityInput> | PokemonAbilityCreateWithoutAbilityInput[] | PokemonAbilityUncheckedCreateWithoutAbilityInput[]
     connectOrCreate?: PokemonAbilityCreateOrConnectWithoutAbilityInput | PokemonAbilityCreateOrConnectWithoutAbilityInput[]
@@ -49992,6 +50136,14 @@ export namespace Prisma {
     update?: PokemonAbilityUpdateWithWhereUniqueWithoutAbilityInput | PokemonAbilityUpdateWithWhereUniqueWithoutAbilityInput[]
     updateMany?: PokemonAbilityUpdateManyWithWhereWithoutAbilityInput | PokemonAbilityUpdateManyWithWhereWithoutAbilityInput[]
     deleteMany?: PokemonAbilityScalarWhereInput | PokemonAbilityScalarWhereInput[]
+  }
+
+  export type NullableIntFieldUpdateOperationsInput = {
+    set?: number | null
+    increment?: number
+    decrement?: number
+    multiply?: number
+    divide?: number
   }
 
   export type PokemonAbilityUncheckedUpdateManyWithoutAbilityNestedInput = {
@@ -50778,6 +50930,13 @@ export namespace Prisma {
     connect?: VersionGroupWhereUniqueInput | VersionGroupWhereUniqueInput[]
   }
 
+  export type AbilityCreateNestedManyWithoutGenerationsInput = {
+    create?: XOR<AbilityCreateWithoutGenerationsInput, AbilityUncheckedCreateWithoutGenerationsInput> | AbilityCreateWithoutGenerationsInput[] | AbilityUncheckedCreateWithoutGenerationsInput[]
+    connectOrCreate?: AbilityCreateOrConnectWithoutGenerationsInput | AbilityCreateOrConnectWithoutGenerationsInput[]
+    createMany?: AbilityCreateManyGenerationsInputEnvelope
+    connect?: AbilityWhereUniqueInput | AbilityWhereUniqueInput[]
+  }
+
   export type TypeUncheckedCreateNestedManyWithoutGenerationInput = {
     create?: XOR<TypeCreateWithoutGenerationInput, TypeUncheckedCreateWithoutGenerationInput> | TypeCreateWithoutGenerationInput[] | TypeUncheckedCreateWithoutGenerationInput[]
     connectOrCreate?: TypeCreateOrConnectWithoutGenerationInput | TypeCreateOrConnectWithoutGenerationInput[]
@@ -50790,6 +50949,13 @@ export namespace Prisma {
     connectOrCreate?: VersionGroupCreateOrConnectWithoutGenerationInput | VersionGroupCreateOrConnectWithoutGenerationInput[]
     createMany?: VersionGroupCreateManyGenerationInputEnvelope
     connect?: VersionGroupWhereUniqueInput | VersionGroupWhereUniqueInput[]
+  }
+
+  export type AbilityUncheckedCreateNestedManyWithoutGenerationsInput = {
+    create?: XOR<AbilityCreateWithoutGenerationsInput, AbilityUncheckedCreateWithoutGenerationsInput> | AbilityCreateWithoutGenerationsInput[] | AbilityUncheckedCreateWithoutGenerationsInput[]
+    connectOrCreate?: AbilityCreateOrConnectWithoutGenerationsInput | AbilityCreateOrConnectWithoutGenerationsInput[]
+    createMany?: AbilityCreateManyGenerationsInputEnvelope
+    connect?: AbilityWhereUniqueInput | AbilityWhereUniqueInput[]
   }
 
   export type RegionUpdateOneRequiredWithoutGenerationsNestedInput = {
@@ -50828,6 +50994,20 @@ export namespace Prisma {
     deleteMany?: VersionGroupScalarWhereInput | VersionGroupScalarWhereInput[]
   }
 
+  export type AbilityUpdateManyWithoutGenerationsNestedInput = {
+    create?: XOR<AbilityCreateWithoutGenerationsInput, AbilityUncheckedCreateWithoutGenerationsInput> | AbilityCreateWithoutGenerationsInput[] | AbilityUncheckedCreateWithoutGenerationsInput[]
+    connectOrCreate?: AbilityCreateOrConnectWithoutGenerationsInput | AbilityCreateOrConnectWithoutGenerationsInput[]
+    upsert?: AbilityUpsertWithWhereUniqueWithoutGenerationsInput | AbilityUpsertWithWhereUniqueWithoutGenerationsInput[]
+    createMany?: AbilityCreateManyGenerationsInputEnvelope
+    set?: AbilityWhereUniqueInput | AbilityWhereUniqueInput[]
+    disconnect?: AbilityWhereUniqueInput | AbilityWhereUniqueInput[]
+    delete?: AbilityWhereUniqueInput | AbilityWhereUniqueInput[]
+    connect?: AbilityWhereUniqueInput | AbilityWhereUniqueInput[]
+    update?: AbilityUpdateWithWhereUniqueWithoutGenerationsInput | AbilityUpdateWithWhereUniqueWithoutGenerationsInput[]
+    updateMany?: AbilityUpdateManyWithWhereWithoutGenerationsInput | AbilityUpdateManyWithWhereWithoutGenerationsInput[]
+    deleteMany?: AbilityScalarWhereInput | AbilityScalarWhereInput[]
+  }
+
   export type TypeUncheckedUpdateManyWithoutGenerationNestedInput = {
     create?: XOR<TypeCreateWithoutGenerationInput, TypeUncheckedCreateWithoutGenerationInput> | TypeCreateWithoutGenerationInput[] | TypeUncheckedCreateWithoutGenerationInput[]
     connectOrCreate?: TypeCreateOrConnectWithoutGenerationInput | TypeCreateOrConnectWithoutGenerationInput[]
@@ -50854,6 +51034,20 @@ export namespace Prisma {
     update?: VersionGroupUpdateWithWhereUniqueWithoutGenerationInput | VersionGroupUpdateWithWhereUniqueWithoutGenerationInput[]
     updateMany?: VersionGroupUpdateManyWithWhereWithoutGenerationInput | VersionGroupUpdateManyWithWhereWithoutGenerationInput[]
     deleteMany?: VersionGroupScalarWhereInput | VersionGroupScalarWhereInput[]
+  }
+
+  export type AbilityUncheckedUpdateManyWithoutGenerationsNestedInput = {
+    create?: XOR<AbilityCreateWithoutGenerationsInput, AbilityUncheckedCreateWithoutGenerationsInput> | AbilityCreateWithoutGenerationsInput[] | AbilityUncheckedCreateWithoutGenerationsInput[]
+    connectOrCreate?: AbilityCreateOrConnectWithoutGenerationsInput | AbilityCreateOrConnectWithoutGenerationsInput[]
+    upsert?: AbilityUpsertWithWhereUniqueWithoutGenerationsInput | AbilityUpsertWithWhereUniqueWithoutGenerationsInput[]
+    createMany?: AbilityCreateManyGenerationsInputEnvelope
+    set?: AbilityWhereUniqueInput | AbilityWhereUniqueInput[]
+    disconnect?: AbilityWhereUniqueInput | AbilityWhereUniqueInput[]
+    delete?: AbilityWhereUniqueInput | AbilityWhereUniqueInput[]
+    connect?: AbilityWhereUniqueInput | AbilityWhereUniqueInput[]
+    update?: AbilityUpdateWithWhereUniqueWithoutGenerationsInput | AbilityUpdateWithWhereUniqueWithoutGenerationsInput[]
+    updateMany?: AbilityUpdateManyWithWhereWithoutGenerationsInput | AbilityUpdateManyWithWhereWithoutGenerationsInput[]
+    deleteMany?: AbilityScalarWhereInput | AbilityScalarWhereInput[]
   }
 
   export type GenerationCreateNestedOneWithoutVersionGroupsInput = {
@@ -51938,14 +52132,6 @@ export namespace Prisma {
     connect?: PokemonMoveWhereUniqueInput | PokemonMoveWhereUniqueInput[]
   }
 
-  export type NullableIntFieldUpdateOperationsInput = {
-    set?: number | null
-    increment?: number
-    decrement?: number
-    multiply?: number
-    divide?: number
-  }
-
   export type TypeUpdateOneRequiredWithoutMoveNestedInput = {
     create?: XOR<TypeCreateWithoutMoveInput, TypeUncheckedCreateWithoutMoveInput>
     connectOrCreate?: TypeCreateOrConnectWithoutMoveInput
@@ -52344,19 +52530,6 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedBoolFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolFilter<$PrismaModel> | boolean
-  }
-
-  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
-    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
-    _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedBoolFilter<$PrismaModel>
-    _max?: NestedBoolFilter<$PrismaModel>
-  }
-
   export type NestedIntNullableWithAggregatesFilter<$PrismaModel = never> = {
     equals?: number | IntFieldRefInput<$PrismaModel> | null
     in?: number[] | ListIntFieldRefInput<$PrismaModel> | null
@@ -52382,6 +52555,19 @@ export namespace Prisma {
     gt?: number | FloatFieldRefInput<$PrismaModel>
     gte?: number | FloatFieldRefInput<$PrismaModel>
     not?: NestedFloatNullableFilter<$PrismaModel> | number | null
+  }
+
+  export type NestedBoolFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolFilter<$PrismaModel> | boolean
+  }
+
+  export type NestedBoolWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: boolean | BooleanFieldRefInput<$PrismaModel>
+    not?: NestedBoolWithAggregatesFilter<$PrismaModel> | boolean
+    _count?: NestedIntFilter<$PrismaModel>
+    _min?: NestedBoolFilter<$PrismaModel>
+    _max?: NestedBoolFilter<$PrismaModel>
   }
 
   export type PokemonAbilityCreateWithoutPokemonInput = {
@@ -52776,6 +52962,27 @@ export namespace Prisma {
     level?: IntFilter<"PokemonMove"> | number
   }
 
+  export type GenerationCreateWithoutAbilityInput = {
+    id: number
+    name: string
+    region: RegionCreateNestedOneWithoutGenerationsInput
+    types?: TypeCreateNestedManyWithoutGenerationInput
+    versionGroups?: VersionGroupCreateNestedManyWithoutGenerationInput
+  }
+
+  export type GenerationUncheckedCreateWithoutAbilityInput = {
+    id: number
+    name: string
+    region_id: number
+    types?: TypeUncheckedCreateNestedManyWithoutGenerationInput
+    versionGroups?: VersionGroupUncheckedCreateNestedManyWithoutGenerationInput
+  }
+
+  export type GenerationCreateOrConnectWithoutAbilityInput = {
+    where: GenerationWhereUniqueInput
+    create: XOR<GenerationCreateWithoutAbilityInput, GenerationUncheckedCreateWithoutAbilityInput>
+  }
+
   export type PokemonAbilityCreateWithoutAbilityInput = {
     id: number
     is_hidden: boolean
@@ -52796,6 +53003,33 @@ export namespace Prisma {
   export type PokemonAbilityCreateManyAbilityInputEnvelope = {
     data: PokemonAbilityCreateManyAbilityInput | PokemonAbilityCreateManyAbilityInput[]
     skipDuplicates?: boolean
+  }
+
+  export type GenerationUpsertWithoutAbilityInput = {
+    update: XOR<GenerationUpdateWithoutAbilityInput, GenerationUncheckedUpdateWithoutAbilityInput>
+    create: XOR<GenerationCreateWithoutAbilityInput, GenerationUncheckedCreateWithoutAbilityInput>
+    where?: GenerationWhereInput
+  }
+
+  export type GenerationUpdateToOneWithWhereWithoutAbilityInput = {
+    where?: GenerationWhereInput
+    data: XOR<GenerationUpdateWithoutAbilityInput, GenerationUncheckedUpdateWithoutAbilityInput>
+  }
+
+  export type GenerationUpdateWithoutAbilityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    region?: RegionUpdateOneRequiredWithoutGenerationsNestedInput
+    types?: TypeUpdateManyWithoutGenerationNestedInput
+    versionGroups?: VersionGroupUpdateManyWithoutGenerationNestedInput
+  }
+
+  export type GenerationUncheckedUpdateWithoutAbilityInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    region_id?: IntFieldUpdateOperationsInput | number
+    types?: TypeUncheckedUpdateManyWithoutGenerationNestedInput
+    versionGroups?: VersionGroupUncheckedUpdateManyWithoutGenerationNestedInput
   }
 
   export type PokemonAbilityUpsertWithWhereUniqueWithoutAbilityInput = {
@@ -52851,12 +53085,14 @@ export namespace Prisma {
     id: number
     name: string
     description: string
+    generations?: GenerationCreateNestedOneWithoutAbilityInput
   }
 
   export type AbilityUncheckedCreateWithoutPokemonInput = {
     id: number
     name: string
     description: string
+    generation_id?: number | null
   }
 
   export type AbilityCreateOrConnectWithoutPokemonInput = {
@@ -52918,12 +53154,14 @@ export namespace Prisma {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    generations?: GenerationUpdateOneWithoutAbilityNestedInput
   }
 
   export type AbilityUncheckedUpdateWithoutPokemonInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
     description?: StringFieldUpdateOperationsInput | string
+    generation_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type StatCreateWithoutNatures_increaseInput = {
@@ -53415,6 +53653,7 @@ export namespace Prisma {
     name: string
     region: RegionCreateNestedOneWithoutGenerationsInput
     versionGroups?: VersionGroupCreateNestedManyWithoutGenerationInput
+    ability?: AbilityCreateNestedManyWithoutGenerationsInput
   }
 
   export type GenerationUncheckedCreateWithoutTypesInput = {
@@ -53422,6 +53661,7 @@ export namespace Prisma {
     name: string
     region_id: number
     versionGroups?: VersionGroupUncheckedCreateNestedManyWithoutGenerationInput
+    ability?: AbilityUncheckedCreateNestedManyWithoutGenerationsInput
   }
 
   export type GenerationCreateOrConnectWithoutTypesInput = {
@@ -53543,6 +53783,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     region?: RegionUpdateOneRequiredWithoutGenerationsNestedInput
     versionGroups?: VersionGroupUpdateManyWithoutGenerationNestedInput
+    ability?: AbilityUpdateManyWithoutGenerationsNestedInput
   }
 
   export type GenerationUncheckedUpdateWithoutTypesInput = {
@@ -53550,6 +53791,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     region_id?: IntFieldUpdateOperationsInput | number
     versionGroups?: VersionGroupUncheckedUpdateManyWithoutGenerationNestedInput
+    ability?: AbilityUncheckedUpdateManyWithoutGenerationsNestedInput
   }
 
   export type PokemonTypeUpsertWithWhereUniqueWithoutTypeInput = {
@@ -54060,6 +54302,7 @@ export namespace Prisma {
     name: string
     types?: TypeCreateNestedManyWithoutGenerationInput
     versionGroups?: VersionGroupCreateNestedManyWithoutGenerationInput
+    ability?: AbilityCreateNestedManyWithoutGenerationsInput
   }
 
   export type GenerationUncheckedCreateWithoutRegionInput = {
@@ -54067,6 +54310,7 @@ export namespace Prisma {
     name: string
     types?: TypeUncheckedCreateNestedManyWithoutGenerationInput
     versionGroups?: VersionGroupUncheckedCreateNestedManyWithoutGenerationInput
+    ability?: AbilityUncheckedCreateNestedManyWithoutGenerationsInput
   }
 
   export type GenerationCreateOrConnectWithoutRegionInput = {
@@ -54164,6 +54408,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     types?: TypeUpdateManyWithoutGenerationNestedInput
     versionGroups?: VersionGroupUpdateManyWithoutGenerationNestedInput
+    ability?: AbilityUpdateManyWithoutGenerationsNestedInput
   }
 
   export type GenerationUncheckedUpdateWithoutRegionInput = {
@@ -54171,6 +54416,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     types?: TypeUncheckedUpdateManyWithoutGenerationNestedInput
     versionGroups?: VersionGroupUncheckedUpdateManyWithoutGenerationNestedInput
+    ability?: AbilityUncheckedUpdateManyWithoutGenerationsNestedInput
   }
 
   export type PokedexUpsertWithWhereUniqueWithoutRegionInput = {
@@ -54277,6 +54523,30 @@ export namespace Prisma {
     skipDuplicates?: boolean
   }
 
+  export type AbilityCreateWithoutGenerationsInput = {
+    id: number
+    name: string
+    description: string
+    pokemon?: PokemonAbilityCreateNestedManyWithoutAbilityInput
+  }
+
+  export type AbilityUncheckedCreateWithoutGenerationsInput = {
+    id: number
+    name: string
+    description: string
+    pokemon?: PokemonAbilityUncheckedCreateNestedManyWithoutAbilityInput
+  }
+
+  export type AbilityCreateOrConnectWithoutGenerationsInput = {
+    where: AbilityWhereUniqueInput
+    create: XOR<AbilityCreateWithoutGenerationsInput, AbilityUncheckedCreateWithoutGenerationsInput>
+  }
+
+  export type AbilityCreateManyGenerationsInputEnvelope = {
+    data: AbilityCreateManyGenerationsInput | AbilityCreateManyGenerationsInput[]
+    skipDuplicates?: boolean
+  }
+
   export type RegionUpsertWithoutGenerationsInput = {
     update: XOR<RegionUpdateWithoutGenerationsInput, RegionUncheckedUpdateWithoutGenerationsInput>
     create: XOR<RegionCreateWithoutGenerationsInput, RegionUncheckedCreateWithoutGenerationsInput>
@@ -54354,11 +54624,38 @@ export namespace Prisma {
     generation_id?: IntFilter<"VersionGroup"> | number
   }
 
+  export type AbilityUpsertWithWhereUniqueWithoutGenerationsInput = {
+    where: AbilityWhereUniqueInput
+    update: XOR<AbilityUpdateWithoutGenerationsInput, AbilityUncheckedUpdateWithoutGenerationsInput>
+    create: XOR<AbilityCreateWithoutGenerationsInput, AbilityUncheckedCreateWithoutGenerationsInput>
+  }
+
+  export type AbilityUpdateWithWhereUniqueWithoutGenerationsInput = {
+    where: AbilityWhereUniqueInput
+    data: XOR<AbilityUpdateWithoutGenerationsInput, AbilityUncheckedUpdateWithoutGenerationsInput>
+  }
+
+  export type AbilityUpdateManyWithWhereWithoutGenerationsInput = {
+    where: AbilityScalarWhereInput
+    data: XOR<AbilityUpdateManyMutationInput, AbilityUncheckedUpdateManyWithoutGenerationsInput>
+  }
+
+  export type AbilityScalarWhereInput = {
+    AND?: AbilityScalarWhereInput | AbilityScalarWhereInput[]
+    OR?: AbilityScalarWhereInput[]
+    NOT?: AbilityScalarWhereInput | AbilityScalarWhereInput[]
+    id?: IntFilter<"Ability"> | number
+    name?: StringFilter<"Ability"> | string
+    description?: StringFilter<"Ability"> | string
+    generation_id?: IntNullableFilter<"Ability"> | number | null
+  }
+
   export type GenerationCreateWithoutVersionGroupsInput = {
     id: number
     name: string
     region: RegionCreateNestedOneWithoutGenerationsInput
     types?: TypeCreateNestedManyWithoutGenerationInput
+    ability?: AbilityCreateNestedManyWithoutGenerationsInput
   }
 
   export type GenerationUncheckedCreateWithoutVersionGroupsInput = {
@@ -54366,6 +54663,7 @@ export namespace Prisma {
     name: string
     region_id: number
     types?: TypeUncheckedCreateNestedManyWithoutGenerationInput
+    ability?: AbilityUncheckedCreateNestedManyWithoutGenerationsInput
   }
 
   export type GenerationCreateOrConnectWithoutVersionGroupsInput = {
@@ -54505,6 +54803,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     region?: RegionUpdateOneRequiredWithoutGenerationsNestedInput
     types?: TypeUpdateManyWithoutGenerationNestedInput
+    ability?: AbilityUpdateManyWithoutGenerationsNestedInput
   }
 
   export type GenerationUncheckedUpdateWithoutVersionGroupsInput = {
@@ -54512,6 +54811,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     region_id?: IntFieldUpdateOperationsInput | number
     types?: TypeUncheckedUpdateManyWithoutGenerationNestedInput
+    ability?: AbilityUncheckedUpdateManyWithoutGenerationsNestedInput
   }
 
   export type VersionUpsertWithWhereUniqueWithoutVersionGroupInput = {
@@ -57336,6 +57636,12 @@ export namespace Prisma {
     name: string
   }
 
+  export type AbilityCreateManyGenerationsInput = {
+    id: number
+    name: string
+    description: string
+  }
+
   export type TypeUpdateWithoutGenerationInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
@@ -57382,6 +57688,26 @@ export namespace Prisma {
   export type VersionGroupUncheckedUpdateManyWithoutGenerationInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type AbilityUpdateWithoutGenerationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    pokemon?: PokemonAbilityUpdateManyWithoutAbilityNestedInput
+  }
+
+  export type AbilityUncheckedUpdateWithoutGenerationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    pokemon?: PokemonAbilityUncheckedUpdateManyWithoutAbilityNestedInput
+  }
+
+  export type AbilityUncheckedUpdateManyWithoutGenerationsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    name?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
   }
 
   export type VersionCreateManyVersionGroupInput = {

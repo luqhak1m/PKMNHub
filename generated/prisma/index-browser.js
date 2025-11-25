@@ -140,7 +140,8 @@ exports.Prisma.PokemonScalarFieldEnum = {
 exports.Prisma.AbilityScalarFieldEnum = {
   id: 'id',
   name: 'name',
-  description: 'description'
+  description: 'description',
+  generation_id: 'generation_id'
 };
 
 exports.Prisma.PokemonAbilityScalarFieldEnum = {

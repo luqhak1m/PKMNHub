@@ -3,6 +3,7 @@ import React from "react";
 import RegisterForm from "./components/Register";
 import LoginForm from "./components/Login";
 import PokemonList from "./components/Pokemon";
+import AbilitiesList from "./components/Ability";
 
 export default function HomePage() {
   return (
@@ -10,6 +11,7 @@ export default function HomePage() {
       <RegisterForm />
       <LoginForm />
       <PokemonList/>
+      <AbilitiesList/>
     </>
   );
 }

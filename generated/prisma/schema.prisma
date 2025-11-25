@@ -42,9 +42,12 @@ model Pokemon {
 }
 
 model Ability {
-  id          Int    @id
-  name        String
-  description String
+  id            Int    @id
+  name          String
+  description   String
+  generation_id Int?
+
+  generations Generation? @relation(fields: [generation_id], references: [id])
 
   pokemon PokemonAbility[]
 }
@@ -167,6 +170,7 @@ model Generation {
 
   types         Type[]
   versionGroups VersionGroup[]
+  ability       Ability[]
 }
 
 model VersionGroup {

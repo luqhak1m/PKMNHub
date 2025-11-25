@@ -14,3 +14,14 @@ input, button {
 button {
   cursor: pointer;
 }
+
+ul {
+  list-style: none;
+}
+
+.sprite-container-div{
+  border: 1px solid rgb(0, 0, 0);
+  display: inline-block;
+  padding: 1em;
+  margin: 1em;
+}

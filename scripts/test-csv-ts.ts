@@ -42,6 +42,11 @@ type Ability={
      * - where row.local_language_id==="9"
      */
     description: string;
+    /**
+     * Generation ID
+     * - row.generation.id
+     */
+    generation_id: number;
 }
 
 /**
@@ -847,6 +852,12 @@ function parseGenerationCSV(row: any): Generation{
         region_id: Number(row.main_region_id)
     }
 }
+function parseRegionCSV(row: any): Region{
+    return{
+        id: Number(row.id),
+        name: row.identifier,
+    }
+}
 function parseVersionCSV(row: any): Version{
     return{
         id: Number(row.id),
@@ -896,6 +907,7 @@ function parseAbilityCSV(row: any): Ability{
         id: Number(row.id),
         name: row.identifier,
         description: row.flavor_text,
+        generation_id: Number(row.generation_id),
     }
 }
 
@@ -1165,7 +1177,7 @@ async function main(){
     // csv file content
     const pokemon: Pokemon[]=pokemon_CSV.map(parsePokemonCSV);
     const generations: Generation[]=generations_CSV.map(parseGenerationCSV);
-    const regions: Region[]=regions_CSV.map(parseGenerationCSV);
+    const regions: Region[]=regions_CSV.map(parseRegionCSV);
     const versions: Version[]=versions_CSV.map(parseVersionCSV);
     const version_groups: VersionGroup[]=version_groups_CSV.map(parseVersionGroupCSV);
     const version_group_regions: VersionGroupRegion[]=version_group_regions_CSV.map(parseVersionGroupRegionCSV);
@@ -1179,7 +1191,7 @@ async function main(){
 
         const combined_ability_row={
             ...ability_row,
-            flavor_text: description_row?.flavor_text?? { flavor_text: "no description" },
+            flavor_text: description_row?.flavor_text?? "no description",
         }
 
         return parseAbilityCSV(
@@ -1221,7 +1233,7 @@ async function main(){
     // console.log("pokedex_version_groups.csv", pokedex_version_groups.slice(0,10));
     // console.log("pokemon_dex_numbers.csv", pokemon_dex_numbers.slice(0,10));
     // console.log("natures.csv", natures.slice(0,3));
-    // console.log("abilities.csv", abilities.slice(0,3));
+    // console.log("abilities.csv", abilities.slice(-100));
     // console.log("pokemon_abilities.csv", pokemon_abilities.slice(0,3));
     // console.log("stats.csv", stats.slice(0,6));
     // console.log("egg_groups.csv", egg_groups.slice(0,6));
@@ -1247,12 +1259,51 @@ async function main(){
     
     const prisma=DBClient.getInstance();
     
-    const pokemon_result=await prisma.pokemon.createMany({
-        data: pokemon,
-        skipDuplicates: true,
+    // const pokemon_result=await prisma.pokemon.createMany({
+    //     data: pokemon,
+    //     skipDuplicates: true,
+    // })
+
+    // console.log("Inserted Pokémon:", pokemon_result);
+
+    // const region_result=await prisma.region.createMany({
+    //     data: regions,
+    //     skipDuplicates: true,
+    // })
+
+    // console.log("Inserted Region:", region_result);
+    
+    // const generation_result=await prisma.generation.createMany({
+    //     data: generations,
+    //     skipDuplicates: true,
+    // })
+
+    // console.log("Inserted Generation:", generation_result);
+
+    // const ability_result=await prisma.ability.createMany({
+    //     data: abilities,
+    //     skipDuplicates: true,
+    // })
+
+    // console.log("Inserted Abilities:", ability_result);
+
+    
+
+    // for(const ability of abilities){
+    //     await prisma.ability.update({
+    //         where: {id: ability.id},
+    //         data: {generation_id: ability.generation_id},
+    //     })
+    // }
+
+    await prisma.ability.updateMany({
+        where: {
+            description: "[object Object]",
+        },
+        data: { description: "no description"},
     })
 
-    console.log("Inserted Pokémon:", pokemon_result);
+
 }
 
 
