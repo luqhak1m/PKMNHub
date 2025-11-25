@@ -93,13 +93,32 @@
 //   console.log("Joke failed quality gate - no punchline detected!");
 // }
 
+import { AIMessage } from "langchain";
 import { GeneralAgent } from "../app/agents/GeneralAgent";
+import promptSync from "prompt-sync";
 
-const general_state={
-    prompt: "What do you know about pokemon",
-    result: ""
+const general_agent=new GeneralAgent();
+const user_prompt=promptSync();
+console.log('----------------------------------');
+console.log('Chat initiated! Enter "q" to end chat.');
+console.log('----------------------------------\n');
+
+let conversation=true;
+
+while(conversation){
+    const question: string=user_prompt('Ask about pokemon!: ');
+    if(question.toLowerCase()==='q'){
+        conversation=false;
+        break;
+    }
+    const result=await general_agent.execute(question); // this returns the AIMessage object with content
+    console.log("Bot: ", result.content);
 }
-const general_agent=new GeneralAgent(general_state);
-await general_agent.execute();
 
-console.log("result: ", general_state.result);
+console.log('\n----------------------------------');
+console.log('Chat ended! Thank you for spending time in the chat :D');
+console.log('----------------------------------');
+console.log('Chat Summary:\n');
+general_agent.getMemoryLog();
+
+

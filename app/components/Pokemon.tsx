@@ -55,6 +55,10 @@ export default function PokemonList(){
 
     return <div>
 
+        <div id="chatbot">
+            
+        </div>
+
         <h2>Pokemon List:</h2>
         <form onSubmit={search_pokemon}>
             <input
