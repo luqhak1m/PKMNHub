@@ -17,11 +17,13 @@ export class GeneralAgent extends BaseAIAgents{
     }
 
     async execute(human_message: string){
+        console.log("setting human message: ", human_message);
         this.setHumanMessage(human_message);
         // console.log(prompt);
+        console.log("invoking model...");
         const result=await this.llm.invoke(this.getMemory());
         this.addToMemory(result);
-        // console.log( res.content );
+        console.log("Result Executed: ", result.content);
         return result;
     }
 }

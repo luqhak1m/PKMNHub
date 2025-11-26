@@ -25,3 +25,107 @@ ul {
   padding: 1em;
   margin: 1em;
 }
+.ability-container-div{
+  border: 1px solid rgb(0, 0, 0);
+  display:list-item ;
+  padding: 1em;
+  margin: 1em;
+}
+
+#chatbot{
+  /* Chatbot on top of other elements */
+  z-index: 9999;
+  position: fixed;
+
+  /* Border */
+  border: 1px solid rgb(0, 0, 0);
+  border-radius: 8px;
+
+  /* Colour */
+  background-color: rgb(156, 156, 156);
+
+  /* Location on the page (bottom right) */
+  bottom: 2em;
+  right: 2em;
+
+  /* Chatbot window size */
+  height: 500px;
+  width: 200px;
+}
+
+#chat-window-div{
+  /* Border */
+  /* border: 1px solid rgb(129, 69, 241); */
+
+  /* Height and width fills the parent div #chatbot */
+  height: 100%;
+  width: 100%;
+
+  /* All elements inside this div is stacked on top of each other */
+  display: flex;
+  flex-direction: column;
+
+  /* All elements within the div will be hidden */
+  overflow: hidden;
+}
+
+#chat-window-div > h3{
+  font-size: 1rem;
+  line-height: 1.2;
+  padding-bottom: 0.25rem;
+  border-bottom: 1px solid rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+.messages{
+  /* Each message takes the whole vertical space */
+  flex: 1 1 auto;
+
+  /* Scroll when content overflows */
+  overflow-y: auto;
+
+  /* Each message is stacked on top of each other */
+  display: flex;
+  flex-direction: column;
+
+  gap: 0.5em;
+
+  align-items: center;
+
+}
+
+.bot-msg {
+  background-color: darkgray;
+  padding: 0.5rem 0.75rem;
+  max-width: 80%;
+  border-radius: 8px;
+  align-self: flex-start;
+  margin-left: 0.2em;
+}
+.human-msg {
+  background-color: darkgray;
+  padding: 0.5rem 0.75rem;
+  max-width: 80%;
+  border-radius: 8px;
+  align-self: flex-end;
+  margin-right: 0.2em;
+}
+
+.user-input-form{
+  /* All elements inside the form are side by side */
+  display: flex;
+  flex-direction: row;
+  /* border: 1px solid rgb(255, 0, 0); */
+  align-items: flex-end;
+}
+
+.user-input-form input{
+  /* The input width will shrink so button fits */
+  min-width: 0;
+  flex: 1 1 auto;
+}
+
+.user-input-form button{
+  flex: 0 0 auto;
+}
+

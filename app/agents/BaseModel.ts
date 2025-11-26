@@ -4,6 +4,11 @@ import { SystemMessage, HumanMessage, AIMessage, BaseMessage, ContentBlock } fro
 import "dotenv/config";
 import { memo } from "react";
 
+interface MemoryMessage {
+  role: string;
+  content: string | (ContentBlock | Text)[];
+}
+
 export abstract class BaseAIAgents{
     private api_key: string;
     readonly llm: any;
@@ -43,8 +48,14 @@ export abstract class BaseAIAgents{
         this.addToMemory(human_message_object);
     }
 
-    getMemoryContent(){
-        return this.memory.map(message=>`${message.constructor.name}: ${message.content}`)
+    getMemoryContent(): { role: string; content: string }[]{
+        return this.memory.map(message=>({role: message.constructor.name, content: Array.isArray(message.content)
+            ? message.content.map(block => {
+                // if Text type exists
+                if ('text' in block) return block.text;
+                return JSON.stringify(block);
+              }).join('\n')
+            : message.content}))
     }
 
     getMemoryLog(){
