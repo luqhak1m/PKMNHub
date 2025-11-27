@@ -194,7 +194,6 @@ model VersionGroupRegion{
 
   region Region @relation(fields:[region_id], references: [id])
   version_group VersionGroup @relation(fields: [version_group_id], references: [id])
-
 }
 
 model Version {
@@ -211,9 +210,9 @@ model Version {
 model Location {
   id        Int       @id
   name      String
-  region_id Int
+  region_id Int?
 
-  region    Region    @relation(fields: [region_id], references: [id])
+  region    Region?    @relation(fields: [region_id], references: [id])
   areas     LocationArea[]
 }
 
@@ -313,7 +312,7 @@ model MoveDamageClass {
 
 model MoveEffect {
   id          Int    @id
-  description String
+  description String?
   moves       Move[]
 }
 
@@ -333,11 +332,11 @@ model Move {
   accuracy        Int?
   priority        Int
   move_damage_class_id Int
-  move_effect_id       Int
+  move_effect_id       Int?
 
   type          Type           @relation(fields: [type_id], references: [id])
   damage_class   MoveDamageClass @relation(fields: [move_damage_class_id], references: [id])
-  effect        MoveEffect     @relation(fields: [move_effect_id], references: [id])
+  effect        MoveEffect?     @relation(fields: [move_effect_id], references: [id])
 
   pokemon_moves  PokemonMove[]
 }
@@ -359,9 +358,9 @@ model PokemonMove {
 model Pokedex {
   id Int @id
   name String
-  region_id Int
+  region_id Int?
 
-  region Region @relation(fields: [region_id], references: [id])
+  region Region? @relation(fields: [region_id], references: [id])
 
   pokedex_version_groups PokedexVersionGroup[]
   pokemon_dex_numbers PokemonDexNumber[]

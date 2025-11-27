@@ -25242,7 +25242,7 @@ export namespace Prisma {
   export type LocationGroupByOutputType = {
     id: number
     name: string
-    region_id: number
+    region_id: number | null
     _count: LocationCountAggregateOutputType | null
     _avg: LocationAvgAggregateOutputType | null
     _sum: LocationSumAggregateOutputType | null
@@ -25268,7 +25268,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     region_id?: boolean
-    region?: boolean | RegionDefaultArgs<ExtArgs>
+    region?: boolean | Location$regionArgs<ExtArgs>
     areas?: boolean | Location$areasArgs<ExtArgs>
     _count?: boolean | LocationCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["location"]>
@@ -25277,14 +25277,14 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     region_id?: boolean
-    region?: boolean | RegionDefaultArgs<ExtArgs>
+    region?: boolean | Location$regionArgs<ExtArgs>
   }, ExtArgs["result"]["location"]>
 
   export type LocationSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     region_id?: boolean
-    region?: boolean | RegionDefaultArgs<ExtArgs>
+    region?: boolean | Location$regionArgs<ExtArgs>
   }, ExtArgs["result"]["location"]>
 
   export type LocationSelectScalar = {
@@ -25295,27 +25295,27 @@ export namespace Prisma {
 
   export type LocationOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "region_id", ExtArgs["result"]["location"]>
   export type LocationInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    region?: boolean | RegionDefaultArgs<ExtArgs>
+    region?: boolean | Location$regionArgs<ExtArgs>
     areas?: boolean | Location$areasArgs<ExtArgs>
     _count?: boolean | LocationCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type LocationIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    region?: boolean | RegionDefaultArgs<ExtArgs>
+    region?: boolean | Location$regionArgs<ExtArgs>
   }
   export type LocationIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    region?: boolean | RegionDefaultArgs<ExtArgs>
+    region?: boolean | Location$regionArgs<ExtArgs>
   }
 
   export type $LocationPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Location"
     objects: {
-      region: Prisma.$RegionPayload<ExtArgs>
+      region: Prisma.$RegionPayload<ExtArgs> | null
       areas: Prisma.$LocationAreaPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
-      region_id: number
+      region_id: number | null
     }, ExtArgs["result"]["location"]>
     composites: {}
   }
@@ -25710,7 +25710,7 @@ export namespace Prisma {
    */
   export interface Prisma__LocationClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    region<T extends RegionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RegionDefaultArgs<ExtArgs>>): Prisma__RegionClient<$Result.GetResult<Prisma.$RegionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    region<T extends Location$regionArgs<ExtArgs> = {}>(args?: Subset<T, Location$regionArgs<ExtArgs>>): Prisma__RegionClient<$Result.GetResult<Prisma.$RegionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     areas<T extends Location$areasArgs<ExtArgs> = {}>(args?: Subset<T, Location$areasArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$LocationAreaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -26137,6 +26137,25 @@ export namespace Prisma {
      * Limit how many Locations to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Location.region
+   */
+  export type Location$regionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Region
+     */
+    select?: RegionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Region
+     */
+    omit?: RegionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegionInclude<ExtArgs> | null
+    where?: RegionWhereInput
   }
 
   /**
@@ -36343,7 +36362,7 @@ export namespace Prisma {
 
   export type MoveEffectGroupByOutputType = {
     id: number
-    description: string
+    description: string | null
     _count: MoveEffectCountAggregateOutputType | null
     _avg: MoveEffectAvgAggregateOutputType | null
     _sum: MoveEffectSumAggregateOutputType | null
@@ -36402,7 +36421,7 @@ export namespace Prisma {
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
-      description: string
+      description: string | null
     }, ExtArgs["result"]["moveEffect"]>
     composites: {}
   }
@@ -38550,7 +38569,7 @@ export namespace Prisma {
     accuracy: number | null
     priority: number
     move_damage_class_id: number
-    move_effect_id: number
+    move_effect_id: number | null
     _count: MoveCountAggregateOutputType | null
     _avg: MoveAvgAggregateOutputType | null
     _sum: MoveSumAggregateOutputType | null
@@ -38584,7 +38603,7 @@ export namespace Prisma {
     move_effect_id?: boolean
     type?: boolean | TypeDefaultArgs<ExtArgs>
     damage_class?: boolean | MoveDamageClassDefaultArgs<ExtArgs>
-    effect?: boolean | MoveEffectDefaultArgs<ExtArgs>
+    effect?: boolean | Move$effectArgs<ExtArgs>
     pokemon_moves?: boolean | Move$pokemon_movesArgs<ExtArgs>
     _count?: boolean | MoveCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["move"]>
@@ -38601,7 +38620,7 @@ export namespace Prisma {
     move_effect_id?: boolean
     type?: boolean | TypeDefaultArgs<ExtArgs>
     damage_class?: boolean | MoveDamageClassDefaultArgs<ExtArgs>
-    effect?: boolean | MoveEffectDefaultArgs<ExtArgs>
+    effect?: boolean | Move$effectArgs<ExtArgs>
   }, ExtArgs["result"]["move"]>
 
   export type MoveSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -38616,7 +38635,7 @@ export namespace Prisma {
     move_effect_id?: boolean
     type?: boolean | TypeDefaultArgs<ExtArgs>
     damage_class?: boolean | MoveDamageClassDefaultArgs<ExtArgs>
-    effect?: boolean | MoveEffectDefaultArgs<ExtArgs>
+    effect?: boolean | Move$effectArgs<ExtArgs>
   }, ExtArgs["result"]["move"]>
 
   export type MoveSelectScalar = {
@@ -38635,19 +38654,19 @@ export namespace Prisma {
   export type MoveInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     type?: boolean | TypeDefaultArgs<ExtArgs>
     damage_class?: boolean | MoveDamageClassDefaultArgs<ExtArgs>
-    effect?: boolean | MoveEffectDefaultArgs<ExtArgs>
+    effect?: boolean | Move$effectArgs<ExtArgs>
     pokemon_moves?: boolean | Move$pokemon_movesArgs<ExtArgs>
     _count?: boolean | MoveCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type MoveIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     type?: boolean | TypeDefaultArgs<ExtArgs>
     damage_class?: boolean | MoveDamageClassDefaultArgs<ExtArgs>
-    effect?: boolean | MoveEffectDefaultArgs<ExtArgs>
+    effect?: boolean | Move$effectArgs<ExtArgs>
   }
   export type MoveIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     type?: boolean | TypeDefaultArgs<ExtArgs>
     damage_class?: boolean | MoveDamageClassDefaultArgs<ExtArgs>
-    effect?: boolean | MoveEffectDefaultArgs<ExtArgs>
+    effect?: boolean | Move$effectArgs<ExtArgs>
   }
 
   export type $MovePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -38655,7 +38674,7 @@ export namespace Prisma {
     objects: {
       type: Prisma.$TypePayload<ExtArgs>
       damage_class: Prisma.$MoveDamageClassPayload<ExtArgs>
-      effect: Prisma.$MoveEffectPayload<ExtArgs>
+      effect: Prisma.$MoveEffectPayload<ExtArgs> | null
       pokemon_moves: Prisma.$PokemonMovePayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
@@ -38667,7 +38686,7 @@ export namespace Prisma {
       accuracy: number | null
       priority: number
       move_damage_class_id: number
-      move_effect_id: number
+      move_effect_id: number | null
     }, ExtArgs["result"]["move"]>
     composites: {}
   }
@@ -39064,7 +39083,7 @@ export namespace Prisma {
     readonly [Symbol.toStringTag]: "PrismaPromise"
     type<T extends TypeDefaultArgs<ExtArgs> = {}>(args?: Subset<T, TypeDefaultArgs<ExtArgs>>): Prisma__TypeClient<$Result.GetResult<Prisma.$TypePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     damage_class<T extends MoveDamageClassDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MoveDamageClassDefaultArgs<ExtArgs>>): Prisma__MoveDamageClassClient<$Result.GetResult<Prisma.$MoveDamageClassPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    effect<T extends MoveEffectDefaultArgs<ExtArgs> = {}>(args?: Subset<T, MoveEffectDefaultArgs<ExtArgs>>): Prisma__MoveEffectClient<$Result.GetResult<Prisma.$MoveEffectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    effect<T extends Move$effectArgs<ExtArgs> = {}>(args?: Subset<T, Move$effectArgs<ExtArgs>>): Prisma__MoveEffectClient<$Result.GetResult<Prisma.$MoveEffectPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     pokemon_moves<T extends Move$pokemon_movesArgs<ExtArgs> = {}>(args?: Subset<T, Move$pokemon_movesArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PokemonMovePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
@@ -39497,6 +39516,25 @@ export namespace Prisma {
      * Limit how many Moves to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Move.effect
+   */
+  export type Move$effectArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the MoveEffect
+     */
+    select?: MoveEffectSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the MoveEffect
+     */
+    omit?: MoveEffectOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: MoveEffectInclude<ExtArgs> | null
+    where?: MoveEffectWhereInput
   }
 
   /**
@@ -40851,7 +40889,7 @@ export namespace Prisma {
   export type PokedexGroupByOutputType = {
     id: number
     name: string
-    region_id: number
+    region_id: number | null
     _count: PokedexCountAggregateOutputType | null
     _avg: PokedexAvgAggregateOutputType | null
     _sum: PokedexSumAggregateOutputType | null
@@ -40877,7 +40915,7 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     region_id?: boolean
-    region?: boolean | RegionDefaultArgs<ExtArgs>
+    region?: boolean | Pokedex$regionArgs<ExtArgs>
     pokedex_version_groups?: boolean | Pokedex$pokedex_version_groupsArgs<ExtArgs>
     pokemon_dex_numbers?: boolean | Pokedex$pokemon_dex_numbersArgs<ExtArgs>
     _count?: boolean | PokedexCountOutputTypeDefaultArgs<ExtArgs>
@@ -40887,14 +40925,14 @@ export namespace Prisma {
     id?: boolean
     name?: boolean
     region_id?: boolean
-    region?: boolean | RegionDefaultArgs<ExtArgs>
+    region?: boolean | Pokedex$regionArgs<ExtArgs>
   }, ExtArgs["result"]["pokedex"]>
 
   export type PokedexSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
     region_id?: boolean
-    region?: boolean | RegionDefaultArgs<ExtArgs>
+    region?: boolean | Pokedex$regionArgs<ExtArgs>
   }, ExtArgs["result"]["pokedex"]>
 
   export type PokedexSelectScalar = {
@@ -40905,29 +40943,29 @@ export namespace Prisma {
 
   export type PokedexOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "region_id", ExtArgs["result"]["pokedex"]>
   export type PokedexInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    region?: boolean | RegionDefaultArgs<ExtArgs>
+    region?: boolean | Pokedex$regionArgs<ExtArgs>
     pokedex_version_groups?: boolean | Pokedex$pokedex_version_groupsArgs<ExtArgs>
     pokemon_dex_numbers?: boolean | Pokedex$pokemon_dex_numbersArgs<ExtArgs>
     _count?: boolean | PokedexCountOutputTypeDefaultArgs<ExtArgs>
   }
   export type PokedexIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    region?: boolean | RegionDefaultArgs<ExtArgs>
+    region?: boolean | Pokedex$regionArgs<ExtArgs>
   }
   export type PokedexIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    region?: boolean | RegionDefaultArgs<ExtArgs>
+    region?: boolean | Pokedex$regionArgs<ExtArgs>
   }
 
   export type $PokedexPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Pokedex"
     objects: {
-      region: Prisma.$RegionPayload<ExtArgs>
+      region: Prisma.$RegionPayload<ExtArgs> | null
       pokedex_version_groups: Prisma.$PokedexVersionGroupPayload<ExtArgs>[]
       pokemon_dex_numbers: Prisma.$PokemonDexNumberPayload<ExtArgs>[]
     }
     scalars: $Extensions.GetPayloadResult<{
       id: number
       name: string
-      region_id: number
+      region_id: number | null
     }, ExtArgs["result"]["pokedex"]>
     composites: {}
   }
@@ -41322,7 +41360,7 @@ export namespace Prisma {
    */
   export interface Prisma__PokedexClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    region<T extends RegionDefaultArgs<ExtArgs> = {}>(args?: Subset<T, RegionDefaultArgs<ExtArgs>>): Prisma__RegionClient<$Result.GetResult<Prisma.$RegionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    region<T extends Pokedex$regionArgs<ExtArgs> = {}>(args?: Subset<T, Pokedex$regionArgs<ExtArgs>>): Prisma__RegionClient<$Result.GetResult<Prisma.$RegionPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
     pokedex_version_groups<T extends Pokedex$pokedex_version_groupsArgs<ExtArgs> = {}>(args?: Subset<T, Pokedex$pokedex_version_groupsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PokedexVersionGroupPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     pokemon_dex_numbers<T extends Pokedex$pokemon_dex_numbersArgs<ExtArgs> = {}>(args?: Subset<T, Pokedex$pokemon_dex_numbersArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$PokemonDexNumberPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
@@ -41750,6 +41788,25 @@ export namespace Prisma {
      * Limit how many Pokedexes to delete.
      */
     limit?: number
+  }
+
+  /**
+   * Pokedex.region
+   */
+  export type Pokedex$regionArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Region
+     */
+    select?: RegionSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Region
+     */
+    omit?: RegionOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: RegionInclude<ExtArgs> | null
+    where?: RegionWhereInput
   }
 
   /**
@@ -45437,15 +45494,15 @@ export namespace Prisma {
     NOT?: LocationWhereInput | LocationWhereInput[]
     id?: IntFilter<"Location"> | number
     name?: StringFilter<"Location"> | string
-    region_id?: IntFilter<"Location"> | number
-    region?: XOR<RegionScalarRelationFilter, RegionWhereInput>
+    region_id?: IntNullableFilter<"Location"> | number | null
+    region?: XOR<RegionNullableScalarRelationFilter, RegionWhereInput> | null
     areas?: LocationAreaListRelationFilter
   }
 
   export type LocationOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    region_id?: SortOrder
+    region_id?: SortOrderInput | SortOrder
     region?: RegionOrderByWithRelationInput
     areas?: LocationAreaOrderByRelationAggregateInput
   }
@@ -45456,15 +45513,15 @@ export namespace Prisma {
     OR?: LocationWhereInput[]
     NOT?: LocationWhereInput | LocationWhereInput[]
     name?: StringFilter<"Location"> | string
-    region_id?: IntFilter<"Location"> | number
-    region?: XOR<RegionScalarRelationFilter, RegionWhereInput>
+    region_id?: IntNullableFilter<"Location"> | number | null
+    region?: XOR<RegionNullableScalarRelationFilter, RegionWhereInput> | null
     areas?: LocationAreaListRelationFilter
   }, "id">
 
   export type LocationOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    region_id?: SortOrder
+    region_id?: SortOrderInput | SortOrder
     _count?: LocationCountOrderByAggregateInput
     _avg?: LocationAvgOrderByAggregateInput
     _max?: LocationMaxOrderByAggregateInput
@@ -45478,7 +45535,7 @@ export namespace Prisma {
     NOT?: LocationScalarWhereWithAggregatesInput | LocationScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Location"> | number
     name?: StringWithAggregatesFilter<"Location"> | string
-    region_id?: IntWithAggregatesFilter<"Location"> | number
+    region_id?: IntNullableWithAggregatesFilter<"Location"> | number | null
   }
 
   export type LocationAreaWhereInput = {
@@ -45978,13 +46035,13 @@ export namespace Prisma {
     OR?: MoveEffectWhereInput[]
     NOT?: MoveEffectWhereInput | MoveEffectWhereInput[]
     id?: IntFilter<"MoveEffect"> | number
-    description?: StringFilter<"MoveEffect"> | string
+    description?: StringNullableFilter<"MoveEffect"> | string | null
     moves?: MoveListRelationFilter
   }
 
   export type MoveEffectOrderByWithRelationInput = {
     id?: SortOrder
-    description?: SortOrder
+    description?: SortOrderInput | SortOrder
     moves?: MoveOrderByRelationAggregateInput
   }
 
@@ -45993,13 +46050,13 @@ export namespace Prisma {
     AND?: MoveEffectWhereInput | MoveEffectWhereInput[]
     OR?: MoveEffectWhereInput[]
     NOT?: MoveEffectWhereInput | MoveEffectWhereInput[]
-    description?: StringFilter<"MoveEffect"> | string
+    description?: StringNullableFilter<"MoveEffect"> | string | null
     moves?: MoveListRelationFilter
   }, "id">
 
   export type MoveEffectOrderByWithAggregationInput = {
     id?: SortOrder
-    description?: SortOrder
+    description?: SortOrderInput | SortOrder
     _count?: MoveEffectCountOrderByAggregateInput
     _avg?: MoveEffectAvgOrderByAggregateInput
     _max?: MoveEffectMaxOrderByAggregateInput
@@ -46012,7 +46069,7 @@ export namespace Prisma {
     OR?: MoveEffectScalarWhereWithAggregatesInput[]
     NOT?: MoveEffectScalarWhereWithAggregatesInput | MoveEffectScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"MoveEffect"> | number
-    description?: StringWithAggregatesFilter<"MoveEffect"> | string
+    description?: StringNullableWithAggregatesFilter<"MoveEffect"> | string | null
   }
 
   export type MoveMethodWhereInput = {
@@ -46069,10 +46126,10 @@ export namespace Prisma {
     accuracy?: IntNullableFilter<"Move"> | number | null
     priority?: IntFilter<"Move"> | number
     move_damage_class_id?: IntFilter<"Move"> | number
-    move_effect_id?: IntFilter<"Move"> | number
+    move_effect_id?: IntNullableFilter<"Move"> | number | null
     type?: XOR<TypeScalarRelationFilter, TypeWhereInput>
     damage_class?: XOR<MoveDamageClassScalarRelationFilter, MoveDamageClassWhereInput>
-    effect?: XOR<MoveEffectScalarRelationFilter, MoveEffectWhereInput>
+    effect?: XOR<MoveEffectNullableScalarRelationFilter, MoveEffectWhereInput> | null
     pokemon_moves?: PokemonMoveListRelationFilter
   }
 
@@ -46085,7 +46142,7 @@ export namespace Prisma {
     accuracy?: SortOrderInput | SortOrder
     priority?: SortOrder
     move_damage_class_id?: SortOrder
-    move_effect_id?: SortOrder
+    move_effect_id?: SortOrderInput | SortOrder
     type?: TypeOrderByWithRelationInput
     damage_class?: MoveDamageClassOrderByWithRelationInput
     effect?: MoveEffectOrderByWithRelationInput
@@ -46104,10 +46161,10 @@ export namespace Prisma {
     accuracy?: IntNullableFilter<"Move"> | number | null
     priority?: IntFilter<"Move"> | number
     move_damage_class_id?: IntFilter<"Move"> | number
-    move_effect_id?: IntFilter<"Move"> | number
+    move_effect_id?: IntNullableFilter<"Move"> | number | null
     type?: XOR<TypeScalarRelationFilter, TypeWhereInput>
     damage_class?: XOR<MoveDamageClassScalarRelationFilter, MoveDamageClassWhereInput>
-    effect?: XOR<MoveEffectScalarRelationFilter, MoveEffectWhereInput>
+    effect?: XOR<MoveEffectNullableScalarRelationFilter, MoveEffectWhereInput> | null
     pokemon_moves?: PokemonMoveListRelationFilter
   }, "id">
 
@@ -46120,7 +46177,7 @@ export namespace Prisma {
     accuracy?: SortOrderInput | SortOrder
     priority?: SortOrder
     move_damage_class_id?: SortOrder
-    move_effect_id?: SortOrder
+    move_effect_id?: SortOrderInput | SortOrder
     _count?: MoveCountOrderByAggregateInput
     _avg?: MoveAvgOrderByAggregateInput
     _max?: MoveMaxOrderByAggregateInput
@@ -46140,7 +46197,7 @@ export namespace Prisma {
     accuracy?: IntNullableWithAggregatesFilter<"Move"> | number | null
     priority?: IntWithAggregatesFilter<"Move"> | number
     move_damage_class_id?: IntWithAggregatesFilter<"Move"> | number
-    move_effect_id?: IntWithAggregatesFilter<"Move"> | number
+    move_effect_id?: IntNullableWithAggregatesFilter<"Move"> | number | null
   }
 
   export type PokemonMoveWhereInput = {
@@ -46220,8 +46277,8 @@ export namespace Prisma {
     NOT?: PokedexWhereInput | PokedexWhereInput[]
     id?: IntFilter<"Pokedex"> | number
     name?: StringFilter<"Pokedex"> | string
-    region_id?: IntFilter<"Pokedex"> | number
-    region?: XOR<RegionScalarRelationFilter, RegionWhereInput>
+    region_id?: IntNullableFilter<"Pokedex"> | number | null
+    region?: XOR<RegionNullableScalarRelationFilter, RegionWhereInput> | null
     pokedex_version_groups?: PokedexVersionGroupListRelationFilter
     pokemon_dex_numbers?: PokemonDexNumberListRelationFilter
   }
@@ -46229,7 +46286,7 @@ export namespace Prisma {
   export type PokedexOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
-    region_id?: SortOrder
+    region_id?: SortOrderInput | SortOrder
     region?: RegionOrderByWithRelationInput
     pokedex_version_groups?: PokedexVersionGroupOrderByRelationAggregateInput
     pokemon_dex_numbers?: PokemonDexNumberOrderByRelationAggregateInput
@@ -46241,8 +46298,8 @@ export namespace Prisma {
     OR?: PokedexWhereInput[]
     NOT?: PokedexWhereInput | PokedexWhereInput[]
     name?: StringFilter<"Pokedex"> | string
-    region_id?: IntFilter<"Pokedex"> | number
-    region?: XOR<RegionScalarRelationFilter, RegionWhereInput>
+    region_id?: IntNullableFilter<"Pokedex"> | number | null
+    region?: XOR<RegionNullableScalarRelationFilter, RegionWhereInput> | null
     pokedex_version_groups?: PokedexVersionGroupListRelationFilter
     pokemon_dex_numbers?: PokemonDexNumberListRelationFilter
   }, "id">
@@ -46250,7 +46307,7 @@ export namespace Prisma {
   export type PokedexOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
-    region_id?: SortOrder
+    region_id?: SortOrderInput | SortOrder
     _count?: PokedexCountOrderByAggregateInput
     _avg?: PokedexAvgOrderByAggregateInput
     _max?: PokedexMaxOrderByAggregateInput
@@ -46264,7 +46321,7 @@ export namespace Prisma {
     NOT?: PokedexScalarWhereWithAggregatesInput | PokedexScalarWhereWithAggregatesInput[]
     id?: IntWithAggregatesFilter<"Pokedex"> | number
     name?: StringWithAggregatesFilter<"Pokedex"> | string
-    region_id?: IntWithAggregatesFilter<"Pokedex"> | number
+    region_id?: IntNullableWithAggregatesFilter<"Pokedex"> | number | null
   }
 
   export type PokedexVersionGroupWhereInput = {
@@ -47284,35 +47341,35 @@ export namespace Prisma {
   export type LocationCreateInput = {
     id: number
     name: string
-    region: RegionCreateNestedOneWithoutLocationsInput
+    region?: RegionCreateNestedOneWithoutLocationsInput
     areas?: LocationAreaCreateNestedManyWithoutLocationInput
   }
 
   export type LocationUncheckedCreateInput = {
     id: number
     name: string
-    region_id: number
+    region_id?: number | null
     areas?: LocationAreaUncheckedCreateNestedManyWithoutLocationInput
   }
 
   export type LocationUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    region?: RegionUpdateOneRequiredWithoutLocationsNestedInput
+    region?: RegionUpdateOneWithoutLocationsNestedInput
     areas?: LocationAreaUpdateManyWithoutLocationNestedInput
   }
 
   export type LocationUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    region_id?: IntFieldUpdateOperationsInput | number
+    region_id?: NullableIntFieldUpdateOperationsInput | number | null
     areas?: LocationAreaUncheckedUpdateManyWithoutLocationNestedInput
   }
 
   export type LocationCreateManyInput = {
     id: number
     name: string
-    region_id: number
+    region_id?: number | null
   }
 
   export type LocationUpdateManyMutationInput = {
@@ -47323,7 +47380,7 @@ export namespace Prisma {
   export type LocationUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    region_id?: IntFieldUpdateOperationsInput | number
+    region_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type LocationAreaCreateInput = {
@@ -47771,41 +47828,41 @@ export namespace Prisma {
 
   export type MoveEffectCreateInput = {
     id: number
-    description: string
+    description?: string | null
     moves?: MoveCreateNestedManyWithoutEffectInput
   }
 
   export type MoveEffectUncheckedCreateInput = {
     id: number
-    description: string
+    description?: string | null
     moves?: MoveUncheckedCreateNestedManyWithoutEffectInput
   }
 
   export type MoveEffectUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     moves?: MoveUpdateManyWithoutEffectNestedInput
   }
 
   export type MoveEffectUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
     moves?: MoveUncheckedUpdateManyWithoutEffectNestedInput
   }
 
   export type MoveEffectCreateManyInput = {
     id: number
-    description: string
+    description?: string | null
   }
 
   export type MoveEffectUpdateManyMutationInput = {
     id?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MoveEffectUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MoveMethodCreateInput = {
@@ -47856,7 +47913,7 @@ export namespace Prisma {
     priority: number
     type: TypeCreateNestedOneWithoutMoveInput
     damage_class: MoveDamageClassCreateNestedOneWithoutMovesInput
-    effect: MoveEffectCreateNestedOneWithoutMovesInput
+    effect?: MoveEffectCreateNestedOneWithoutMovesInput
     pokemon_moves?: PokemonMoveCreateNestedManyWithoutMoveInput
   }
 
@@ -47869,7 +47926,7 @@ export namespace Prisma {
     accuracy?: number | null
     priority: number
     move_damage_class_id: number
-    move_effect_id: number
+    move_effect_id?: number | null
     pokemon_moves?: PokemonMoveUncheckedCreateNestedManyWithoutMoveInput
   }
 
@@ -47882,7 +47939,7 @@ export namespace Prisma {
     priority?: IntFieldUpdateOperationsInput | number
     type?: TypeUpdateOneRequiredWithoutMoveNestedInput
     damage_class?: MoveDamageClassUpdateOneRequiredWithoutMovesNestedInput
-    effect?: MoveEffectUpdateOneRequiredWithoutMovesNestedInput
+    effect?: MoveEffectUpdateOneWithoutMovesNestedInput
     pokemon_moves?: PokemonMoveUpdateManyWithoutMoveNestedInput
   }
 
@@ -47895,7 +47952,7 @@ export namespace Prisma {
     accuracy?: NullableIntFieldUpdateOperationsInput | number | null
     priority?: IntFieldUpdateOperationsInput | number
     move_damage_class_id?: IntFieldUpdateOperationsInput | number
-    move_effect_id?: IntFieldUpdateOperationsInput | number
+    move_effect_id?: NullableIntFieldUpdateOperationsInput | number | null
     pokemon_moves?: PokemonMoveUncheckedUpdateManyWithoutMoveNestedInput
   }
 
@@ -47908,7 +47965,7 @@ export namespace Prisma {
     accuracy?: number | null
     priority: number
     move_damage_class_id: number
-    move_effect_id: number
+    move_effect_id?: number | null
   }
 
   export type MoveUpdateManyMutationInput = {
@@ -47929,7 +47986,7 @@ export namespace Prisma {
     accuracy?: NullableIntFieldUpdateOperationsInput | number | null
     priority?: IntFieldUpdateOperationsInput | number
     move_damage_class_id?: IntFieldUpdateOperationsInput | number
-    move_effect_id?: IntFieldUpdateOperationsInput | number
+    move_effect_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PokemonMoveCreateInput = {
@@ -47994,7 +48051,7 @@ export namespace Prisma {
   export type PokedexCreateInput = {
     id: number
     name: string
-    region: RegionCreateNestedOneWithoutPokedexInput
+    region?: RegionCreateNestedOneWithoutPokedexInput
     pokedex_version_groups?: PokedexVersionGroupCreateNestedManyWithoutPokedexInput
     pokemon_dex_numbers?: PokemonDexNumberCreateNestedManyWithoutPokedexInput
   }
@@ -48002,7 +48059,7 @@ export namespace Prisma {
   export type PokedexUncheckedCreateInput = {
     id: number
     name: string
-    region_id: number
+    region_id?: number | null
     pokedex_version_groups?: PokedexVersionGroupUncheckedCreateNestedManyWithoutPokedexInput
     pokemon_dex_numbers?: PokemonDexNumberUncheckedCreateNestedManyWithoutPokedexInput
   }
@@ -48010,7 +48067,7 @@ export namespace Prisma {
   export type PokedexUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    region?: RegionUpdateOneRequiredWithoutPokedexNestedInput
+    region?: RegionUpdateOneWithoutPokedexNestedInput
     pokedex_version_groups?: PokedexVersionGroupUpdateManyWithoutPokedexNestedInput
     pokemon_dex_numbers?: PokemonDexNumberUpdateManyWithoutPokedexNestedInput
   }
@@ -48018,7 +48075,7 @@ export namespace Prisma {
   export type PokedexUncheckedUpdateInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    region_id?: IntFieldUpdateOperationsInput | number
+    region_id?: NullableIntFieldUpdateOperationsInput | number | null
     pokedex_version_groups?: PokedexVersionGroupUncheckedUpdateManyWithoutPokedexNestedInput
     pokemon_dex_numbers?: PokemonDexNumberUncheckedUpdateManyWithoutPokedexNestedInput
   }
@@ -48026,7 +48083,7 @@ export namespace Prisma {
   export type PokedexCreateManyInput = {
     id: number
     name: string
-    region_id: number
+    region_id?: number | null
   }
 
   export type PokedexUpdateManyMutationInput = {
@@ -48037,7 +48094,7 @@ export namespace Prisma {
   export type PokedexUncheckedUpdateManyInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    region_id?: IntFieldUpdateOperationsInput | number
+    region_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PokedexVersionGroupCreateInput = {
@@ -49085,6 +49142,11 @@ export namespace Prisma {
     version_group_id?: SortOrder
   }
 
+  export type RegionNullableScalarRelationFilter = {
+    is?: RegionWhereInput | null
+    isNot?: RegionWhereInput | null
+  }
+
   export type LocationAreaListRelationFilter = {
     every?: LocationAreaWhereInput
     some?: LocationAreaWhereInput
@@ -49522,9 +49584,9 @@ export namespace Prisma {
     isNot?: MoveDamageClassWhereInput
   }
 
-  export type MoveEffectScalarRelationFilter = {
-    is?: MoveEffectWhereInput
-    isNot?: MoveEffectWhereInput
+  export type MoveEffectNullableScalarRelationFilter = {
+    is?: MoveEffectWhereInput | null
+    isNot?: MoveEffectWhereInput | null
   }
 
   export type MoveCountOrderByAggregateInput = {
@@ -51420,10 +51482,12 @@ export namespace Prisma {
     connect?: LocationAreaWhereUniqueInput | LocationAreaWhereUniqueInput[]
   }
 
-  export type RegionUpdateOneRequiredWithoutLocationsNestedInput = {
+  export type RegionUpdateOneWithoutLocationsNestedInput = {
     create?: XOR<RegionCreateWithoutLocationsInput, RegionUncheckedCreateWithoutLocationsInput>
     connectOrCreate?: RegionCreateOrConnectWithoutLocationsInput
     upsert?: RegionUpsertWithoutLocationsInput
+    disconnect?: RegionWhereInput | boolean
+    delete?: RegionWhereInput | boolean
     connect?: RegionWhereUniqueInput
     update?: XOR<XOR<RegionUpdateToOneWithWhereWithoutLocationsInput, RegionUpdateWithoutLocationsInput>, RegionUncheckedUpdateWithoutLocationsInput>
   }
@@ -52148,10 +52212,12 @@ export namespace Prisma {
     update?: XOR<XOR<MoveDamageClassUpdateToOneWithWhereWithoutMovesInput, MoveDamageClassUpdateWithoutMovesInput>, MoveDamageClassUncheckedUpdateWithoutMovesInput>
   }
 
-  export type MoveEffectUpdateOneRequiredWithoutMovesNestedInput = {
+  export type MoveEffectUpdateOneWithoutMovesNestedInput = {
     create?: XOR<MoveEffectCreateWithoutMovesInput, MoveEffectUncheckedCreateWithoutMovesInput>
     connectOrCreate?: MoveEffectCreateOrConnectWithoutMovesInput
     upsert?: MoveEffectUpsertWithoutMovesInput
+    disconnect?: MoveEffectWhereInput | boolean
+    delete?: MoveEffectWhereInput | boolean
     connect?: MoveEffectWhereUniqueInput
     update?: XOR<XOR<MoveEffectUpdateToOneWithWhereWithoutMovesInput, MoveEffectUpdateWithoutMovesInput>, MoveEffectUncheckedUpdateWithoutMovesInput>
   }
@@ -52274,10 +52340,12 @@ export namespace Prisma {
     connect?: PokemonDexNumberWhereUniqueInput | PokemonDexNumberWhereUniqueInput[]
   }
 
-  export type RegionUpdateOneRequiredWithoutPokedexNestedInput = {
+  export type RegionUpdateOneWithoutPokedexNestedInput = {
     create?: XOR<RegionCreateWithoutPokedexInput, RegionUncheckedCreateWithoutPokedexInput>
     connectOrCreate?: RegionCreateOrConnectWithoutPokedexInput
     upsert?: RegionUpsertWithoutPokedexInput
+    disconnect?: RegionWhereInput | boolean
+    delete?: RegionWhereInput | boolean
     connect?: RegionWhereUniqueInput
     update?: XOR<XOR<RegionUpdateToOneWithWhereWithoutPokedexInput, RegionUpdateWithoutPokedexInput>, RegionUncheckedUpdateWithoutPokedexInput>
   }
@@ -53741,7 +53809,7 @@ export namespace Prisma {
     accuracy?: number | null
     priority: number
     damage_class: MoveDamageClassCreateNestedOneWithoutMovesInput
-    effect: MoveEffectCreateNestedOneWithoutMovesInput
+    effect?: MoveEffectCreateNestedOneWithoutMovesInput
     pokemon_moves?: PokemonMoveCreateNestedManyWithoutMoveInput
   }
 
@@ -53753,7 +53821,7 @@ export namespace Prisma {
     accuracy?: number | null
     priority: number
     move_damage_class_id: number
-    move_effect_id: number
+    move_effect_id?: number | null
     pokemon_moves?: PokemonMoveUncheckedCreateNestedManyWithoutMoveInput
   }
 
@@ -53880,7 +53948,7 @@ export namespace Prisma {
     accuracy?: IntNullableFilter<"Move"> | number | null
     priority?: IntFilter<"Move"> | number
     move_damage_class_id?: IntFilter<"Move"> | number
-    move_effect_id?: IntFilter<"Move"> | number
+    move_effect_id?: IntNullableFilter<"Move"> | number | null
   }
 
   export type TypeCreateWithoutAttackingInput = {
@@ -54364,7 +54432,7 @@ export namespace Prisma {
     NOT?: LocationScalarWhereInput | LocationScalarWhereInput[]
     id?: IntFilter<"Location"> | number
     name?: StringFilter<"Location"> | string
-    region_id?: IntFilter<"Location"> | number
+    region_id?: IntNullableFilter<"Location"> | number | null
   }
 
   export type VersionGroupRegionUpsertWithWhereUniqueWithoutRegionInput = {
@@ -54441,7 +54509,7 @@ export namespace Prisma {
     NOT?: PokedexScalarWhereInput | PokedexScalarWhereInput[]
     id?: IntFilter<"Pokedex"> | number
     name?: StringFilter<"Pokedex"> | string
-    region_id?: IntFilter<"Pokedex"> | number
+    region_id?: IntNullableFilter<"Pokedex"> | number | null
   }
 
   export type RegionCreateWithoutGenerationsInput = {
@@ -55280,13 +55348,13 @@ export namespace Prisma {
   export type LocationCreateWithoutAreasInput = {
     id: number
     name: string
-    region: RegionCreateNestedOneWithoutLocationsInput
+    region?: RegionCreateNestedOneWithoutLocationsInput
   }
 
   export type LocationUncheckedCreateWithoutAreasInput = {
     id: number
     name: string
-    region_id: number
+    region_id?: number | null
   }
 
   export type LocationCreateOrConnectWithoutAreasInput = {
@@ -55362,13 +55430,13 @@ export namespace Prisma {
   export type LocationUpdateWithoutAreasInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    region?: RegionUpdateOneRequiredWithoutLocationsNestedInput
+    region?: RegionUpdateOneWithoutLocationsNestedInput
   }
 
   export type LocationUncheckedUpdateWithoutAreasInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    region_id?: IntFieldUpdateOperationsInput | number
+    region_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type EncounterUpsertWithWhereUniqueWithoutLocation_areaInput = {
@@ -56238,7 +56306,7 @@ export namespace Prisma {
     accuracy?: number | null
     priority: number
     type: TypeCreateNestedOneWithoutMoveInput
-    effect: MoveEffectCreateNestedOneWithoutMovesInput
+    effect?: MoveEffectCreateNestedOneWithoutMovesInput
     pokemon_moves?: PokemonMoveCreateNestedManyWithoutMoveInput
   }
 
@@ -56250,7 +56318,7 @@ export namespace Prisma {
     pp: number
     accuracy?: number | null
     priority: number
-    move_effect_id: number
+    move_effect_id?: number | null
     pokemon_moves?: PokemonMoveUncheckedCreateNestedManyWithoutMoveInput
   }
 
@@ -56412,12 +56480,12 @@ export namespace Prisma {
 
   export type MoveEffectCreateWithoutMovesInput = {
     id: number
-    description: string
+    description?: string | null
   }
 
   export type MoveEffectUncheckedCreateWithoutMovesInput = {
     id: number
-    description: string
+    description?: string | null
   }
 
   export type MoveEffectCreateOrConnectWithoutMovesInput = {
@@ -56514,12 +56582,12 @@ export namespace Prisma {
 
   export type MoveEffectUpdateWithoutMovesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type MoveEffectUncheckedUpdateWithoutMovesInput = {
     id?: IntFieldUpdateOperationsInput | number
-    description?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
   export type PokemonMoveUpsertWithWhereUniqueWithoutMoveInput = {
@@ -56587,7 +56655,7 @@ export namespace Prisma {
     priority: number
     type: TypeCreateNestedOneWithoutMoveInput
     damage_class: MoveDamageClassCreateNestedOneWithoutMovesInput
-    effect: MoveEffectCreateNestedOneWithoutMovesInput
+    effect?: MoveEffectCreateNestedOneWithoutMovesInput
   }
 
   export type MoveUncheckedCreateWithoutPokemon_movesInput = {
@@ -56599,7 +56667,7 @@ export namespace Prisma {
     accuracy?: number | null
     priority: number
     move_damage_class_id: number
-    move_effect_id: number
+    move_effect_id?: number | null
   }
 
   export type MoveCreateOrConnectWithoutPokemon_movesInput = {
@@ -56712,7 +56780,7 @@ export namespace Prisma {
     priority?: IntFieldUpdateOperationsInput | number
     type?: TypeUpdateOneRequiredWithoutMoveNestedInput
     damage_class?: MoveDamageClassUpdateOneRequiredWithoutMovesNestedInput
-    effect?: MoveEffectUpdateOneRequiredWithoutMovesNestedInput
+    effect?: MoveEffectUpdateOneWithoutMovesNestedInput
   }
 
   export type MoveUncheckedUpdateWithoutPokemon_movesInput = {
@@ -56724,7 +56792,7 @@ export namespace Prisma {
     accuracy?: NullableIntFieldUpdateOperationsInput | number | null
     priority?: IntFieldUpdateOperationsInput | number
     move_damage_class_id?: IntFieldUpdateOperationsInput | number
-    move_effect_id?: IntFieldUpdateOperationsInput | number
+    move_effect_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PokemonUpsertWithoutMoveInput = {
@@ -56916,14 +56984,14 @@ export namespace Prisma {
   export type PokedexCreateWithoutPokedex_version_groupsInput = {
     id: number
     name: string
-    region: RegionCreateNestedOneWithoutPokedexInput
+    region?: RegionCreateNestedOneWithoutPokedexInput
     pokemon_dex_numbers?: PokemonDexNumberCreateNestedManyWithoutPokedexInput
   }
 
   export type PokedexUncheckedCreateWithoutPokedex_version_groupsInput = {
     id: number
     name: string
-    region_id: number
+    region_id?: number | null
     pokemon_dex_numbers?: PokemonDexNumberUncheckedCreateNestedManyWithoutPokedexInput
   }
 
@@ -56977,14 +57045,14 @@ export namespace Prisma {
   export type PokedexUpdateWithoutPokedex_version_groupsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    region?: RegionUpdateOneRequiredWithoutPokedexNestedInput
+    region?: RegionUpdateOneWithoutPokedexNestedInput
     pokemon_dex_numbers?: PokemonDexNumberUpdateManyWithoutPokedexNestedInput
   }
 
   export type PokedexUncheckedUpdateWithoutPokedex_version_groupsInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    region_id?: IntFieldUpdateOperationsInput | number
+    region_id?: NullableIntFieldUpdateOperationsInput | number | null
     pokemon_dex_numbers?: PokemonDexNumberUncheckedUpdateManyWithoutPokedexNestedInput
   }
 
@@ -57024,14 +57092,14 @@ export namespace Prisma {
   export type PokedexCreateWithoutPokemon_dex_numbersInput = {
     id: number
     name: string
-    region: RegionCreateNestedOneWithoutPokedexInput
+    region?: RegionCreateNestedOneWithoutPokedexInput
     pokedex_version_groups?: PokedexVersionGroupCreateNestedManyWithoutPokedexInput
   }
 
   export type PokedexUncheckedCreateWithoutPokemon_dex_numbersInput = {
     id: number
     name: string
-    region_id: number
+    region_id?: number | null
     pokedex_version_groups?: PokedexVersionGroupUncheckedCreateNestedManyWithoutPokedexInput
   }
 
@@ -57093,14 +57161,14 @@ export namespace Prisma {
   export type PokedexUpdateWithoutPokemon_dex_numbersInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    region?: RegionUpdateOneRequiredWithoutPokedexNestedInput
+    region?: RegionUpdateOneWithoutPokedexNestedInput
     pokedex_version_groups?: PokedexVersionGroupUpdateManyWithoutPokedexNestedInput
   }
 
   export type PokedexUncheckedUpdateWithoutPokemon_dex_numbersInput = {
     id?: IntFieldUpdateOperationsInput | number
     name?: StringFieldUpdateOperationsInput | string
-    region_id?: IntFieldUpdateOperationsInput | number
+    region_id?: NullableIntFieldUpdateOperationsInput | number | null
     pokedex_version_groups?: PokedexVersionGroupUncheckedUpdateManyWithoutPokedexNestedInput
   }
 
@@ -57451,7 +57519,7 @@ export namespace Prisma {
     accuracy?: number | null
     priority: number
     move_damage_class_id: number
-    move_effect_id: number
+    move_effect_id?: number | null
   }
 
   export type PokemonTypeUpdateWithoutTypeInput = {
@@ -57513,7 +57581,7 @@ export namespace Prisma {
     accuracy?: NullableIntFieldUpdateOperationsInput | number | null
     priority?: IntFieldUpdateOperationsInput | number
     damage_class?: MoveDamageClassUpdateOneRequiredWithoutMovesNestedInput
-    effect?: MoveEffectUpdateOneRequiredWithoutMovesNestedInput
+    effect?: MoveEffectUpdateOneWithoutMovesNestedInput
     pokemon_moves?: PokemonMoveUpdateManyWithoutMoveNestedInput
   }
 
@@ -57525,7 +57593,7 @@ export namespace Prisma {
     accuracy?: NullableIntFieldUpdateOperationsInput | number | null
     priority?: IntFieldUpdateOperationsInput | number
     move_damage_class_id?: IntFieldUpdateOperationsInput | number
-    move_effect_id?: IntFieldUpdateOperationsInput | number
+    move_effect_id?: NullableIntFieldUpdateOperationsInput | number | null
     pokemon_moves?: PokemonMoveUncheckedUpdateManyWithoutMoveNestedInput
   }
 
@@ -57537,7 +57605,7 @@ export namespace Prisma {
     accuracy?: NullableIntFieldUpdateOperationsInput | number | null
     priority?: IntFieldUpdateOperationsInput | number
     move_damage_class_id?: IntFieldUpdateOperationsInput | number
-    move_effect_id?: IntFieldUpdateOperationsInput | number
+    move_effect_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type PokemonEggGroupCreateManyEgg_groupInput = {
@@ -58162,7 +58230,7 @@ export namespace Prisma {
     pp: number
     accuracy?: number | null
     priority: number
-    move_effect_id: number
+    move_effect_id?: number | null
   }
 
   export type MoveUpdateWithoutDamage_classInput = {
@@ -58173,7 +58241,7 @@ export namespace Prisma {
     accuracy?: NullableIntFieldUpdateOperationsInput | number | null
     priority?: IntFieldUpdateOperationsInput | number
     type?: TypeUpdateOneRequiredWithoutMoveNestedInput
-    effect?: MoveEffectUpdateOneRequiredWithoutMovesNestedInput
+    effect?: MoveEffectUpdateOneWithoutMovesNestedInput
     pokemon_moves?: PokemonMoveUpdateManyWithoutMoveNestedInput
   }
 
@@ -58185,7 +58253,7 @@ export namespace Prisma {
     pp?: IntFieldUpdateOperationsInput | number
     accuracy?: NullableIntFieldUpdateOperationsInput | number | null
     priority?: IntFieldUpdateOperationsInput | number
-    move_effect_id?: IntFieldUpdateOperationsInput | number
+    move_effect_id?: NullableIntFieldUpdateOperationsInput | number | null
     pokemon_moves?: PokemonMoveUncheckedUpdateManyWithoutMoveNestedInput
   }
 
@@ -58197,7 +58265,7 @@ export namespace Prisma {
     pp?: IntFieldUpdateOperationsInput | number
     accuracy?: NullableIntFieldUpdateOperationsInput | number | null
     priority?: IntFieldUpdateOperationsInput | number
-    move_effect_id?: IntFieldUpdateOperationsInput | number
+    move_effect_id?: NullableIntFieldUpdateOperationsInput | number | null
   }
 
   export type MoveCreateManyEffectInput = {

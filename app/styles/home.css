@@ -1,0 +1,31 @@
+
+.features-container-div{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.feature-card-div{
+    display: flex;
+    flex-direction: column;
+    height: 21em;
+    width: 18em;
+    border: 1px solid black;
+    margin: 3em;
+    border-radius: 8px;
+}
+
+.feature-card-upper{
+    height: 90%;
+}
+.feature-card-lower{
+    height: 10%;
+    background-color: rgb(144, 144, 144);
+    color: white;
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+}

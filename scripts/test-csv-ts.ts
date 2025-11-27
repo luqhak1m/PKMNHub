@@ -786,7 +786,7 @@ type PokemonMove={
      * Method to learn this move by the Pokemon
      * - row.pokemon_move_method_id
      */
-    pokemon_move_method_id: number;
+    move_method_id: number;
     /**
      * Move ID
      * - row.move_id
@@ -915,8 +915,8 @@ function parseNatureCSV(row: any): Nature{
     return{
         id: Number(row.id),
         name: row.identifier,
-        increased_stat_id: row.increased_stat_id,
-        decreased_stat_id: row.decreased_stat_id,
+        increased_stat_id: Number(row.increased_stat_id),
+        decreased_stat_id: Number(row.decreased_stat_id),
     }
 }
 
@@ -938,16 +938,16 @@ function parseTypeCSV(row: any): Type{
     return{
         id: Number(row.id),
         name: row.identifier,
-        generation_id: row.generation_id,
+        generation_id: Number(row.generation_id),
     }
 }
 
 function parseTypeEffectivenessCSV(row: any, id: number): TypeEffectiveness{
     return{
-        id: id,
-        type_id: row.damage_type_id,
-        target_type_id: row.target_type_id,
-        damage_factor: row.damage_factor
+        id: Number(id),
+        type_id: Number(row.damage_type_id),
+        target_type_id: Number(row.target_type_id),
+        damage_factor: Number(row.damage_factor)
     }
 }
 function parseLocationCSV(row: any): Location{
@@ -1055,9 +1055,9 @@ function parsePokemonEggGroupCSV(row: any, id: number): PokemonEggGroup{
     }
 }
 
-function parseMoveMethodCSV(row: any, id: number): MoveMethod{
+function parseMoveMethodCSV(row: any): MoveMethod{
     return{
-        id: Number(id),
+        id: Number(row.id),
         name: row.identifier,
     }
 }
@@ -1084,16 +1084,16 @@ function parsePokemonMoveCSV(row: any, id: any): PokemonMove{
     return{
         id: Number(id),
         version_group_id: Number(row.version_group_id),
-        pokemon_move_method_id: Number(row.pokemon_move_method_id),
+        move_method_id: Number(row.pokemon_move_method_id),
         move_id: Number(row.move_id),
         level: Number(row.level),
         pokemon_id: Number(row.pokemon_id)
 
     }
 }
-function parseMoveDamageClassCSV(row: any, id: number): MoveDamageClass{
+function parseMoveDamageClassCSV(row: any): MoveDamageClass{
     return{
-        id: Number(id),
+        id: Number(row.id),
         name: row.identifier,
     }
 }
@@ -1134,6 +1134,7 @@ async function main(){
     const pokemon_egg_group_path="/Users/luq/Documents/projects/PKMNHub/csv/pokemon_egg_groups.csv";
     const move_method_path="/Users/luq/Documents/projects/PKMNHub/csv/pokemon_move_methods.csv";
     const move_effect_path="/Users/luq/Documents/projects/PKMNHub/csv/move_effect_prose.csv";
+    const move_effect_id_path="/Users/luq/Documents/projects/PKMNHub/csv/move_effects.csv";
     const move_path="/Users/luq/Documents/projects/PKMNHub/csv/moves.csv";
     const move_damage_class_path="/Users/luq/Documents/projects/PKMNHub/csv/move_damage_classes.csv";
     const pokemon_move_path="/Users/luq/Documents/projects/PKMNHub/csv/pokemon_moves.csv";
@@ -1170,57 +1171,67 @@ async function main(){
     const pokemon_egg_groups_CSV=await readCSV(pokemon_egg_group_path);
     const move_methods_CSV=await readCSV(move_method_path);
     const move_effects_CSV=await readCSV(move_effect_path);
+    const move_effects_id_CSV=await readCSV(move_effect_id_path);
     const moves_CSV=await readCSV(move_path);
     const move_damage_classes_CSV=await readCSV(move_damage_class_path);
     const pokemon_moves_CSV=await readCSV(pokemon_move_path);
 
+    console.log(move_effects_CSV[0]);
+
+
     // csv file content
-    const pokemon: Pokemon[]=pokemon_CSV.map(parsePokemonCSV);
-    const generations: Generation[]=generations_CSV.map(parseGenerationCSV);
-    const regions: Region[]=regions_CSV.map(parseRegionCSV);
-    const versions: Version[]=versions_CSV.map(parseVersionCSV);
-    const version_groups: VersionGroup[]=version_groups_CSV.map(parseVersionGroupCSV);
-    const version_group_regions: VersionGroupRegion[]=version_group_regions_CSV.map(parseVersionGroupRegionCSV);
-    const pokedexes: Pokedex[]=pokedexes_CSV.map(parsePokedexCSV);
-    const pokedex_version_groups: PokedexVersionGroup[]=pokedex_version_groups_CSV.map(parsePokedexVersionGroupCSV);
-    const pokemon_dex_numbers: PokemonDexNumber[]=pokemon_dex_numbers_CSV.map(parsePokemonDexNumberCSV);
-    const abilities: Ability[]=abilities_CSV.map(ability_row=>{
-        const description_row=abilities_description_CSV.find(
-            row=>row.ability_id===ability_row.id&&row.language_id==='9'
-        );
+    // const pokemon: Pokemon[]=pokemon_CSV.map(parsePokemonCSV);
+    // const generations: Generation[]=generations_CSV.map(parseGenerationCSV);
+    // const regions: Region[]=regions_CSV.map(parseRegionCSV);
+    // const versions: Version[]=versions_CSV.map(parseVersionCSV);
+    // const version_groups: VersionGroup[]=version_groups_CSV.map(parseVersionGroupCSV);
+    // const version_group_regions: VersionGroupRegion[]=version_group_regions_CSV.map(parseVersionGroupRegionCSV);
+    // const pokedexes: Pokedex[]=pokedexes_CSV.map(parsePokedexCSV);
+    // const pokedex_version_groups: PokedexVersionGroup[]=pokedex_version_groups_CSV.map(parsePokedexVersionGroupCSV);
+    // const pokemon_dex_numbers: PokemonDexNumber[]=pokemon_dex_numbers_CSV.map(parsePokemonDexNumberCSV);
+    // const abilities: Ability[]=abilities_CSV.map(ability_row=>{
+    //     const description_row=abilities_description_CSV.find(
+    //         row=>row.ability_id===ability_row.id&&row.language_id==='9'
+    //     );
 
-        const combined_ability_row={
-            ...ability_row,
-            flavor_text: description_row?.flavor_text?? "no description",
-        }
+    //     const combined_ability_row={
+    //         ...ability_row,
+    //         flavor_text: description_row?.flavor_text?? "no description",
+    //     }
 
-        return parseAbilityCSV(
-            combined_ability_row,  
-        );
-    })
+    //     return parseAbilityCSV(
+    //         combined_ability_row,  
+    //     );
+    // })
     
-    const natures: Nature[]=natures_CSV.map(parseNatureCSV);
-    const stats: Stat[]=stats_CSV.map(parseStatCSV);
-    const egg_groups: Stat[]=egg_groups_CSV.map(parseEggGroupCSV);
-    const types: Type[]=types_CSV.map(parseTypeCSV);
-    const type_effectiveness: TypeEffectiveness[]=types_effectiveness_CSV.map(parseTypeEffectivenessCSV);
-    const locations: Location[]=locations_CSV.map(parseLocationCSV);
-    const location_areas: LocationArea[]=location_areas_CSV.map(parseLocationAreaCSV);
-    const encounter_methods: EncounterMethod[]=encounter_methods_CSV.map(parseEncounterMethodCSV);
-    const encounter_conditions: EncounterCondition[]=encounter_conditions_CSV.map(parseEncounterConditionCSV);
-    const encounter_condition_values: EncounterConditionValue[]=encounter_condition_values_CSV.map(parseEncounterConditionValueCSV);
-    const encounter_condition_value_maps: EncounterConditionValueMap[]=encounter_condition_value_maps_CSV.map(parseEncounterConditionValueMapCSV);
-    const encounter_slots: EncounterSlot[]=encounter_slots_CSV.map(parseEncounterSlotCSV);
-    const encounters: Encounter[]=encounters_CSV.map(parseEncounterCSV);
-    const location_area_encounter_rates: LocationAreaEncounterRate[]=location_area_encounter_rates_CSV.map(parseLocationAreaEncounterRateCSV);
-    const pokemon_abilities: PokemonAbility[]=pokemon_abilities_CSV.map(parsePokemonAbilityCSV);
+    // const natures: Nature[]=natures_CSV.map(parseNatureCSV);
+    // const stats: Stat[]=stats_CSV.map(parseStatCSV);
+    // const egg_groups: Stat[]=egg_groups_CSV.map(parseEggGroupCSV);
+    // const types: Type[]=types_CSV.map(parseTypeCSV);
+    // const type_effectiveness: TypeEffectiveness[]=types_effectiveness_CSV.map(parseTypeEffectivenessCSV);
+    // const locations: Location[]=locations_CSV.map(parseLocationCSV);
+    // const location_areas: LocationArea[]=location_areas_CSV.map(parseLocationAreaCSV);
+    // const encounter_methods: EncounterMethod[]=encounter_methods_CSV.map(parseEncounterMethodCSV);
+    // const encounter_conditions: EncounterCondition[]=encounter_conditions_CSV.map(parseEncounterConditionCSV);
+    // const encounter_condition_values: EncounterConditionValue[]=encounter_condition_values_CSV.map(parseEncounterConditionValueCSV);
+    // const encounter_condition_value_maps: EncounterConditionValueMap[]=encounter_condition_value_maps_CSV.map(parseEncounterConditionValueMapCSV);
+    // const encounter_slots: EncounterSlot[]=encounter_slots_CSV.map(parseEncounterSlotCSV);
+    // const encounters: Encounter[]=encounters_CSV.map(parseEncounterCSV);
+    // const location_area_encounter_rates: LocationAreaEncounterRate[]=location_area_encounter_rates_CSV.map(parseLocationAreaEncounterRateCSV);
+    // const pokemon_abilities: PokemonAbility[]=pokemon_abilities_CSV.map(parsePokemonAbilityCSV);
     const pokemon_stats: PokemonStat[]=pokemon_stats_CSV.map(parsePokemonStatCSV);
     const pokemon_types: PokemonType[]=pokemon_types_CSV.map(parsePokemonTypeCSV);
     const pokemon_egg_groups: PokemonEggGroup[]=pokemon_egg_groups_CSV.map(parsePokemonEggGroupCSV);
-    const move_methods: MoveMethod[]=move_methods_CSV.map(parseMoveMethodCSV);
-    const move_effects: MoveEffect[]=move_effects_CSV.map(parseMoveEffectCSV);
-    const moves: Move[]=moves_CSV.map(parseMoveCSV);
-    const move_damage_classes: MoveDamageClass[]=move_damage_classes_CSV.map(parseMoveDamageClassCSV);
+    // const move_methods: MoveMethod[]=move_methods_CSV.map(parseMoveMethodCSV);
+    // const move_effects_id_desc_map=new Map(move_effects_CSV.map(row=>(
+    //     [Number(row.move_effect_id), row.short_effect]
+    // )));
+    // const move_effects: MoveEffect[]=move_effects_id_CSV.map((effect, index)=>({
+    //     id: Number(effect.id),
+    //     description: move_effects_id_desc_map.get(Number(effect.id)) || null,
+    // }));
+    // const moves: Move[]=moves_CSV.map(parseMoveCSV);
+    // const move_damage_classes: MoveDamageClass[]=move_damage_classes_CSV.map(parseMoveDamageClassCSV);
     const pokemon_moves: PokemonMove[]=pokemon_moves_CSV.map(parsePokemonMoveCSV);
 
     // console.log("pokemon.csv", pokemon.slice(0,3));
@@ -1242,7 +1253,7 @@ async function main(){
     // console.log("types.csv", types.slice(0,18));
     // console.log("type_efficacy.csv", type_effectiveness.slice(0,18));
     // console.log("pokemon_types.csv", pokemon_types.slice(0,18));
-    // console.log("locations.csv", locations.slice(0,3));
+    // console.log("locations.csv", locations.slice(253));
     // console.log("location_areas.csv", location_areas.slice(0,10));
     // console.log("encounter_methods.csv", encounter_methods.slice(0,3));
     // console.log("encounter_conditions.csv", encounter_conditions.slice(0,3));
@@ -1253,7 +1264,7 @@ async function main(){
     // console.log("location_area_encounter_rates.csv", location_area_encounter_rates.slice(0,3));
     // console.log("pokemon_move_methods.csv", move_methods.slice(0,3));
     // console.log("move_effects.csv", move_effects.slice(0,3));
-    // console.log("moves.csv", moves.slice(0,3));
+    // console.log("moves.csv", moves.slice(827));
     // console.log("move_damage_classes.csv", move_damage_classes.slice(0,3));
     // console.log("pokemon_moves.csv", pokemon_moves.slice(0,3));
     
@@ -1307,7 +1318,186 @@ async function main(){
     //     data: pokemon_abilities,
     //     skipDuplicates: true,
     // })
-}
 
+    // const version_groups_result=await prisma.versionGroup.createMany({
+    //     data: version_groups,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted version_groups:", version_groups_result.count);
+
+    // const versions_result=await prisma.version.createMany({
+    //     data: versions,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted Versions:", versions_result.count);
+    
+
+    // const version_group_regions_result=await prisma.versionGroupRegion.createMany({
+    //     data: version_group_regions,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted version_group_regions:", version_group_regions_result.count);
+
+    // const pokedexes_result=await prisma.pokedex.createMany({
+    //     data: pokedexes.map(pokedex=>({
+    //         ...pokedex,
+    //         region_id: pokedex.region_id===0?null:pokedex.region_id,
+    //     })),
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted pokedexes:", pokedexes_result.count);
+
+    // const pokedex_version_groups_result=await prisma.pokedexVersionGroup.createMany({
+    //     data: pokedex_version_groups,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted pokedex_version_groups:", pokedex_version_groups_result.count);
+
+    // const pokemon_dex_numbers_result=await prisma.pokemonDexNumber.createMany({
+    //     data: pokemon_dex_numbers,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted pokemon_dex_numbers:", pokemon_dex_numbers_result.count);
+
+    // const stats_result=await prisma.stat.createMany({
+    //     data: stats,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted stats_result:",stats_result.count);
+    // const natures_result=await prisma.nature.createMany({
+    //     data: natures,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted natures_result:",natures_result.count);
+    
+    // const egg_groups_result=await prisma.eggGroup.createMany({
+    //     data: egg_groups,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted natures_result:", egg_groups_result.count);
+
+    // const locations_result=await prisma.location.createMany({
+    //     data: locations.map(location=>({
+    //         ...location,
+    //         region_id: location.region_id===0?(null):(location.region_id),
+    //     })),
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted locations:", locations_result.count);
+
+    // const location_areas_result=await prisma.locationArea.createMany({
+    //     data: location_areas,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted location_areas:", location_areas_result.count);
+
+    // const encounter_methods_result=await prisma.encounterMethod.createMany({
+    //     data: encounter_methods,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted encounter_methods:", encounter_methods_result.count);
+
+    // const encounter_slots_result=await prisma.encounterSlot.createMany({
+    //     data: encounter_slots,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted encounter_slots:", encounter_slots_result.count);
+    // const encounters_result=await prisma.encounter.createMany({
+    //     data: encounters,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted encounters:", encounters_result.count);
+
+    // const encounter_conditions_result=await prisma.encounterCondition.createMany({
+    //     data: encounter_conditions,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted encounter_conditions:", encounter_conditions_result.count);
+
+    // const encounter_condition_values_result=await prisma.encounterConditionValue.createMany({
+    //     data: encounter_condition_values,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted encounter_condition_values:", encounter_condition_values_result.count);
+
+    // const encounter_condition_value_maps_result=await prisma.encounterConditionValueMap.createMany({
+    //     data: encounter_condition_value_maps,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted encounter_condition_value_maps:", encounter_condition_value_maps_result.count);
+
+    // const location_area_encounter_rates_result=await prisma.locationAreaEncounterRate.createMany({
+    //     data: location_area_encounter_rates,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted location_area_encounter_rates:", location_area_encounter_rates_result.count);
+    
+    // const move_damage_classes_deletemany_result=await prisma.moveDamageClass.deleteMany();
+    // console.log("Deleted move_damage_classes:", move_damage_classes_deletemany_result.count);
+    
+    // const move_damage_classes_result=await prisma.moveDamageClass.createMany({
+    //     data: move_damage_classes,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted move_damage_classes:", move_damage_classes_result.count);
+    // const move_effects_delete_result=await prisma.moveEffect.deleteMany();
+    // console.log("Deleted move_effects:", move_effects_delete_result.count);
+    
+    // const move_effects_result=await prisma.moveEffect.createMany({
+    //     data: move_effects,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted move_effects:", move_effects_result.count);
+    
+    // const move_methods_delete_result=await prisma.moveMethod.deleteMany();
+    // console.log("Deleted move_methods:", move_methods_delete_result.count);
+    // const move_methods_result=await prisma.moveMethod.createMany({
+    //     data: move_methods,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted move_methods:", move_methods_result.count);
+    // console.log([...new Set(moves.map(m => m.move_effect_id))]);
+    // const effectIds = new Set((await prisma.moveEffect.findMany({ select: { id: true } })).map(e => e.id));
+    
+    // const missing = [...new Set(moves
+    // .map(m => m.move_effect_id)
+    // .filter(id => id !== 0 && !effectIds.has(id))
+    // )];
+    
+    // console.log("Missing MoveEffect IDs:", missing);
+    
+    // const moves_result=await prisma.move.createMany({
+    //     data: moves.map(move=>({
+    //         ...move,
+    //         move_effect_id: move.move_effect_id===0?(null):(move.move_effect_id),
+    //     })),
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted moves:", moves_result.count);
+    
+    // const pokemon_stats_result=await prisma.pokemonStat.createMany({
+    //     data: pokemon_stats,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted pokemon_stats:", pokemon_stats_result.count);
+
+    // const pokemon_types_result=await prisma.pokemonType.createMany({
+    //     data: pokemon_types,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted pokemon_types:", pokemon_types_result.count);
+
+    // const pokemon_egg_groups_result=await prisma.pokemonEggGroup.createMany({
+    //     data: pokemon_egg_groups,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted pokemon_egg_groups:", pokemon_egg_groups_result.count);
+    // const pokemon_moves_result=await prisma.pokemonMove.createMany({
+    //     data: pokemon_moves,
+    //     skipDuplicates: true,
+    // })
+    // console.log("Inserted pokemon_moves:", pokemon_moves_result.count);
+}
+                    
 
 main();
