@@ -20,12 +20,30 @@
 .feature-card-upper{
     height: 90%;
 }
+
 .feature-card-lower{
+    position: relative;
     height: 10%;
     background-color: rgb(144, 144, 144);
     color: white;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     text-align: center;
     align-items: center;
+}
+
+#pokedex-tracker-description-span{
+    visibility: hidden;
+    color: white;
+    margin-top: 3em;
+}
+
+.feature-card-lower:hover{
+    height: 50%;
+    background-color: rgb(86, 86, 86);
+}
+
+.feature-card-lower:hover #pokedex-tracker-description-span {
+    opacity: 1;
+    visibility: visible;
 }

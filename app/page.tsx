@@ -31,19 +31,28 @@ export default function HomePage() {
         <div className="features-container-div">
           <div className="feature-card-div" id="pokedex-tracker-card">
             <div className="feature-card-upper"></div>
-            <div className="feature-card-lower">Pokedex Tracker</div>
+            <div className="feature-card-lower">
+              Pokedex Tracker
+            <span id="pokedex-tracker-description-span">Track your pokedex completion pregress across different games.</span>
+              </div>
           </div>
           <div className="feature-card-div" id="pokedex-tracker-card">
             <div className="feature-card-upper"></div>
-            <div className="feature-card-lower">Breeding Calculator</div>
+            <div className="feature-card-lower">Breeding Calculator
+            <span id="pokedex-tracker-description-span">Track your pokedex completion pregress across different games.</span>
+            </div>
           </div>
           <div className="feature-card-div" id="pokedex-tracker-card">
             <div className="feature-card-upper"></div>
-            <div className="feature-card-lower">Pokewalker Counter</div>
+            <div className="feature-card-lower">Pokewalker Counter
+              <span id="pokedex-tracker-description-span">Track your pokedex completion pregress across different games.</span>
+            </div>
           </div>
           <div className="feature-card-div" id="pokedex-tracker-card">
             <div className="feature-card-upper"></div>
-            <div className="feature-card-lower">Team Builder</div>
+            <div className="feature-card-lower">Team Builder            
+              <span id="pokedex-tracker-description-span">Track your pokedex completion pregress across different games.</span>
+            </div>
           </div>
         </div>
       </div>
