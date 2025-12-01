@@ -7,9 +7,16 @@ const prisma=DBClient.getInstance()
 const __filename=fileURLToPath(import.meta.url);
 const __dirname=path.dirname(__filename);
 
+async function updateSprites(){
+    await prisma.pokemon.updateMany({
+        where: { sprite_url: null },
+        data: { sprite_url: "/sprites/substitute.png" }}
+    )
+}
+
 async function main(){
     // const sprites_directory=path.join(__dirname, "/public/sprites");
-    const sprites_directory=path.join(__dirname, "../app/public/sprites/")
+    const sprites_directory=path.join(__dirname, "../public/sprites/")
     const sprites_files=fs.readdirSync(sprites_directory);
     // console.log(sprites_directory);
     // console.log(sprites_files);
@@ -36,4 +43,5 @@ async function main(){
     }
 }
 
-main()
+updateSprites();
+// main()

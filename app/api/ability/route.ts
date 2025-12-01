@@ -9,8 +9,8 @@ export async function GET(request: NextResponse, {params}: {params: Promise<stri
     try{
         const url=new URL(request.url);
         const page=parseInt(url.searchParams.get("page") || "1");
-        const limit=parseInt(url.searchParams.get("limit") || "25");
-        const skip=(page-1)*limit;
+        const limit=Number(url.searchParams.get("limit"));
+        const skip=limit&&isNaN(limit)?((page-1)*limit):(undefined);
         const query=url.searchParams.get("q") || "";
         const abilities=await delegate.findMany({
             where: {
@@ -19,8 +19,8 @@ export async function GET(request: NextResponse, {params}: {params: Promise<stri
                     mode: "insensitive",
                 }
             },
-            skip: skip,
-            take: limit,
+            ...(limit&&isNaN(limit)?{take:limit}:{}),
+            ...(limit&&isNaN(limit)?{skip:skip}:{}),
             orderBy: {name: "asc"}
         }); 
         console.log("[GET][/ability] abilities fetched: \n", abilities.length);

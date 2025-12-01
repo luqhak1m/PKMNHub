@@ -13,7 +13,9 @@ export async function GET(request: NextRequest){
         const skip=(page-1)*limit; // at page 1 skip 0, page 2 skip (2-1)*25=25, basically skips previous entries
 
         const query=url.searchParams.get("q") || "";
+
         const ability=url.searchParams.get("ability") || "";
+        const pokedex=url.searchParams.get("pokedex") || "";
 
         const pokemon=await delegate.findMany({
             where: {
@@ -25,6 +27,18 @@ export async function GET(request: NextRequest){
                                 name: {
                                     equals: ability,
                                     mode: "insensitive",
+                                },
+                            },
+                        },
+                    },
+                }),
+                ...(pokedex && {
+                    dex_numbers: {
+                        some: {
+                            pokedex: {
+                                name: {
+                                    equals: pokedex,
+                                    mode: "insensitive"
                                 },
                             },
                         },
