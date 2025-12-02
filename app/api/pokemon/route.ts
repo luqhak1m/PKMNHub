@@ -15,7 +15,7 @@ export async function GET(request: NextRequest){
         const query=url.searchParams.get("q") || "";
 
         const ability=url.searchParams.get("ability") || "";
-        const pokedex=url.searchParams.get("pokedex") || "";
+        const pokedex=Number(url.searchParams.get("pokedex"));
 
         const pokemon=await delegate.findMany({
             where: {
@@ -32,13 +32,12 @@ export async function GET(request: NextRequest){
                         },
                     },
                 }),
-                ...(pokedex && {
+                ...(pokedex && !isNaN(pokedex) &&  {
                     dex_numbers: {
                         some: {
                             pokedex: {
-                                name: {
+                                id: {
                                     equals: pokedex,
-                                    mode: "insensitive"
                                 },
                             },
                         },
@@ -47,7 +46,7 @@ export async function GET(request: NextRequest){
             },
             skip,
             take: limit,
-            orderBy: {id:"asc"}, // sort by id here
+            // orderBy: {id:"asc"}, // sort by id here
         });
         console.log("[GET][/pokemon] pokemon fetched: \n", pokemon.length);
         return NextResponse.json({pokemon, page, limit, query})

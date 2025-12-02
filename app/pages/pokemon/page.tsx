@@ -8,13 +8,23 @@ import getCachedAudio from "../../utils/Audio-Cache";
 import { Pokemon, Ability, Pokedex } from "../../../generated/prisma";
 import "./styles.css"
 
+type PokemonDexNumber = {
+  id: number;
+  pokemon_id: number;
+  pokedex_id: number;
+  pokedex_number: number;
+  pokemon: Pokemon
+}
+
+
 export default function PokemonList(){
     const [pokemon, setPokemon]=useState<Pokemon[]>([]);
     const [abilities, setAbilities]=useState<Ability[]>([]);
     const [pokedexes, setPokedexes]=useState<Pokedex[]>([]);
+    const [pokemon_dex_number, setPokemonDexNumber]=useState<PokemonDexNumber[]>([]);
 
     const [ability, setAbility]=useState<string>("");
-    const [pokedex, setPokedex]=useState<string>("");
+    const [pokedex, setPokedex]=useState<number>(1);
 
     const [page, setPage]=useState<number>(1);
     const [search, setSearch]=useState<string>("");
@@ -22,21 +32,19 @@ export default function PokemonList(){
     const [isLoading, setLoadingStatus]=useState<boolean>(true)
     const limit=25;
 
-    useEffect(()=>{
-        fetch(`
+    // useEffect(()=>{
+    //     fetch(`
             
-            /api/pokemon?page=${page}&limit=${limit}&q=${encodeURIComponent(query)}&ability=${ability}&pokedex=${pokedex}
+    //         /api/pokemon?page=${page}&limit=${limit}&q=${encodeURIComponent(query)}&ability=${ability}&pokedex=${pokedex}
             
-            `)
-            .then(response=>response.json())
-            .then(data=>{
-                setPokemon(data.pokemon.sort(
-                    (a: Pokemon, b: Pokemon)=>a.id-b.id)
-                )
-            })
-            .catch(error=>console.error(error))
-            .finally(()=>setLoadingStatus(false))
-    }, [query, search, ability, page, pokedex]); // runs this every time the page is set or the search bar is being typed on
+    //         `)
+    //         .then(response=>response.json())
+    //         .then(data=>{
+    //             setPokemon(data.pokemon)
+    //         })
+    //         .catch(error=>console.error(error))
+    //         .finally(()=>setLoadingStatus(false))
+    // }, [query, search, ability, page, pokedex]); // runs this every time the page is set or the search bar is being typed on
 
     useEffect(()=>{
         fetch(`/api/ability`)
@@ -57,6 +65,19 @@ export default function PokemonList(){
         .catch(error=>console.error(error))
         .finally(()=>setLoadingStatus(false))
     }, [])
+
+    useEffect(()=>{
+        fetch(`
+            /api/pokemon-dex-number?page=${page}&limit=${limit}&q=${encodeURIComponent(query)}&ability=${ability}&pokedex=${pokedex}
+            `)
+        .then(response=>response.json())
+        .then(data=>{
+            setPokemonDexNumber(data.pokemon_dex_number);
+        })
+        .catch(error=>console.error(error))
+        .finally(()=>setLoadingStatus(false))
+        console.log(pokemon_dex_number);
+    }, [query, search, ability, page, pokedex]); // runs this every time the page is set or the search bar is being typed on
 
     const play_cry=(p: Pokemon)=>{
         const audio=getCachedAudio(p.id, p.cry_url || "");
@@ -110,14 +131,12 @@ export default function PokemonList(){
                 {isLoading?(
                     <h3>Loading Pokedexes...</h3>
                 ):(
-                    <select name="pokedexes" id="pokedexes" defaultValue="" onChange={e=>{
-                            setPokedex(e.target.value)
+                    <select name="pokedexes" id="pokedexes" defaultValue={1} onChange={e=>{
+                            setPokedex(parseInt(e.target.value));
                             setPage(1);
-
                         }}>
-                        <option value="">--select pokedex--</option>
                         {pokedexes.map(pokedex=>(
-                            <option value={pokedex.name} key={pokedex.id}>{pokedex.name}</option>
+                            <option value={pokedex.id} key={pokedex.id}>{pokedex.name}</option>
                         ))}
                     </select>
                 )}
@@ -128,17 +147,16 @@ export default function PokemonList(){
             <h3>Loading Pokemon...</h3>
         ):(
             <ul>
-                {pokemon.map(
-                    p=>(
-                        <button className="sprite-container-clickable-button" onClick={()=>{play_cry(p)}} key={p.id}>
-                            <div className="sprite-container-div">
-                                {p.sprite_url && <img className="sprite-img" src={p.sprite_url} alt={p.name}/>}
-                                <div className="sprite-card-lower-div">
-                                    <h3>{p.id}. {p.name}</h3>
-                                    <span className="pokemon-details-span"><a href="#">Details</a></span>
-                                </div>
+                {pokemon_dex_number.map(pokemon_dex=>(
+                    <button className="sprite-container-clickable-button" onClick={()=>{play_cry(pokemon_dex.pokemon)}} key={pokemon_dex.id}>
+                        <div className="sprite-container-div">
+                            {pokemon_dex.pokemon.sprite_url && <img className="sprite-img" src={pokemon_dex.pokemon.sprite_url} alt={pokemon_dex.pokemon.name}/>}
+                            <div className="sprite-card-lower-div">
+                                <h3>{pokemon_dex.pokedex_number}. {pokemon_dex.pokemon.name}</h3>
+                                <span className="pokemon-details-span"><a href="#">Details</a></span>
                             </div>
-                        </button>
+                        </div>
+                    </button>
                     )
                 )}
             </ul>
