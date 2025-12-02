@@ -17,12 +17,36 @@ export async function GET(request: NextRequest){
         const ability=url.searchParams.get("ability") || "";
         const pokedex_id=Number(url.searchParams.get("pokedex")) || 1;
         const pokemon_dex_number=await prisma.pokemonDexNumber.findMany({
-            where: {pokedex_id: pokedex_id},
+            where: {
+                pokedex_id: pokedex_id,
+                pokemon: {
+                    name: {
+                        contains: query,
+                        mode: "insensitive",
+                    },
+                    ...(ability && {
+                        abilities: {
+                            some: {
+                                ability: {
+                                    name: {
+                                        equals: ability,
+                                        mode: "insensitive",
+                                    },
+                                },
+                            },
+                        },
+                    }),
+                },
+            },
             orderBy: {pokedex_number: "asc"},
             include: {
                 pokemon: {
                     include: {
-                        abilities: true
+                        abilities: {
+                            include: {
+                                ability: true,
+                            }
+                        }
                     }
                 }
 
