@@ -7,6 +7,7 @@ import { useRef } from "react";
 import getCachedAudio from "../../utils/Audio-Cache";
 import { Pokemon, Ability, Pokedex, Type } from "../../../generated/prisma";
 import "./styles.css"
+import Link from "next/link";
 
 type PokemonDexNumber = {
   id: number;
@@ -167,7 +168,7 @@ export default function PokemonList(){
                             {pokemon_dex.pokemon.sprite_url && <img className="sprite-img" src={pokemon_dex.pokemon.sprite_url} alt={pokemon_dex.pokemon.name}/>}
                             <div className="sprite-card-lower-div">
                                 <h3>{pokemon_dex.pokedex_number}. {pokemon_dex.pokemon.name}</h3>
-                                <span className="pokemon-details-span"><a href="#">Details</a></span>
+                                <span className="pokemon-details-span"><Link href={`/pages/pokemon/${pokemon_dex.pokemon_id}`}>Details</Link></span>
                             </div>
                         </div>
                     </button>
